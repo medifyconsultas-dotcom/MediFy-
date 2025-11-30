@@ -3,7 +3,21 @@ from firebase_admin import firestore
 import time
 from functools import wraps
 
-db = firestore.client()
+# Inicializa db de forma resiliente - permite que app funcione sem Firebase
+try:
+    db = firestore.client()
+except Exception:
+    db = None
+
+def _ensure_db():
+    """Helper para garantir que o db está disponível antes de usar"""
+    global db
+    if db is None:
+        try:
+            db = firestore.client()
+        except Exception:
+            pass
+    return db
 
 import requests
 
