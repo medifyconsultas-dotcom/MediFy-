@@ -32,6 +32,39 @@ ALLOWED_HOSTS = [
 ]
 
 # =====================================================================
+# CSRF TRUSTED ORIGINS
+# =====================================================================
+CSRF_TRUSTED_ORIGINS = [
+    'https://medify-production-416a.up.railway.app',
+]
+
+# Adiciona domínios das variáveis de ambiente
+railway_public = os.environ.get("RAILWAY_PUBLIC_DOMAIN", "")
+railway_private = os.environ.get("RAILWAY_PRIVATE_DOMAIN", "")
+
+def normalize_origin(domain):
+    """Normaliza o domínio para formato https://domain"""
+    if not domain:
+        return None
+    domain = domain.strip()
+    if domain.startswith('http://'):
+        return domain.replace('http://', 'https://')
+    elif domain.startswith('https://'):
+        return domain
+    else:
+        return f'https://{domain}'
+
+if railway_public:
+    origin = normalize_origin(railway_public)
+    if origin and origin not in CSRF_TRUSTED_ORIGINS:
+        CSRF_TRUSTED_ORIGINS.append(origin)
+
+if railway_private:
+    origin = normalize_origin(railway_private)
+    if origin and origin not in CSRF_TRUSTED_ORIGINS:
+        CSRF_TRUSTED_ORIGINS.append(origin)
+
+# =====================================================================
 # FIREBASE INIT
 # =====================================================================
 firebase_sa = os.environ.get('FIREBASE_SERVICE_ACCOUNT')
@@ -172,10 +205,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 7
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'Lax'
-SESSION_COOKIE_SECURE = False  # Em produção: True
+SESSION_COOKIE_SECURE = not DEBUG  # True em produção (HTTPS)
 
-CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = not DEBUG  # True em produção (HTTPS)
 CSRF_COOKIE_SAMESITE = 'Lax'
+CSRF_USE_SESSIONS = False
+CSRF_COOKIE_HTTPONLY = False  # Permite acesso via JavaScript quando necessário
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_SAVE_EVERY_REQUEST = False
