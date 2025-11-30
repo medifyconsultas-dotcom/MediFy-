@@ -1,0 +1,3 @@
+[run]
+omit =
+    medify_web/debug_firebase.py

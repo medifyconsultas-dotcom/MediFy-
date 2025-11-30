@@ -1,0 +1,68 @@
+﻿{
+  "indexes": [
+    {
+      "collectionGroup": "consultas",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {"fieldPath": "paciente_uid", "order": "ASCENDING"},
+        {"fieldPath": "status", "order": "DESCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "consultas",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {"fieldPath": "profissional_uid", "order": "ASCENDING"},
+        {"fieldPath": "data_consulta", "order": "DESCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "consultas_clinicas",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {"fieldPath": "id_paciente", "order": "ASCENDING"},
+        {"fieldPath": "status", "order": "DESCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "consultas_clinicas",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {"fieldPath": "id_profissional", "order": "ASCENDING"},
+        {"fieldPath": "data_consulta", "order": "DESCENDING"}
+      ]
+    },
+  {
+    "collectionGroup": "consultas_autonomos",
+    "queryScope": "COLLECTION_GROUP",
+    "fields": [
+      {"fieldPath": "id_paciente", "order": "ASCENDING"},
+      {"fieldPath": "status", "order": "DESCENDING"}
+    ]
+  },
+  {
+    "collectionGroup": "consultas_autonomos",
+    "queryScope": "COLLECTION_GROUP",
+    "fields": [
+      {"fieldPath": "id_paciente", "order": "ASCENDING"},
+      {"fieldPath": "data_consulta", "order": "DESCENDING"}
+    ]
+  },
+  {
+    "collectionGroup": "consultas_autonomos",
+    "queryScope": "COLLECTION_GROUP",
+    "fields": [
+      {"fieldPath": "id_profissional", "order": "ASCENDING"},
+      {"fieldPath": "status", "order": "DESCENDING"}
+    ]
+  },
+    {
+      "collectionGroup": "consultas_autonomos",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {"fieldPath": "id_profissional", "order": "ASCENDING"},
+        {"fieldPath": "data_consulta", "order": "DESCENDING"}
+      ]
+    }
+  ]
+}

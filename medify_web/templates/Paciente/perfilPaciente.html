@@ -1,0 +1,925 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Perfil - MediFy</title>
+  <link rel="stylesheet" href="{% static 'css/dashboardPaciente.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ESTILOS DO MENU RESPONSIVO - IGUAL ÀS OUTRAS PÁGINAS */
+    :root {
+      --color-surface: #ffffff;
+      --color-border: #e1e5e9;
+      --gradient-primary: linear-gradient(135deg, var(--primary), #1e6fc7);
+      --gradient-secondary: linear-gradient(135deg, var(--secondary), #008f7a);
+      --box-shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.15);
+      --box-shadow-xl: 0 12px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    .main-content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2rem;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .welcome-section {
+      animation: fadeInDown 0.8s ease-out;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .welcome-section h1 {
+      font-size: 2.5rem;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .welcome-section p {
+      color: var(--gray);
+      font-size: 1.1rem;
+    }
+
+    /* ===== MENU LATERAL PARA DESKTOP - LADO DIREITO ===== */
+    .desktop-sidebar {
+      position: fixed;
+      top: 0;
+      right: -280px;
+      left: auto;
+      width: 280px;
+      height: 100vh;
+      background: white;
+      z-index: 100;
+      box-shadow: -2px 0 20px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition-slow);
+    }
+
+    .desktop-sidebar.active {
+      right: 0;
+      left: auto;
+    }
+
+    .desktop-sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .desktop-sidebar-header .logo-container {
+      gap: 0.5rem;
+    }
+
+    .desktop-sidebar-header h1 {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .desktop-sidebar-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.25rem;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .desktop-sidebar-close:hover {
+      background: rgba(255,255,255,0.2);
+      transform: rotate(90deg);
+    }
+
+    .desktop-sidebar-links {
+      flex: 1;
+      padding: 1rem 0;
+      overflow-y: auto;
+    }
+
+    .desktop-sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      color: var(--dark);
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      font-size: 1rem;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .desktop-sidebar-link:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      transform: translateX(-5px);
+    }
+
+    .desktop-sidebar-form {
+      margin-top: auto;
+      border-top: 1px solid var(--gray-light);
+    }
+
+    .desktop-sidebar-logout {
+      color: #e74c3c;
+      border-bottom: none !important;
+    }
+
+    .desktop-sidebar-logout:hover {
+      background: #ffeaea;
+      color: #c0392b;
+    }
+
+    /* Botão para abrir menu no desktop - LADO DIREITO */
+    .desktop-menu-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      left: auto;
+      z-index: 99;
+      background: var(--primary);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      box-shadow: var(--box-shadow);
+      cursor: pointer;
+      transition: var(--transition);
+      display: none;
+    }
+
+    .desktop-menu-toggle:hover {
+      background: #1e6fc7;
+      transform: scale(1.1);
+    }
+
+    /* Ajustes para quando o menu lateral está ativo - LADO DIREITO */
+    body.menu-active .main-content {
+      margin-right: 280px;
+      transition: var(--transition-slow);
+    }
+
+    /* ===== MENU MOBILE - LADO DIREITO ===== */
+    .mobile-menu-toggle {
+      display: none;
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      left: auto;
+      z-index: 1000;
+      background: var(--primary);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      box-shadow: var(--box-shadow);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .mobile-menu-toggle:hover {
+      background: #1e6fc7;
+      transform: scale(1.1);
+    }
+
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      left: auto;
+      width: 280px;
+      height: 100vh;
+      background: white;
+      z-index: 1001;
+      transition: var(--transition-slow);
+      box-shadow: -2px 0 20px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-nav.active {
+      right: 0;
+      left: auto;
+    }
+
+    .mobile-nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .mobile-nav-header .logo-container {
+      gap: 0.5rem;
+    }
+
+    .mobile-nav-header h1 {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .mobile-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.25rem;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .mobile-close:hover {
+      background: rgba(255,255,255,0.2);
+      transform: rotate(90deg);
+    }
+
+    .mobile-nav-links {
+      flex: 1;
+      padding: 1rem 0;
+      overflow-y: auto;
+    }
+
+    .mobile-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      color: var(--dark);
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      font-size: 1rem;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .mobile-nav-link:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      transform: translateX(-5px);
+    }
+
+    .mobile-nav-form {
+      margin-top: auto;
+      border-top: 1px solid var(--gray-light);
+    }
+
+    .mobile-nav-logout {
+      color: #e74c3c;
+      border-bottom: none !important;
+    }
+
+    .mobile-nav-logout:hover {
+      background: #ffeaea;
+      color: #c0392b;
+    }
+
+    .mobile-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .mobile-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ===== MEDIA QUERIES PARA MENU RESPONSIVO ===== */
+    @media (max-width: 768px) {
+      .desktop-sidebar,
+      .desktop-menu-toggle {
+        display: none;
+      }
+      
+      .mobile-menu-toggle {
+        display: flex;
+      }
+      
+      .main-content {
+        margin-right: 0 !important;
+        padding-top: 80px;
+      }
+
+      .header-right {
+        display: none !important;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .mobile-menu-toggle,
+      .mobile-nav,
+      .mobile-overlay {
+        display: none !important;
+      }
+      
+      .desktop-menu-toggle {
+        display: flex;
+      }
+      
+      .header-right {
+        display: block !important;
+      }
+    }
+
+    /* ESTILOS ESPECÍFICOS DA PÁGINA PERFIL */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-avatar {
+      text-align: center;
+    }
+
+    .avatar-preview {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 1rem;
+      background: var(--gray-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: var(--gray);
+    }
+
+    .grid-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    /* RESPONSIVIDADE PARA CONTEÚDO */
+    @media (max-width: 768px) {
+      .main-content {
+        padding: 1rem;
+        padding-top: 80px;
+      }
+
+      .welcome-section {
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .welcome-section h1 {
+        font-size: 1.8rem;
+      }
+
+      .welcome-section p {
+        font-size: 1rem;
+      }
+
+      .profile-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .grid-cols {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-content {
+        padding: 0.75rem;
+        padding-top: 70px;
+      }
+
+      .welcome-section h1 {
+        font-size: 1.5rem;
+      }
+
+      .avatar-preview {
+        width: 120px;
+        height: 120px;
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body class="dashboard">
+  <!-- Header Profissional -->
+  <header class="dashboard-header">
+    <div class="logo-container">
+      <a href="{% url 'medify_web:dashboard_paciente' %}" style="text-decoration:none; color:inherit; display:flex; align-items:center;">
+        <img src="{% static 'imagens/estetoscopio.png' %}" alt="MediFy Logo" class="logo-icon" style="width:24px;height:24px;object-fit:contain;">
+        <h1 style="margin:0 0 0 0.5rem;">MediFy</h1>
+      </a>
+    </div>
+    <div class="header-right">
+  
+    </div>
+  </header>
+
+  <!-- Menu Mobile (para telas menores) -->
+  <div class="mobile-menu-toggle" id="mobileMenuToggle">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+      <div class="logo-container">
+        <img src="{% static 'imagens/estetoscopio.png' %}" alt="MediFy Logo" class="logo-icon" style="width:24px;height:24px;object-fit:contain;">
+        <h1>MediFy</h1>
+      </div>
+      <button class="mobile-close" id="mobileClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="{% url 'medify_web:dashboard_paciente' %}" class="mobile-nav-link">
+        <i class="fas fa-home"></i>
+        Dashboard
+      </a>
+      <a href="{% url 'medify_web:consultaGeral' %}" class="mobile-nav-link">
+        <i class="fas fa-calendar-plus"></i>
+        Agendar Consulta
+      </a>
+      <a href="{% url 'medify_web:verAgenda' %}" class="mobile-nav-link">
+        <i class="fas fa-calendar-check"></i>
+        Minhas Consultas
+      </a>
+      <a href="{% url 'medify_web:perfilPaciente' %}" class="mobile-nav-link">
+        <i class="fas fa-user-edit"></i>
+        Meu Perfil
+      </a>
+      <form action="{% url 'medify_web:logout' %}" method="post" class="mobile-nav-form" id="logoutFormMobile" onsubmit="return confirmarLogout(event);">
+        {% csrf_token %}
+        <button type="submit" class="mobile-nav-link mobile-nav-logout">
+          <i class="fas fa-sign-out-alt"></i>
+          Sair
+        </button>
+      </form>
+    </nav>
+  </div>
+
+  <!-- Menu Desktop (para telas maiores) -->
+  <div class="desktop-menu-toggle" id="desktopMenuToggle">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <div class="desktop-sidebar" id="desktopSidebar">
+    <div class="desktop-sidebar-header">
+      <div class="logo-container">
+        <img src="{% static 'imagens/estetoscopio.png' %}" alt="MediFy Logo" class="logo-icon" style="width:24px;height:24px;object-fit:contain;">
+        <h1>MediFy</h1>
+      </div>
+      <button class="desktop-sidebar-close" id="desktopSidebarClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <nav class="desktop-sidebar-links">
+      <a href="{% url 'medify_web:dashboard_paciente' %}" class="desktop-sidebar-link">
+        <i class="fas fa-home"></i>
+        Dashboard
+      </a>
+      <a href="{% url 'medify_web:consultaGeral' %}" class="desktop-sidebar-link">
+        <i class="fas fa-calendar-plus"></i>
+        Agendar Consulta
+      </a>
+      <a href="{% url 'medify_web:verAgenda' %}" class="desktop-sidebar-link">
+        <i class="fas fa-calendar-check"></i>
+        Minhas Consultas
+      </a>
+      <a href="{% url 'medify_web:perfilPaciente' %}" class="desktop-sidebar-link">
+        <i class="fas fa-user-edit"></i>
+        Meu Perfil
+      </a>
+      <form action="{% url 'medify_web:logout' %}" method="post" class="desktop-sidebar-form" id="logoutFormDesktop" onsubmit="return confirmarLogout(event);">
+        {% csrf_token %}
+        <button type="submit" class="desktop-sidebar-link desktop-sidebar-logout">
+          <i class="fas fa-sign-out-alt"></i>
+          Sair
+        </button>
+      </form>
+    </nav>
+  </div>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <!-- Conteúdo Principal -->
+  <main class="main-content">
+    <div class="welcome-section">
+      <h1>Meu Perfil</h1>
+      <p>Gerencie seus dados pessoais</p>
+    </div>
+
+
+    <script>
+      // Tentativa front-end de buscar o documento do paciente diretamente no Firestore
+      // (apenas leitura) para popular o campo 'endereco' no cliente quando o backend
+      // não o inclui na renderização. Isso não altera o backend.
+      (function(){
+        try {
+          const uid = "{{ session_user_id|default:'' }}";
+          if (!uid) return;
+
+          // Projeto e API key usados pelo backend - necessário para a leitura pública via REST
+          const PROJECT_ID = 'medify-401a8';
+          const API_KEY = 'AIzaSyC6w4Q2bzj9oV8YKuduoCeJjsmKiqNUH94';
+
+          const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/pacientes/${uid}?key=${API_KEY}`;
+          fetch(url, { method: 'GET', credentials: 'omit' })
+            .then(r => r.ok ? r.json() : Promise.reject(r))
+            .then(doc => {
+              // Firestore REST returns fields in 'fields' with typed values
+              const fields = doc && doc.fields ? doc.fields : null;
+              if (!fields) return;
+              // endereco may be stored as stringValue or mapValue; try common patterns
+              let endereco = '';
+              if (fields.endereco) {
+                if (fields.endereco.stringValue) endereco = fields.endereco.stringValue;
+                else if (fields.endereco.mapValue) {
+                  // try nested stringValue
+                  try {
+                    const inner = fields.endereco.mapValue.fields || {};
+                    endereco = inner.value && inner.value.stringValue ? inner.value.stringValue : '';
+                  } catch(e) { endereco = ''; }
+                }
+              }
+
+              if (!endereco && fields['address']) {
+                endereco = fields['address'].stringValue || '';
+              }
+
+              if (endereco) {
+                const dbg = document.getElementById('debugEndereco');
+                if (dbg) dbg.textContent = endereco;
+                const input = document.querySelector('input[name="endereco"]');
+                if (input && (!input.value || input.value.trim() === '')) input.value = endereco;
+              }
+            })
+            .catch(err => {
+              // silent fail; leave template value as-is
+              console.debug('Firestore read failed', err);
+            });
+        } catch (e) { console.debug('err', e); }
+      })();
+    </script>
+
+    {% with nome_inicial=paciente.nome|default:"U" %}
+      {% with initial=nome_inicial|slice:":1"|upper %}
+    <form method="post" style="background:#fff; padding:2rem; border-radius:var(--border-radius); box-shadow: var(--box-shadow); margin-bottom: 2rem;">
+      {% csrf_token %}
+      <div class="profile-grid">
+        <div class="profile-avatar">
+          <div class="avatar-preview" id="avatarPreview">
+            {% if paciente.foto %}
+              {% if paciente.foto|slice:":5" == "data:" %}
+                <img src="{{ paciente.foto }}" alt="Foto do paciente" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'avatar-initial\'>{{ initial }}</span>';">
+              {% else %}
+                <img src="{{ paciente.foto }}" alt="Foto do paciente" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'avatar-initial\'>{{ initial }}</span>';">
+              {% endif %}
+            {% else %}
+              <span class="avatar-initial">{{ initial }}</span>
+            {% endif %}
+          </div>
+          
+          <div style="display:flex; gap:0.5rem; margin-top: 1rem;">
+            <button class="btn btn-primary" type="submit" style="padding: 0.75rem 1.5rem; width: 100%;">
+              <i class="fas fa-save"></i> Salvar Perfil
+            </button>
+          </div>
+        </div>
+
+        <div class="profile-fields">
+          <div class="grid-cols">
+            <label style="display: block;">
+              Nome<br>
+              <input type="text" name="nome" value="{{ paciente.nome|default:'' }}" placeholder="Nome completo" style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-light); border-radius: 4px; margin-top: 0.25rem;">
+            </label>
+            <label style="display: block;">
+              Telefone<br>
+              <input type="text" name="telefone" value="{{ paciente.telefone|default:'' }}" placeholder="(11) 9xxxx-xxxx" style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-light); border-radius: 4px; margin-top: 0.25rem;">
+            </label>
+            <label style="display: block; grid-column: 1 / -1;">
+              Endereço<br>
+              <input type="text" name="endereco" value="{{ paciente.endereco|default:'' }}" placeholder="Rua, número, bairro, cidade" style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-light); border-radius: 4px; margin-top: 0.25rem;">
+            </label>
+            <label style="display: block; grid-column: 1 / -1;">
+              Plano de saúde (opcional)<br>
+              <input type="text" name="plano" value="{{ paciente.plano|default:'' }}" placeholder="Nome do convênio" style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-light); border-radius: 4px; margin-top: 0.25rem;">
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+      {% endwith %}
+    {% endwith %}
+
+    <div style="background: white; padding: 2rem; border-radius: var(--border-radius); box-shadow: var(--box-shadow); margin-bottom: 2rem;">
+      <h2 style="margin-bottom: 1rem; color: var(--dark);">Redefinir senha</h2>
+      <p style="color: var(--gray); margin-bottom: 1rem;">Esqueceu sua senha? Envie um e-mail de redefinição.</p>
+      <form method="post" action="{% url 'medify_web:enviar_redefinicao_senha' %}">
+        {% csrf_token %}
+        <label style="display: block; margin-bottom: 1rem;">
+          E-mail para redefinição<br>
+          <input type="email" name="email" value="{{ paciente.email|default:'' }}" required placeholder="Seu e-mail cadastrado" style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-light); border-radius: 4px; margin-top: 0.25rem;">
+        </label>
+        <div>
+          <button class="btn btn-primary" type="submit">
+            <i class="fas fa-envelope"></i> Enviar e-mail de redefinição
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div style="background: white; padding: 2rem; border-radius: var(--border-radius); box-shadow: var(--box-shadow);">
+      <h2 style="margin-bottom: 1rem; color: var(--dark);">Alterar senha</h2>
+      <p style="color: var(--gray); margin-bottom: 1rem;">Altere sua senha atual (usuário autenticado).</p>
+      <form method="post" action="{% url 'medify_web:alterar_senha' %}" style="max-width:420px;">
+        {% csrf_token %}
+        <label style="display: block; margin-bottom: 1rem;">
+          Nova senha<br>
+          <input type="password" name="nova_senha" required placeholder="Nova senha (mínimo 8 caracteres)" style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-light); border-radius: 4px; margin-top: 0.25rem;">
+        </label>
+        <label style="display: block; margin-bottom: 1rem;">
+          Confirme a nova senha<br>
+          <input type="password" name="confirma_senha" required placeholder="Repita a nova senha" style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-light); border-radius: 4px; margin-top: 0.25rem;">
+        </label>
+        <div>
+          <button class="btn btn-primary" type="submit">
+            <i class="fas fa-key"></i> Alterar Senha
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    // Controle do menu móvel - IGUAL ÀS OUTRAS PÁGINAS
+    document.addEventListener('DOMContentLoaded', function() {
+      // Elementos do menu mobile
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const mobileNav = document.getElementById('mobileNav');
+      const mobileClose = document.getElementById('mobileClose');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+
+      // Elementos do menu desktop
+      const desktopMenuToggle = document.getElementById('desktopMenuToggle');
+      const desktopSidebar = document.getElementById('desktopSidebar');
+      const desktopSidebarClose = document.getElementById('desktopSidebarClose');
+
+      function openMobileMenu() {
+        mobileNav.classList.add('active');
+        mobileOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMobileMenu() {
+        mobileNav.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      function openDesktopMenu() {
+        desktopSidebar.classList.add('active');
+        document.body.classList.add('menu-active');
+      }
+
+      function closeDesktopMenu() {
+        desktopSidebar.classList.remove('active');
+        document.body.classList.remove('menu-active');
+      }
+
+      // Event listeners para mobile
+      mobileMenuToggle.addEventListener('click', openMobileMenu);
+      mobileClose.addEventListener('click', closeMobileMenu);
+      mobileOverlay.addEventListener('click', closeMobileMenu);
+
+      // Event listeners para desktop
+      desktopMenuToggle.addEventListener('click', openDesktopMenu);
+      desktopSidebarClose.addEventListener('click', closeDesktopMenu);
+
+      // Fechar menus ao clicar em um link
+      document.querySelectorAll('.mobile-nav-link, .desktop-sidebar-link').forEach(link => {
+        link.addEventListener('click', function() {
+          closeMobileMenu();
+          closeDesktopMenu();
+        });
+      });
+
+      // Fechar menu desktop ao clicar fora
+      document.addEventListener('click', function(event) {
+        if (desktopSidebar.classList.contains('active') && 
+            !desktopSidebar.contains(event.target) && 
+            !desktopMenuToggle.contains(event.target)) {
+          closeDesktopMenu();
+        }
+      });
+
+      // Intercept form submit to perform frontend-only optimistic updates
+      const profileForm = document.querySelector('form[method="post"]');
+      if (profileForm) {
+        profileForm.addEventListener('submit', async function(ev) {
+          ev.preventDefault();
+
+          // Get CSRF token from the hidden input
+          const csrfInput = profileForm.querySelector('input[name="csrfmiddlewaretoken"]');
+          const csrfToken = csrfInput ? csrfInput.value : null;
+
+          // Read current form values (optimistic update)
+          const nomeVal = profileForm.querySelector('input[name="nome"]').value;
+          const telefoneVal = profileForm.querySelector('input[name="telefone"]').value;
+          const enderecoVal = profileForm.querySelector('input[name="endereco"]').value;
+          const planoVal = profileForm.querySelector('input[name="plano"]').value;
+
+          // Send the textual profile fields to the server via AJAX
+          try {
+            const postData = new URLSearchParams();
+            if (csrfToken) postData.append('csrfmiddlewaretoken', csrfToken);
+            postData.append('nome', nomeVal);
+            postData.append('telefone', telefoneVal);
+            postData.append('endereco', enderecoVal);
+            postData.append('plano', planoVal);
+
+            const resp2 = await fetch(window.location.href, {
+              method: 'POST',
+              body: postData,
+              headers: { 'X-Requested-With': 'XMLHttpRequest' },
+              credentials: 'same-origin'
+            });
+
+            // Optimistically update the inputs/DOM so user sees their saved data immediately
+            // (The server may be slightly stale due to caching; this avoids a confusing UX)
+            profileForm.querySelector('input[name="nome"]').value = nomeVal;
+            profileForm.querySelector('input[name="telefone"]').value = telefoneVal;
+            profileForm.querySelector('input[name="endereco"]').value = enderecoVal;
+            profileForm.querySelector('input[name="plano"]').value = planoVal;
+
+            // Show a temporary success message inline
+            const msgContainer = document.createElement('div');
+            msgContainer.style.background = '#d4edda';
+            msgContainer.style.color = '#155724';
+            msgContainer.style.padding = '0.75rem';
+            msgContainer.style.borderRadius = '4px';
+            msgContainer.style.marginBottom = '0.75rem';
+            msgContainer.style.border = '1px solid #c3e6cb';
+            msgContainer.textContent = 'Perfil salvo (alterações aplicadas localmente).';
+            profileForm.parentNode.insertBefore(msgContainer, profileForm);
+            setTimeout(() => msgContainer.remove(), 4500);
+
+            // Optionally, avoid reloading the page; let the optimistic UI hold.
+            // If you prefer a full reload to get server state, uncomment next line:
+            // window.location.reload();
+          } catch (err) {
+            console.warn('Erro ao enviar dados do perfil via AJAX:', err);
+            // Fallback: submit the form normally if AJAX fails
+            profileForm.submit();
+          }
+        });
+      }
+    });
+
+    // Função para confirmar logout antes de sair
+    function confirmarLogout(event) {
+      event.preventDefault();
+      if (confirm('Tem certeza que deseja sair da sua conta?')) {
+        event.target.submit();
+      }
+      return false;
+    }
+
+    // Prevenir logout acidental ao usar o botão voltar do navegador
+    let logoutPrevenido = false;
+    let logoutConfirmado = false;
+
+    // Interceptar navegação no histórico do navegador
+    window.addEventListener('popstate', function(event) {
+      // Se a URL contém logout, redirecionar para o dashboard
+      if (window.location.pathname.includes('/logout') || window.location.pathname.includes('/auth/')) {
+        if (!logoutConfirmado) {
+          event.preventDefault();
+          window.history.pushState(null, null, window.location.href);
+          window.location.href = '{% url "medify_web:dashboard_paciente" %}';
+        }
+      }
+    });
+
+    // Prevenir acesso direto à URL de logout via GET
+    if (window.location.pathname.includes('/logout')) {
+      if (!logoutConfirmado) {
+        window.location.href = '{% url "medify_web:dashboard_paciente" %}';
+      }
+    }
+
+    // Adicionar estado ao histórico para prevenir logout ao voltar
+    window.history.pushState(null, null, window.location.href);
+
+    // Interceptar todos os formulários de logout para adicionar confirmação
+    document.addEventListener('DOMContentLoaded', function() {
+      const logoutForms = document.querySelectorAll('form[action*="logout"]');
+      logoutForms.forEach(form => {
+        if (!form.hasAttribute('data-confirmado')) {
+          form.addEventListener('submit', function(e) {
+            if (!confirm('Tem certeza que deseja sair da sua conta?')) {
+              e.preventDefault();
+              return false;
+            }
+            logoutConfirmado = true;
+            logoutPrevenido = true;
+            form.setAttribute('data-confirmado', 'true');
+          });
+        }
+      });
+
+      // Prevenir que o botão voltar cause logout
+      window.addEventListener('beforeunload', function(e) {
+        if (!logoutConfirmado && window.location.pathname.includes('/logout')) {
+          e.preventDefault();
+          return false;
+        }
+      });
+    });
+
+    // ===== FORMATAÇÃO AUTOMÁTICA DE TELEFONE =====
+    function formatarTelefone(input) {
+      let valor = input.value.replace(/\D/g, '');
+      if (valor.length <= 10) {
+        // Telefone fixo: (XX) XXXX-XXXX
+        valor = valor.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+      } else {
+        // Celular: (XX) XXXXX-XXXX
+        valor = valor.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
+      }
+      input.value = valor;
+    }
+
+    // Aplicar formatação ao campo de telefone no perfil
+    document.addEventListener('DOMContentLoaded', function() {
+      const telefoneInput = document.querySelector('input[name="telefone"]');
+      if (telefoneInput) {
+        telefoneInput.addEventListener('input', function() {
+          formatarTelefone(this);
+        });
+        telefoneInput.setAttribute('maxlength', '15');
+        // Formatar valor inicial se já existir
+        if (telefoneInput.value) {
+          formatarTelefone(telefoneInput);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

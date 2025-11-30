@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acesso Restrito - ClinicApp</title>
+  <style>
+    /* ===== VARIÁVEIS DE CORES ===== */
+    :root {
+      --primary-blue: #1CACD4;
+      --primary-green: #10B981;
+      --dark-blue: #1E40AF;
+      --dark-green: #059669;
+      --light-blue: #DBEAFE;
+      --light-green: #D1FAE5;
+      --dark-text: #1F2937;
+      --light-text: #6B7280;
+      --white: #FFFFFF;
+      --light-gray: #F3F4F6;
+      --border-color: #E5E7EB;
+    }
+
+    /* ===== RESET E ESTILOS BASE ===== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: var(--dark-text);
+      line-height: 1.6;
+      background-color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ===== LAYOUT PRINCIPAL ===== */
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+    }
+
+    .content-wrapper {
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      padding: 3rem;
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* ===== CABEÇALHO ===== */
+    .header {
+      margin-bottom: 2rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .logo-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+    }
+
+    .logo-text h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--dark-text);
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text p {
+      font-size: 1rem;
+      color: var(--light-text);
+      margin-top: 0.25rem;
+    }
+
+    /* ===== MENSAGEM PRINCIPAL ===== */
+    .message-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .message-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary-blue);
+    }
+
+    .message-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: var(--dark-text);
+    }
+
+    .message-description {
+      font-size: 1.125rem;
+      color: var(--light-text);
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ===== PLATAFORMAS DISPONÍVEIS ===== */
+    .platforms-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .platforms-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--dark-text);
+    }
+
+    .platforms-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .platform-card {
+      background: var(--light-gray);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid var(--border-color);
+    }
+
+    .platform-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .platform-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary-blue);
+    }
+
+    .platform-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--dark-text);
+    }
+
+    .platform-card p {
+      color: var(--light-text);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* ===== BOTÕES DE DOWNLOAD ===== */
+    .download-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .download-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.5rem;
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(37, 99, 235, 0.3);
+    }
+
+    /* ===== VOLTAR AO LOGIN ===== */
+    .back-section {
+      margin-top: 1.5rem;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--light-gray);
+      color: var(--dark-text);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      background: var(--light-blue);
+    }
+
+    /* ===== RESPONSIVIDADE ===== */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      .content-wrapper {
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
+      }
+      
+      .logo {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      
+      .logo-text h1 {
+        font-size: 1.8rem;
+      }
+      
+      .message-title {
+        font-size: 1.6rem;
+      }
+      
+      .message-description {
+        font-size: 1rem;
+      }
+      
+      .platforms-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      .download-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .download-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .content-wrapper {
+        padding: 1.5rem 1rem;
+      }
+      
+      .logo-icon {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .logo-text h1 {
+        font-size: 1.5rem;
+      }
+      
+      .message-title {
+        font-size: 1.4rem;
+      }
+      
+      .message-description {
+        font-size: 0.95rem;
+      }
+      
+      .platforms-title {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="content-wrapper">
+      <div class="header">
+        <div class="logo">
+          <div class="logo-icon">
+            <!-- Ícone do aplicativo -->
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 12H15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 9V15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="logo-text">
+            <h1>ClinicApp</h1>
+            <p>Sistema de Gestão Médica</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="message-section">
+        <div class="message-icon">
+          <!-- Ícone de aviso -->
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 9V11M12 15H12.01M5.07183 19H18.9282C20.4678 19 21.4301 17.3333 20.6603 16L13.7321 4C12.9623 2.66667 11.0377 2.66667 10.2679 4L3.33975 16C2.56995 17.3333 3.53223 19 5.07183 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2 class="message-title">Acesso Restrito para Profissionais</h2>
+        <p class="message-description">
+          O acesso ao sistema via navegador web não está disponível para profissionais de saúde. 
+          Para utilizar todas as funcionalidades do MediFy, baixe nosso aplicativo para dispositivos móveis ou desktop.
+        </p>
+      </div>
+
+      <div class="platforms-section">
+        <h3 class="platforms-title">Plataformas Disponíveis</h3>
+        <div class="platforms-grid">
+          <div class="platform-card">
+            <div class="platform-icon">
+              <!-- Ícone mobile -->
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 2H7C5.89543 2 5 2.89543 5 4V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V4C19 2.89543 18.1046 2 17 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 18H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Aplicativo Mobile</h3>
+            <p>Disponível para Android e iOS. Gerencie suas consultas em qualquer lugar.</p>
+          </div>
+          <div class="platform-card">
+            <div class="platform-icon">
+              <!-- Ícone desktop -->
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 4H20V16H4V4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 20H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 16V20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Aplicativo Desktop</h3>
+            <p>Versão completa para Windows. Interface otimizada para produtividade.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="download-buttons">
+        <a href="#" class="download-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 10L12 15L17 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 15V3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Baixar para Android
+        </a>
+        <a href="#" class="download-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 2V8H20" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 13H8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 17H8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 9H9H8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Baixar para Windows
+        </a>
+      </div>
+
+      <div class="back-section">
+        <a href="/auth" class="back-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Voltar para a tela de login
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Adicionar funcionalidade aos botões de download
+    document.querySelectorAll('.download-btn').forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const platform = this.textContent.includes('Android') ? 'Android' : 'Windows';
+        alert(`Redirecionando para download do aplicativo ${platform}. Em um cenário real, você seria redirecionado para a loja de aplicativos ou página de download.`);
+      });
+    });
+  </script>
+</body>
+</html>

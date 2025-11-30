@@ -1,0 +1,446 @@
+:root {
+      --primary: #2bb7da;
+      --primary-dark: #2398b7;
+      --secondary: #3cd495;
+      --secondary-dark: #2bb76c;
+      --accent: #6a5acd;
+      --accent-dark: #5a4abd;
+      --background: #f8fafc;
+      --foreground: #23303b;
+      --card: #ffffff;
+      --muted: #6c7a89;
+      --light-gray: #e6e9ee;
+      --medium-gray: #d0d7df;
+      --radius: 16px;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+body.dashboard {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Header aprimorado - igual ao marcarConsulta.css */
+.dashboard-header {
+  background: linear-gradient(135deg, #2bb7da, #3cd495);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.dashboard-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+  opacity: 0.1;
+}
+
+.dashboard-header .header-left h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-header .header-left p {
+  margin: 0.5rem 0 0;
+  opacity: 0.95;
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.header-avatar {
+  position: relative;
+  z-index: 1;
+}
+
+.header-avatar img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.7);
+  transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.header-avatar:hover img {
+  transform: scale(1.05);
+  border-color: rgba(255,255,255,0.9);
+}
+
+
+.dashboard-main {
+  padding: 2rem 1.5rem;
+  animation: fadeIn 0.6s ease-out;
+}
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Appointment form aprimorado */
+    .appointment-form {
+      max-width: 760px;
+      margin: 0 auto;
+      background: var(--card);
+      padding: 2.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .appointment-form:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    .appointment-form::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .appointment-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      position: relative;
+    }
+
+    .appointment-field label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--foreground);
+      font-size: 1rem;
+    }
+
+    .appointment-field input,
+    .appointment-field select,
+    .appointment-field textarea {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      border-radius: 10px;
+      border: 1px solid var(--light-gray);
+      font-size: 1rem;
+      transition: var(--transition);
+      background: #fafafa;
+      font-family: inherit;
+    }
+
+    .appointment-field input:focus,
+    .appointment-field select:focus,
+    .appointment-field textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(43, 183, 218, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .appointment-field textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    /* Horários container */
+    #horarios-container {
+      margin-bottom: 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .horario-btn {
+      padding: 0.7rem 1.2rem;
+      border-radius: 10px;
+      border: 1px solid var(--medium-gray);
+      background: white;
+      color: var(--foreground);
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .horario-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.5s;
+    }
+
+    .horario-btn:hover::before {
+      left: 100%;
+    }
+
+    .horario-btn:hover {
+      border-color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(43, 183, 218, 0.15);
+    }
+
+    .horario-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border-color: transparent;
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(43, 183, 218, 0.3);
+    }
+
+    /* Informações do médico selecionado */
+    #selected-medico-info {
+      margin-bottom: 1.5rem;
+      padding: 1.5rem;
+      background: #f8fafc;
+      border-radius: 12px;
+      border-left: 4px solid var(--primary);
+      animation: slideIn 0.4s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    #selected-medico-nome {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    #selected-medico-esp {
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    /* Botões */
+    .btn {
+      padding: 0.7rem 1.2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      font-family: inherit;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--medium-gray);
+      color: var(--foreground);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .appointment-btn {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    .appointment-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .appointment-btn:hover::before {
+      left: 100%;
+    }
+
+    .appointment-btn:hover {
+      background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(43, 183, 218, 0.3);
+    }
+
+    .appointment-btn:active {
+      transform: translateY(-1px);
+    }
+
+    /* Estados de loading */
+    .loading {
+      position: relative;
+      pointer-events: none;
+    }
+
+    .loading::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      margin: -10px 0 0 -10px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Estados de sucesso/erro */
+    .success-message {
+      padding: 1rem;
+      background: #e8f7ef;
+      border-radius: 8px;
+      border-left: 4px solid var(--secondary);
+      color: #2d5a40;
+      margin-bottom: 1rem;
+      animation: slideIn 0.4s ease-out;
+    }
+
+    .error-message {
+      padding: 1rem;
+      background: #fde8e8;
+      border-radius: 8px;
+      border-left: 4px solid #e53e3e;
+      color: #742a2a;
+      margin-bottom: 1rem;
+      animation: slideIn 0.4s ease-out;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .dashboard-header {
+        padding: 0.75rem 1rem;
+      }
+
+      .dashboard-header .header-left h1 {
+        font-size: 1.7rem;
+      }
+
+      .dashboard-main {
+        padding: 1.5rem 1rem;
+      }
+
+      .appointment-form {
+        padding: 1.5rem;
+        border-radius: 12px;
+      }
+
+      .appointment-field input,
+      .appointment-field select,
+      .appointment-field textarea {
+        padding: 0.8rem 1rem;
+      }
+
+      .horario-btn {
+        padding: 0.6rem 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .dashboard-header .header-left h1 {
+        font-size: 1.5rem;
+      }
+
+      .dashboard-header .header-left p {
+        font-size: 1rem;
+      }
+
+      .appointment-form {
+        padding: 1.2rem;
+      }
+
+      .appointment-btn {
+        padding: 0.9rem;
+        font-size: 1rem;
+      }
+    }
+
+    /* Normalize header to match Consultas page (verAgenda) */
+    /* This ensures the Agendar page header height/spacing matches the Consultas header. */
+    .dashboard-header {
+      /* same compact padding used across dashboard pages */
+      padding: 0.75rem 1.5rem;
+    }
+
+    .dashboard-header .header-left h1 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .dashboard-header .header-left p {
+      margin: 0.5rem 0 0;
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+
+    /* ensure navbar sits absolutely inside the header (prevents it pushing header height)
+       and remove extra margin that could add height */
+    .dashboard-header { position: relative; }
+    .dashboard-header .top-nav { margin-bottom: 0; top: 50%; transform: translateY(-50%); right: 18px; }

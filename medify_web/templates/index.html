@@ -1,0 +1,249 @@
+<<<<<<< HEAD
+{% load static %}
+=======
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Login{% endblock %}
+>>>>>>> 07e3dd3 (Primeiro commit)
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<<<<<<< HEAD
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/index_v2.css' %}">
+  <title>ClinicApp</title>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-logo">
+      <div class="logo-icon">
+        <img src="{% static 'imagens/estetoscopio.png' %}" alt="MediFy Logo" style="width:28px;height:28px;object-fit:contain;filter:brightness(0) invert(1);">
+      </div>
+      <div>
+        <h1>MediFy</h1>
+        <p>Sistema de Gestão Médica</p>
+      </div>
+    </div>
+    <a href="{% url 'medify_web:auth' %}" class="header-btn">
+      Entrar <i data-lucide="arrow-right"></i>
+    </a>
+    <button class="mobile-menu-toggle">
+      <i data-lucide="menu"></i>
+    </button>
+  </header>
+
+  <!-- Menu Mobile -->
+  <nav class="mobile-nav">
+    <button class="close-menu">
+      <i data-lucide="x"></i>
+    </button>
+    <a href="#features">Funcionalidades</a>
+    <a href="#multiplatform">Plataformas</a>
+    <a href="#download">Download</a>
+    <a href="#" class="header-btn" style="margin-top: 2rem;">
+      Entrar <i data-lucide="arrow-right"></i>
+    </a>
+  </nav>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1>Agendamento <span class="highlight">Inteligente</span><br>para Clínicas</h1>
+        <p>Simplifique o agendamento de consultas, reduza ligações telefônicas e melhore a comunicação entre pacientes e profissionais de saúde.</p>
+        <div class="hero-features">
+          <div class="hero-feature"><i data-lucide="calendar"></i> Agendamento Online</div>
+          <div class="hero-feature"><i data-lucide="clock"></i> Disponibilidade Real</div>
+          <div class="hero-feature"><i data-lucide="users"></i> Gestão de Pacientes</div>
+          <div class="hero-feature"><i data-lucide="shield"></i> Dados Seguros</div>
+        </div>
+        <div class="hero-actions">
+          <a href="{% url 'medify_web:auth' %}" class="btn-primary">
+           <i data-lucide="arrow-right"></i> Começar Agora
+          </a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-image-box">
+          <img src="{% static 'imagens/index_imagem.jpg' %}" alt="Ilustração clínica">
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features-section">
+      <h3 class="features-title">Funcionalidades Completas</h3>
+      <p class="features-desc">Tudo que você precisa para modernizar sua clínica e oferecer a melhor experiência aos seus pacientes.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="calendar"></i></div>
+          <h4>Agendamento Inteligente</h4>
+          <p>Sistema automatizado que permite aos pacientes agendar consultas 24/7, visualizando disponibilidade em tempo real.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="users"></i></div>
+          <h4>Gestão de Pacientes</h4>
+          <p>Organize prontuários, histórico de consultas e informações dos pacientes de forma segura e eficiente.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="clock"></i></div>
+          <h4>Controle de Horários</h4>
+          <p>Gerencie sua agenda profissional, defina disponibilidade e organize consultas de forma otimizada.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="bell"></i></div>
+          <h4>Notificações Automáticas</h4>
+          <p>Lembretes por email e SMS para pacientes e profissionais sobre consultas agendadas e confirmações.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="bar-chart-2"></i></div>
+          <h4>Relatórios e Analytics</h4>
+          <p>Acompanhe métricas importantes como taxa de ocupação, no-shows e performance da clínica.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="shield"></i></div>
+          <h4>Segurança LGPD</h4>
+          <p>Proteção completa dos dados médicos seguindo todas as normas de privacidade e segurança.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Multiplatform -->
+    <section id="multiplatform" class="features-section">
+      <h3 class="features-title">Multiplataforma</h3>
+      <p class="features-desc">Acesse de qualquer lugar, a qualquer momento, no dispositivo que preferir.</p>
+      <div class="features-grid">
+        <div class="feature-card-multiplatform">
+          <div class="feature-icon-multiplatform"><i data-lucide="monitor"></i></div>
+          <h4>Web Dashboard</h4>
+          <p>Interface completa para gestão e agendamentos via navegador.</p>
+          <div>
+            <a class="secondary">paciente</a>
+          </div>
+        </div>
+        <div class="feature-card-multiplatform">
+          <div class="feature-icon-multiplatform"><i data-lucide="smartphone"></i></div>
+          <h4>App Mobile</h4>
+          <p>Aplicativo nativo para agendamentos rápidos e notificações.</p>
+          <div>
+            <a class="secondary">paciente</a>
+            <a class="secondary">profissional</a>
+          </div>
+        </div>
+        <div class="feature-card-multiplatform">
+          <div class="feature-icon-multiplatform"><i data-lucide="file-text"></i></div>
+          <h4>Sistema Desktop</h4>
+          <p>Software completo para gestão de clínicas e estabelecimentos.</p>
+          <div>
+            <a class="secondary">clínica</a>
+            <a class="secondary">profissional</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-section">
+    <h3 class="footer-title">Download</h3>
+    <p class="footer-desc">Acesse de qualquer lugar, a qualquer momento, no dispositivo que preferir.</p>
+    <div class="footer-grid">
+      <div class="footer-card-multiplatform">
+        <div class="footer-icon-multiplatform"><i data-lucide="monitor"></i></div>
+        <h4>Aplicativo Web</h4>
+        <p>Agendamentos rápidos e notificações na palma da sua mão</p>
+        <ul class="footer-list">
+          <li>Agendamento em tempo real</li>
+          <li>Notificações push</li>
+          <li>Histórico de consultas</li>
+        </ul>
+        <button class="btn-footer">Download para Android</button>
+      </div>
+      <div class="footer-card-multiplatform">
+        <div class="footer-icon-multiplatform"><i data-lucide="smartphone"></i></div>
+        <h4>Sistema Desktop</h4>
+        <p>Gestão completa para clínicas e estabelecimentos de saúde</p>
+        <ul class="footer-list">
+          <li>Gestão completa de pacientes</li>
+          <li>Relatórios avançados</li>
+          <li>Controle financeiro</li>
+        </ul>
+        <button class="btn-footer">Download para Windows</button>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Inicializar ícones
+    lucide.createIcons();
+    
+    // Menu mobile
+  const menuToggle = document.querySelector('.mobile-menu-toggle');
+  const closeMenu = document.querySelector('.close-menu');
+  const mobileNav = document.querySelector('.mobile-nav');
+  
+  menuToggle.addEventListener('click', () => {
+    mobileNav.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Impede scroll quando menu está aberto
+  });
+  
+  closeMenu.addEventListener('click', () => {
+    mobileNav.classList.remove('active');
+    document.body.style.overflow = 'auto'; // Restaura scroll
+  });
+  
+  // Fechar menu ao clicar em um link
+  const mobileLinks = document.querySelectorAll('.mobile-nav a');
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+  });
+    
+    // Animação de entrada dos cards
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+    
+    // Observar elementos para animação
+    document.querySelectorAll('.feature-card, .feature-card-multiplatform, .platform-card, .download-card, .footer-card-multiplatform').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  </script>
+=======
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <h1>Agendamento Inteligente para clínicas</h1>
+    <div class="buttons">
+        
+    </div>
+>>>>>>> 07e3dd3 (Primeiro commit)
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,17 @@
+# Django / Python
+*.pyc
+__pycache__/
+env/
+venv/
+.venv/
+db.sqlite3
+.pytest_cache/
+.coverage
+
+# Firebase key (do not commit secret)
+core/firebase_key.json
+
+# Media / static
+/media/
+/staticfiles/
+"core/firebase_key.json" 

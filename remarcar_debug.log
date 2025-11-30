@@ -1,0 +1,1488 @@
+DEBUG criar_consulta: medico_id_final=None profissional_nome=None medico_selecionado_exists=False old_prof_name=None
+DEBUG criar_consulta: medico_id_final=None profissional_nome=None medico_selecionado_exists=False old_prof_name=None
+DEBUG criar_consulta: medico_id_final=None profissional_nome=None medico_selecionado_exists=False old_prof_name=None
+DEBUG criar_consulta: medico_id_final=None profissional_nome=None medico_selecionado_exists=False old_prof_name=None
+DEBUG criar_consulta: medico_id_final=None profissional_nome=None medico_selecionado_exists=False old_prof_name=None
+DEBUG criar_consulta: medico_id_final=None profissional_nome=None medico_selecionado_exists=False old_prof_name=None
+DEBUG criar_consulta: medico_id_final=None profissional_nome=None medico_selecionado_exists=False old_prof_name=None
+EXCEPTION during agendar:
+Traceback (most recent call last):
+  File "C:\Users\Usuario\OneDrive\Documents\Lab Multi\Medify_Web_\Medify_Web_\Medify_Web\medify_web\views_consultas.py", line 174, in consultaGeral
+    raise Exception("Falha ao criar consulta com profissional autônomo")
+Exception: Falha ao criar consulta com profissional autônomo
+
+EXCEPTION during agendar:
+Traceback (most recent call last):
+  File "C:\Users\Usuario\OneDrive\Documents\Lab Multi\Medify_Web_\Medify_Web_\Medify_Web\medify_web\views_consultas.py", line 159, in consultaGeral
+    messages.error(request, 'Dados incompletos para agendamento. Verifique todos os campos.')
+    ^^^^^^^^
+UnboundLocalError: cannot access local variable 'messages' where it is not associated with a value
+
+DEBUG criar_consulta: medico_id_final=GyRhschrmtYf59AzVRSqgUMDNbW2 profissional_nome=ozzy medico_selecionado_exists=True old_prof_name=None
+[marcar_consulta_cancelada] called: consulta_id='r3GkMoC8oi9TVy4eRk0l', motivo='porque sim'
+[marcar_consulta_cancelada] updated doc consultas_autonomos/r3GkMoC8oi9TVy4eRk0l
+[marcar_consulta_cancelada] updated doc pacientes/XytKVTZ3Fph9j0h8RTAodZic3ew2/consultas/r3GkMoC8oi9TVy4eRk0l
+[marcar_consulta_cancelada] updated doc profissionais/e5pTRUJV88UbPrw0nu57KTKBznA3/consultas/r3GkMoC8oi9TVy4eRk0l
+DEBUG criar_consulta: medico_id_final=e5pTRUJV88UbPrw0nu57KTKBznA3 profissional_nome=tobias medico_selecionado_exists=True old_prof_name=None
+[marcar_consulta_cancelada] called: consulta_id='ajXMr5XwJYeaLoPjJnHX', motivo='Conflito de horário'
+[marcar_consulta_cancelada] updated doc consultas_autonomos/ajXMr5XwJYeaLoPjJnHX
+[marcar_consulta_cancelada] set doc pacientes/XytKVTZ3Fph9j0h8RTAodZic3ew2/consultas/ajXMr5XwJYeaLoPjJnHX (merge)
+[marcar_consulta_cancelada] set doc profissionais/VPeMWdcc8oa4NWW8LO0t1zcQMoG3/consultas/ajXMr5XwJYeaLoPjJnHX (merge)
+DEBUG criar_consulta: medico_id_final=e5pTRUJV88UbPrw0nu57KTKBznA3 profissional_nome=tobias medico_selecionado_exists=True old_prof_name=None
+DEBUG criar_consulta: medico_id_final=e5pTRUJV88UbPrw0nu57KTKBznA3 profissional_nome=tobias medico_selecionado_exists=True old_prof_name=tobias
+marcar_horario_reservado updated=1 for e5pTRUJV88UbPrw0nu57KTKBznA3 2025-10-31 13:00
+marcar_horario_disponivel attempted for e5pTRUJV88UbPrw0nu57KTKBznA3 2024-02-12 12:00, freed=1
+DEBUG criar_consulta: medico_id_final=e5pTRUJV88UbPrw0nu57KTKBznA3 profissional_nome=tobias medico_selecionado_exists=True old_prof_name=tobias
+marcar_horario_reservado updated=1 for e5pTRUJV88UbPrw0nu57KTKBznA3 2024-02-12 12:00
+marcar_horario_disponivel attempted for e5pTRUJV88UbPrw0nu57KTKBznA3 2025-10-31 13:00, freed=1
+[marcar_consulta_cancelada] called: consulta_id='I1HmcB6rQDlXCSOQ9Szx', motivo='313212'
+[marcar_consulta_cancelada] updated doc consultas_autonomos/I1HmcB6rQDlXCSOQ9Szx
+[marcar_consulta_cancelada] updated doc pacientes/XytKVTZ3Fph9j0h8RTAodZic3ew2/consultas/I1HmcB6rQDlXCSOQ9Szx
+[marcar_consulta_cancelada] updated doc profissionais/e5pTRUJV88UbPrw0nu57KTKBznA3/consultas/I1HmcB6rQDlXCSOQ9Szx
+DEBUG criar_consulta: medico_id_final=e5pTRUJV88UbPrw0nu57KTKBznA3 profissional_nome=tobias medico_selecionado_exists=True old_prof_name=tobias
+marcar_horario_reservado updated=1 for e5pTRUJV88UbPrw0nu57KTKBznA3 2025-10-31 13:00
+marcar_horario_disponivel attempted for e5pTRUJV88UbPrw0nu57KTKBznA3 2024-02-12 12:00, freed=1
+[marcar_consulta_cancelada] called: consulta_id='0AiyP0C7WBLAf4m7AdWx', motivo=None
+[marcar_consulta_cancelada] updated doc consultas_autonomos/0AiyP0C7WBLAf4m7AdWx
+[marcar_consulta_cancelada] updated doc pacientes/XytKVTZ3Fph9j0h8RTAodZic3ew2/consultas/0AiyP0C7WBLAf4m7AdWx
+[marcar_consulta_cancelada] called: consulta_id='0AiyP0C7WBLAf4m7AdWx', motivo=None
+[marcar_consulta_cancelada] called: consulta_id='cI4WH46dGrlwX4Wlqkg9', motivo=None
+[marcar_consulta_cancelada] updated doc consultas_autonomos/0AiyP0C7WBLAf4m7AdWx
+[marcar_consulta_cancelada] updated doc pacientes/XytKVTZ3Fph9j0h8RTAodZic3ew2/consultas/0AiyP0C7WBLAf4m7AdWx
+[marcar_consulta_cancelada] updated doc consultas_autonomos/cI4WH46dGrlwX4Wlqkg9
+[marcar_consulta_cancelada] updated doc pacientes/XytKVTZ3Fph9j0h8RTAodZic3ew2/consultas/cI4WH46dGrlwX4Wlqkg9
+[marcar_consulta_cancelada] updated doc profissionais/e5pTRUJV88UbPrw0nu57KTKBznA3/consultas/cI4WH46dGrlwX4Wlqkg9
+[marcar_consulta_cancelada] called: consulta_id='2Rsdm6DUu3scRDtOzBmv', motivo=None
+[marcar_consulta_cancelada] called: consulta_id='Cd0YfWr5eg6hoIn1G2AH', motivo=None
+[marcar_consulta_cancelada] updated doc consultas_autonomos/2Rsdm6DUu3scRDtOzBmv
+[marcar_consulta_cancelada] called: consulta_id='3Q42KMFRX8ELgGpmi477', motivo=None
+[marcar_consulta_cancelada] set doc pacientes/XytKVTZ3Fph9j0h8RTAodZic3ew2/consultas/2Rsdm6DUu3scRDtOzBmv (merge)
+[marcar_consulta_cancelada] updated doc consultas_autonomos/Cd0YfWr5eg6hoIn1G2AH
+[marcar_consulta_cancelada] set doc profissionais/e5pTRUJV88UbPrw0nu57KTKBznA3/consultas/2Rsdm6DUu3scRDtOzBmv (merge)
+[marcar_consulta_cancelada] updated doc pacientes/XytKVTZ3Fph9j0h8RTAodZic3ew2/consultas/Cd0YfWr5eg6hoIn1G2AH
+[marcar_consulta_cancelada] updated doc consultas_autonomos/3Q42KMFRX8ELgGpmi477
+[marcar_consulta_cancelada] updated doc pacientes/XytKVTZ3Fph9j0h8RTAodZic3ew2/consultas/3Q42KMFRX8ELgGpmi477
+[marcar_consulta_cancelada] updated doc profissionais/GyRhschrmtYf59AzVRSqgUMDNbW2/consultas/3Q42KMFRX8ELgGpmi477
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=0
+[marcar_consulta_cancelada] called: consulta_id='hgXuLDoEXcmAb9kFMrPz', motivo='32'
+[marcar_consulta_cancelada] updated doc consultas_autonomos/hgXuLDoEXcmAb9kFMrPz
+[marcar_consulta_cancelada] set doc pacientes/XytKVTZ3Fph9j0h8RTAodZic3ew2/consultas/hgXuLDoEXcmAb9kFMrPz (merge)
+[marcar_consulta_cancelada] set doc profissionais/e5pTRUJV88UbPrw0nu57KTKBznA3/consultas/hgXuLDoEXcmAb9kFMrPz (merge)
+[finalizar_consultas_passadas] updated=0
+[marcar_consulta_cancelada] called: consulta_id='hgXuLDoEXcmAb9kFMrPz', motivo='23232'
+[marcar_consulta_cancelada] updated doc consultas_autonomos/hgXuLDoEXcmAb9kFMrPz
+[marcar_consulta_cancelada] updated doc pacientes/XytKVTZ3Fph9j0h8RTAodZic3ew2/consultas/hgXuLDoEXcmAb9kFMrPz
+[marcar_consulta_cancelada] updated doc profissionais/e5pTRUJV88UbPrw0nu57KTKBznA3/consultas/hgXuLDoEXcmAb9kFMrPz
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[marcar_consulta_cancelada] called: consulta_id='dbQIuKpT2kQfyUSt4FH2', motivo='dfgdsg'
+[marcar_consulta_cancelada] updated doc consultas_autonomos/dbQIuKpT2kQfyUSt4FH2
+[marcar_consulta_cancelada] updated doc pacientes/XytKVTZ3Fph9j0h8RTAodZic3ew2/consultas/dbQIuKpT2kQfyUSt4FH2
+[marcar_consulta_cancelada] updated doc profissionais/e5pTRUJV88UbPrw0nu57KTKBznA3/consultas/dbQIuKpT2kQfyUSt4FH2
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[marcar_consulta_cancelada] called: consulta_id='cI4WH46dGrlwX4Wlqkg9', motivo=None
+[marcar_consulta_cancelada] updated doc consultas_autonomos/cI4WH46dGrlwX4Wlqkg9
+[marcar_consulta_cancelada] updated doc pacientes/XytKVTZ3Fph9j0h8RTAodZic3ew2/consultas/cI4WH46dGrlwX4Wlqkg9
+[marcar_consulta_cancelada] updated doc profissionais/e5pTRUJV88UbPrw0nu57KTKBznA3/consultas/cI4WH46dGrlwX4Wlqkg9
+DEBUG criar_consulta: medico_id_final=e5pTRUJV88UbPrw0nu57KTKBznA3 profissional_nome=tobias medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for e5pTRUJV88UbPrw0nu57KTKBznA3 2025-10-30 14:00
+DEBUG criar_consulta: medico_id_final=e5pTRUJV88UbPrw0nu57KTKBznA3 profissional_nome=tobias medico_selecionado_exists=True old_prof_name=tobias
+marcar_horario_reservado updated=1 for e5pTRUJV88UbPrw0nu57KTKBznA3 2025-10-30 13:00
+marcar_horario_disponivel attempted for e5pTRUJV88UbPrw0nu57KTKBznA3 2025-10-30 14:00, freed=1
+[finalizar_consultas_passadas] updated=10
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+DEBUG criar_consulta: medico_id_final=3AxObXsY7fPvFx9pIX3v4chmH9n1 profissional_nome=belle medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for 3AxObXsY7fPvFx9pIX3v4chmH9n1 2025-11-27 10:00
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+DEBUG criar_consulta: medico_id_final=3AxObXsY7fPvFx9pIX3v4chmH9n1 profissional_nome=belle medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for 3AxObXsY7fPvFx9pIX3v4chmH9n1 2025-11-21 10:00
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[marcar_consulta_cancelada] called: consulta_id='G78izg8mtj7rkeV5QxvH', motivo=None
+[marcar_consulta_cancelada] updated doc consultas_autonomos/G78izg8mtj7rkeV5QxvH
+[marcar_consulta_cancelada] updated doc pacientes/3AxObXsY7fPvFx9pIX3v4chmH9n1/consultas/G78izg8mtj7rkeV5QxvH
+[marcar_consulta_cancelada] updated doc profissionais/3AxObXsY7fPvFx9pIX3v4chmH9n1/consultas/G78izg8mtj7rkeV5QxvH
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[marcar_consulta_cancelada] called: consulta_id='G78izg8mtj7rkeV5QxvH', motivo=None
+[marcar_consulta_cancelada] updated doc consultas_autonomos/G78izg8mtj7rkeV5QxvH
+[marcar_consulta_cancelada] updated doc pacientes/3AxObXsY7fPvFx9pIX3v4chmH9n1/consultas/G78izg8mtj7rkeV5QxvH
+[marcar_consulta_cancelada] updated doc profissionais/3AxObXsY7fPvFx9pIX3v4chmH9n1/consultas/G78izg8mtj7rkeV5QxvH
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+DEBUG criar_consulta: medico_id_final=3AxObXsY7fPvFx9pIX3v4chmH9n1 profissional_nome=belle medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for 3AxObXsY7fPvFx9pIX3v4chmH9n1 2025-11-21 11:00
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[marcar_consulta_cancelada] called: consulta_id='ZmwersjRkt63l3mqb4Ai', motivo=None
+[marcar_consulta_cancelada] updated doc consultas_autonomos/ZmwersjRkt63l3mqb4Ai
+[marcar_consulta_cancelada] updated doc pacientes/3AxObXsY7fPvFx9pIX3v4chmH9n1/consultas/ZmwersjRkt63l3mqb4Ai
+[marcar_consulta_cancelada] updated doc profissionais/3AxObXsY7fPvFx9pIX3v4chmH9n1/consultas/ZmwersjRkt63l3mqb4Ai
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+DEBUG criar_consulta: medico_id_final=3AxObXsY7fPvFx9pIX3v4chmH9n1 profissional_nome=belle medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for 3AxObXsY7fPvFx9pIX3v4chmH9n1 2025-11-21 13:00
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[marcar_consulta_cancelada] called: consulta_id='bTxoJ01bZHawFP0aFCjY', motivo=None
+[marcar_consulta_cancelada] updated doc consultas_autonomos/bTxoJ01bZHawFP0aFCjY
+[marcar_consulta_cancelada] updated doc pacientes/uKkE1T20RuNtgrd5dipz723Dpw93/consultas/bTxoJ01bZHawFP0aFCjY
+[marcar_consulta_cancelada] updated doc profissionais/3AxObXsY7fPvFx9pIX3v4chmH9n1/consultas/bTxoJ01bZHawFP0aFCjY
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+DEBUG criar_consulta: medico_id_final=3AxObXsY7fPvFx9pIX3v4chmH9n1 profissional_nome=belle medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for 3AxObXsY7fPvFx9pIX3v4chmH9n1 2025-11-21 13:00
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+DEBUG criar_consulta: medico_id_final=3AxObXsY7fPvFx9pIX3v4chmH9n1 profissional_nome=belle medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for 3AxObXsY7fPvFx9pIX3v4chmH9n1 2025-11-27 10:00
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+DEBUG criar_consulta: medico_id_final=3AxObXsY7fPvFx9pIX3v4chmH9n1 profissional_nome=belle medico_selecionado_exists=True old_prof_name=belle
+marcar_horario_reservado updated=1 for 3AxObXsY7fPvFx9pIX3v4chmH9n1 2025-11-21 11:00
+marcar_horario_disponivel attempted for 3AxObXsY7fPvFx9pIX3v4chmH9n1 2025-11-27 10:00, freed=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=0
+[marcar_consulta_cancelada] called: consulta_id='U6l1vPUamXqcCRdAjQCm', motivo='Doença'
+[marcar_consulta_cancelada] updated doc consultas_autonomos/U6l1vPUamXqcCRdAjQCm
+[marcar_consulta_cancelada] updated doc pacientes/uKkE1T20RuNtgrd5dipz723Dpw93/consultas/U6l1vPUamXqcCRdAjQCm
+[marcar_consulta_cancelada] updated doc profissionais/3AxObXsY7fPvFx9pIX3v4chmH9n1/consultas/U6l1vPUamXqcCRdAjQCm
+DEBUG criar_consulta: medico_id_final=rquhOFCVkvTXnXBnzsfUsKW01HP2 profissional_nome=Sirius medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for rquhOFCVkvTXnXBnzsfUsKW01HP2 2025-11-22 10:00
+DEBUG criar_consulta: medico_id_final=3AxObXsY7fPvFx9pIX3v4chmH9n1 profissional_nome=belle medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=2 for 3AxObXsY7fPvFx9pIX3v4chmH9n1 2025-12-12 09:00
+DEBUG criar_consulta: medico_id_final=3AxObXsY7fPvFx9pIX3v4chmH9n1 profissional_nome=belle medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for 3AxObXsY7fPvFx9pIX3v4chmH9n1 2025-11-21 11:00
+[finalizar_consultas_passadas] updated=0
+DEBUG criar_consulta: medico_id_final=rquhOFCVkvTXnXBnzsfUsKW01HP2 profissional_nome=Sirius medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for rquhOFCVkvTXnXBnzsfUsKW01HP2 2025-11-25 09:00
+[marcar_consulta_cancelada] called: consulta_id='OrHkXWaEeX1DBq6A2Anr', motivo='Conflito de horário'
+[marcar_consulta_cancelada] updated doc consultas_clinicas/OrHkXWaEeX1DBq6A2Anr
+[marcar_consulta_cancelada] set doc pacientes/h6MfcpFS3YY8X2aija2z1jAXPmz1/consultas/OrHkXWaEeX1DBq6A2Anr (merge)
+[marcar_consulta_cancelada] set doc profissionais/rquhOFCVkvTXnXBnzsfUsKW01HP2/consultas/OrHkXWaEeX1DBq6A2Anr (merge)
+DEBUG criar_consulta: medico_id_final=rquhOFCVkvTXnXBnzsfUsKW01HP2 profissional_nome=Sirius medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for rquhOFCVkvTXnXBnzsfUsKW01HP2 2025-11-26 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=rquhOFCVkvTXnXBnzsfUsKW01HP2 profissional_nome=Sirius medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for rquhOFCVkvTXnXBnzsfUsKW01HP2 2025-11-22 18:00
+DEBUG criar_consulta: medico_id_final=3AxObXsY7fPvFx9pIX3v4chmH9n1 profissional_nome=belle medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for 3AxObXsY7fPvFx9pIX3v4chmH9n1 2025-11-23 11:00
+DEBUG criar_consulta: medico_id_final=rquhOFCVkvTXnXBnzsfUsKW01HP2 profissional_nome=Sirius medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for rquhOFCVkvTXnXBnzsfUsKW01HP2 2025-11-23 13:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=3AxObXsY7fPvFx9pIX3v4chmH9n1 profissional_nome=belle medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for 3AxObXsY7fPvFx9pIX3v4chmH9n1 2025-12-09 11:00
+DEBUG criar_consulta: medico_id_final=OqMbz4kdmfbyL2K0EJpldJmRJrX2 profissional_nome=sansa medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for OqMbz4kdmfbyL2K0EJpldJmRJrX2 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=OqMbz4kdmfbyL2K0EJpldJmRJrX2 profissional_nome=sansa medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for OqMbz4kdmfbyL2K0EJpldJmRJrX2 2025-12-01 12:00
+DEBUG criar_consulta: medico_id_final=F8yTrDVnpQhySGBIf1fH7VdMe3p1 profissional_nome=Johnny medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for F8yTrDVnpQhySGBIf1fH7VdMe3p1 2025-12-02 15:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+EXCEPTION during agendar:
+Traceback (most recent call last):
+  File "C:\Users\Usuario\Documents\Lab Multi\Projeto_MediFy\basic app\Medify_Web\medify_web\views_consultas.py", line 288, in consultaGeral
+    return redirect('medify_web:dashboard_paciente?consulta_agendada=1')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\shortcuts.py", line 49, in redirect
+    return redirect_class(resolve_url(to, *args, **kwargs))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\shortcuts.py", line 180, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\urls\resolvers.py", line 851, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard_paciente?consulta_agendada=1' not found. 'dashboard_paciente?consulta_agendada=1' is not a valid view function or pattern name.
+
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=2
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-01-01 09:00
+DEBUG criar_consulta: medico_id_final=m1 profissional_nome=Dr Teste medico_selecionado_exists=True old_prof_name=None
+marcar_horario_reservado updated=1 for m1 2025-12-01 09:00
+DEBUG criar_consulta: medico_id_final=pr_old profissional_nome=Dr Old medico_selecionado_exists=True old_prof_name=Dr Old
+marcar_horario_reservado updated=0 for pr_old 2025-12-05 10:00
+WARNING: marcar_horario_reservado returned 0 for pr_old 2025-12-05 10:00
+marcar_horario_disponivel attempted for pr_old 2025-11-01 08:00, freed=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=0
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=2
+[finalizar_consultas_passadas] updated=1
+[finalizar_consultas_passadas] updated=3
+[finalizar_consultas_passadas] updated=1

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+<p>Lista de pacientes cadastrados no Firestore:</p>
+<ul>
+  {% for p in pacientes %}
+    <li>{{ p.nome }} - {{ p.email }}</li>
+  {% empty %}
+    <li>Nenhum paciente encontrado.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
