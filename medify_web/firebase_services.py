@@ -298,7 +298,7 @@ def criar_profissional(dados: dict):
 def listar_profissionais():
     docs = db.collection('profissionais').stream()
     return [doc.to_dict() | {"id": doc.id} for doc in docs]
->>>>>>> 07e3dd3 (Primeiro commit)
+
 
 # CLÍNICAS
 def criar_clinica(dados: dict):
