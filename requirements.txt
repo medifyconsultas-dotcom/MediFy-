@@ -100,9 +100,6 @@ stack-data==0.6.3
 sympy==1.14.0
 tbb==2021.11.0
 tokenizers==0.22.1
-torch==2.3.0+cpu
-torchaudio==2.3.0+cpu
-torchvision==0.18.0+cpu
 tornado==6.5.2
 tqdm==4.67.1
 traitlets==5.14.3
