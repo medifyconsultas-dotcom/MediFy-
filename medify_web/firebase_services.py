@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import datetime
 from firebase_admin import firestore
 import time
@@ -6,8 +5,8 @@ from functools import wraps
 
 db = firestore.client()
 
-
 import requests
+
 def enviar_email_redefinicao(email, api_key=None):
     """Envia e-mail de redefinição de senha para o usuário usando a API REST do Firebase Auth."""
     if api_key is None:
@@ -65,6 +64,7 @@ def _timed_cache(ttl=30):
             return val
         return wrapper
     return decorator
+
 # Lista todos os médicos das clínicas
 
 @_timed_cache(ttl=600)  # OTIMIZAÇÃO: Aumentado de 60s para 600s (10min)
@@ -150,12 +150,12 @@ def marcar_medico_profile_completed(medico_uid: str) -> bool:
                         break
                 except Exception:
                     continue
-                if updated:
-                    # write back the medicos array
-                    pid = getattr(doc, 'id', None)
-                    if pid:
-                        doc_ref = db.collection('clinicas').document(pid)
-                        doc_ref.update({'medicos': medicos})
+            if updated:
+                # write back the medicos array
+                pid = getattr(doc, 'id', None)
+                if pid:
+                    doc_ref = db.collection('clinicas').document(pid)
+                    doc_ref.update({'medicos': medicos})
                 return True
     except Exception:
         pass
@@ -258,54 +258,11 @@ def atualizar_profissional(uid: str, updates: dict) -> bool:
         except Exception:
             return False
 
-
-def atualizar_clinica(clinica_id: str, updates: dict) -> bool:
-    """Atualiza campos do documento da clínica. Retorna True em sucesso."""
-    try:
-        doc_ref = db.collection('clinicas').document(clinica_id)
-        doc_ref.update(updates)
-        return True
-    except Exception:
-        try:
-            db.collection('clinicas').document(clinica_id).set(updates, merge=True)
-            return True
-        except Exception:
-            return False
-=======
-from firebase_admin import firestore
-
-db = firestore.client()
-
-# PACIENTES
-def criar_paciente(dados: dict):
-    """Cria paciente no Firestore"""
-    return db.collection('pacientes').add(dados)
-
-def listar_pacientes():
-    docs = db.collection('pacientes').stream()
-    return [doc.to_dict() | {"id": doc.id} for doc in docs]
-
-def obter_paciente(id_paciente: str):
-    doc = db.collection('pacientes').document(id_paciente).get()
-    if doc.exists:
-        return doc.to_dict() | {"id": doc.id}
-    return None
-
-# PROFISSIONAIS
-def criar_profissional(dados: dict):
-    return db.collection('profissionais').add(dados)
-
-def listar_profissionais():
-    docs = db.collection('profissionais').stream()
-    return [doc.to_dict() | {"id": doc.id} for doc in docs]
-
-
 # CLÍNICAS
 def criar_clinica(dados: dict):
     return db.collection('clinicas').add(dados)
 
 def listar_clinicas():
-<<<<<<< HEAD
     docs = db.collection('clinicas').limit(100).stream()
     results = []
     for doc in docs:
@@ -313,25 +270,6 @@ def listar_clinicas():
         if sd:
             results.append(sd)
     return results
-=======
-    docs = db.collection('clinicas').stream()
-    return [doc.to_dict() | {"id": doc.id} for doc in docs]
->>>>>>> 07e3dd3 (Primeiro commit)
-
-# FUNCIONÁRIOS DENTRO DA CLÍNICA
-def criar_funcionario(id_clinica: str, dados: dict):
-    return db.collection('clinicas').document(id_clinica).collection('funcionarios').add(dados)
-
-def listar_funcionarios(id_clinica: str):
-<<<<<<< HEAD
-    docs = db.collection('funcionarios').document(id_clinica).collection('funcionarios').stream()
-    results = []
-    for doc in docs:
-        sd = _safe_snapshot_dict(doc)
-        if sd:
-            results.append(sd)
-    return results
-
 
 @_timed_cache(ttl=600)  # OTIMIZAÇÃO: Cache 10min para reduzir Firestore reads
 def obter_clinica(clinica_id: str):
@@ -346,6 +284,19 @@ def obter_clinica(clinica_id: str):
     except Exception:
         pass
     return None
+
+def atualizar_clinica(clinica_id: str, updates: dict) -> bool:
+    """Atualiza campos do documento da clínica. Retorna True em sucesso."""
+    try:
+        doc_ref = db.collection('clinicas').document(clinica_id)
+        doc_ref.update(updates)
+        return True
+    except Exception:
+        try:
+            db.collection('clinicas').document(clinica_id).set(updates, merge=True)
+            return True
+        except Exception:
+            return False
 
 def obter_clinica_por_recepcionista(recepcionista_uid: str):
     """Procura uma clínica que contenha o recepcionista com o UID fornecido.
@@ -364,6 +315,18 @@ def obter_clinica_por_recepcionista(recepcionista_uid: str):
                 continue
     return None
 
+# FUNCIONÁRIOS DENTRO DA CLÍNICA
+def criar_funcionario(id_clinica: str, dados: dict):
+    return db.collection('clinicas').document(id_clinica).collection('funcionarios').add(dados)
+
+def listar_funcionarios(id_clinica: str):
+    docs = db.collection('clinicas').document(id_clinica).collection('funcionarios').stream()
+    results = []
+    for doc in docs:
+        sd = _safe_snapshot_dict(doc)
+        if sd:
+            results.append(sd)
+    return results
 
 # HORÁRIOS / DISPONIBILIDADE (por profissional)
 def adicionar_horario_profissional(profissional_uid: str, data_str: str, hora_str: str):
@@ -1229,8 +1192,4 @@ def excluir_prontuario(prontuario_id: str):
 def verificar_prontuario_existente(prontuario_id: str):
     """Verifica se existe um prontuário com o ID fornecido em qualquer paciente."""
     return obter_prontuario(prontuario_id) is not None
-=======
-    docs = db.collection('clinicas').document(id_clinica).collection('funcionarios').stream()
-    return [doc.to_dict() | {"id": doc.id} for doc in docs]
->>>>>>> 07e3dd3 (Primeiro commit)
 
