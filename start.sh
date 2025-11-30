@@ -1,51 +1,40 @@
 #!/usr/bin/env sh
 set -e
 
-# Gera core/firebase_key.json a partir da env FIREBASE_SERVICE_ACCOUNT
+echo "==> Criando firebase_key.json..."
+
+# Criar core/firebase_key.json a partir da env FIREBASE_SERVICE_ACCOUNT
+mkdir -p core
+
 if [ -n "$FIREBASE_SERVICE_ACCOUNT" ]; then
-  # Se começar com '{' provavelmente é JSON cru
   case "$FIREBASE_SERVICE_ACCOUNT" in
     '{'*)
+      # JSON puro
       printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > core/firebase_key.json
       ;;
     *)
-      # tenta decodificar base64, se falhar grava o conteúdo cru
-      printf '%s' "$FIREBASE_SERVICE_ACCOUNT" | base64 -d > core/firebase_key.json 2>/dev/null || printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > core/firebase_key.json
+      # tenta decodificar base64; se falhar grava como texto normal
+      printf '%s' "$FIREBASE_SERVICE_ACCOUNT" | base64 -d > core/firebase_key.json 2>/dev/null \
+        || printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > core/firebase_key.json
       ;;
   esac
-  echo "Wrote core/firebase_key.json from FIREBASE_SERVICE_ACCOUNT"
+  echo "Firebase key escrita em core/firebase_key.json"
 else
-  echo "FIREBASE_SERVICE_ACCOUNT not set; skipping firebase key creation"
+  echo "FIREBASE_SERVICE_ACCOUNT não definida! Firebase NÃO VAI FUNCIONAR."
 fi
 
-# Atualiza pip e instala dependências
+echo "==> Instalando dependências..."
 python -m pip install --upgrade pip setuptools wheel || true
+
 if [ -f requirements.txt ]; then
   python -m pip install -r requirements.txt
 fi
 
-# Executa migrations e collectstatic
+echo "==> Rodando migrations..."
 python manage.py migrate --noinput || true
+
+echo "==> Coletando arquivos estáticos..."
 python manage.py collectstatic --noinput || true
 
-# Inicia Gunicorn (Railway fornece $PORT)
+echo "==> Iniciando Gunicorn..."
 exec gunicorn core.wsgi:application --bind 0.0.0.0:${PORT:-8000} --workers 3
-#!/usr/bin/env bash
-set -e
-
-# Escrever chave do Firebase a partir da variável FIREBASE_SERVICE_ACCOUNT
-if [ -n "$FIREBASE_SERVICE_ACCOUNT" ]; then
-  echo "$FIREBASE_SERVICE_ACCOUNT" > core/firebase_key.json
-fi
-
-# Se você armazenou em base64 no env, descomente e use:
-# echo "$FIREBASE_SERVICE_ACCOUNT_B64" | base64 -d > core/firebase_key.json
-
-# Rodar migrações
-python manage.py migrate --noinput
-
-# Coletar arquivos estáticos
-python manage.py collectstatic --noinput
-
-# Iniciar Gunicorn (usa $PORT provido pelo Railway)
-gunicorn core.wsgi:application --bind 0.0.0.0:${PORT:-8000} --workers 3
