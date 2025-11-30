@@ -67,34 +67,64 @@ if railway_private:
 # =====================================================================
 # FIREBASE INIT
 # =====================================================================
+# Opção para desabilitar Firebase completamente (útil quando credenciais estão inválidas)
+FIREBASE_ENABLED = os.environ.get('FIREBASE_ENABLED', 'True').lower() == 'true'
 firebase_sa = os.environ.get('FIREBASE_SERVICE_ACCOUNT')
-cred = None
+db = None
 
-if firebase_sa:
+# Tenta inicializar Firebase apenas se estiver habilitado e as credenciais estiverem disponíveis
+# Verifica se já foi inicializado para evitar múltiplas inicializações
+if FIREBASE_ENABLED:
     try:
-        cred_dict = json.loads(firebase_sa)
-    except Exception:
+        # Verifica se já existe uma app inicializada
         try:
-            cred_json = base64.b64decode(firebase_sa).decode('utf-8')
-            cred_dict = json.loads(cred_json)
-        except Exception:
-            cred_dict = None
+            _existing_app = firebase_admin.get_app()
+            # Se já existe, apenas obtém o cliente
+            db = firestore.client()
+        except ValueError:
+            # Nenhuma app inicializada ainda, pode prosseguir
+            cred = None
+            
+            if firebase_sa:
+                try:
+                    cred_dict = json.loads(firebase_sa)
+                except Exception:
+                    try:
+                        cred_json = base64.b64decode(firebase_sa).decode('utf-8')
+                        cred_dict = json.loads(cred_json)
+                    except Exception:
+                        cred_dict = None
 
-    if cred_dict:
-        cred = credentials.Certificate(cred_dict)
-else:
-    fallback_path = os.path.join(BASE_DIR, "core", "firebase_key.json")
-    if os.path.exists(fallback_path):
-        cred = credentials.Certificate(fallback_path)
-
-if cred:
-    try:
-        firebase_admin.initialize_app(cred)
-        db = firestore.client()
-    except Exception:
+                if cred_dict and isinstance(cred_dict, dict):
+                    # Valida campos essenciais antes de tentar inicializar
+                    if cred_dict.get('project_id') and cred_dict.get('private_key') and cred_dict.get('client_email'):
+                        try:
+                            cred = credentials.Certificate(cred_dict)
+                            firebase_admin.initialize_app(cred)
+                            db = firestore.client()
+                        except Exception as e:
+                            import logging
+                            logger = logging.getLogger(__name__)
+                            logger.warning(f"Firebase initialization failed: {str(e)}")
+                            db = None
+            else:
+                fallback_path = os.path.join(BASE_DIR, "core", "firebase_key.json")
+                if os.path.exists(fallback_path):
+                    try:
+                        cred = credentials.Certificate(fallback_path)
+                        firebase_admin.initialize_app(cred)
+                        db = firestore.client()
+                    except Exception as e:
+                        import logging
+                        logger = logging.getLogger(__name__)
+                        logger.warning(f"Firebase initialization from file failed: {str(e)}")
+                        db = None
+    except Exception as e:
+        # Falha silenciosa - app continua funcionando sem Firebase
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.warning(f"Firebase setup error: {str(e)}")
         db = None
-else:
-    db = None
 
 # =====================================================================
 # APPLICATIONS
