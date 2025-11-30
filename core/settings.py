@@ -19,8 +19,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security from env
 SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',') if os.environ.get('ALLOWED_HOSTS') else []
-
+ALLOWED_HOSTS = [
+    '*',
+    os.environ.get("RAILWAY_PUBLIC_DOMAIN", ""),
+    os.environ.get("RAILWAY_PRIVATE_DOMAIN", ""),
+]
 from pathlib import Path
 import os
 import json
