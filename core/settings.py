@@ -26,6 +26,9 @@ ALLOWED_HOSTS = [
     '*',
     os.environ.get("RAILWAY_PUBLIC_DOMAIN", ""),
     os.environ.get("RAILWAY_PRIVATE_DOMAIN", ""),
+    'medify-production-416a.up.railway.app',
+    '*.up.railway.app',  # ou ['*'] temporariamente para testar
+    '.railway.app',
 ]
 
 # =====================================================================
@@ -188,3 +191,17 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 # AI MODEL CONFIG
 # =====================================================================
 DEFAULT_AI_MODEL = 'claude-haiku-4.5'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'ERROR',
+    },
+}
