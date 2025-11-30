@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block title %}Home{% endblock %}
 
 {% block content %}
@@ -10,16 +11,20 @@
 <header>
   <div class="header-logo">
     <div class="logo-icon">
-      <img src="{% static 'imagens/estetoscopio.png' %}" alt="MediFy Logo" style="width:28px;height:28px;object-fit:contain;filter:brightness(0) invert(1);">
+      <img src="{% static 'imagens/estetoscopio.png' %}" 
+           alt="MediFy Logo" 
+           style="width:28px;height:28px;object-fit:contain;filter:brightness(0) invert(1);">
     </div>
     <div>
       <h1>MediFy</h1>
       <p>Sistema de Gestão Médica</p>
     </div>
   </div>
+
   <a href="{% url 'medify_web:auth' %}" class="header-btn">
     Entrar <i data-lucide="arrow-right"></i>
   </a>
+
   <button class="mobile-menu-toggle">
     <i data-lucide="menu"></i>
   </button>
@@ -33,29 +38,34 @@
   <a href="#features">Funcionalidades</a>
   <a href="#multiplatform">Plataformas</a>
   <a href="#download">Download</a>
+
   <a href="{% url 'medify_web:auth' %}" class="header-btn" style="margin-top: 2rem;">
     Entrar <i data-lucide="arrow-right"></i>
   </a>
 </nav>
 
 <main>
+
   <!-- Hero -->
   <section class="hero-section">
     <div class="hero-content">
       <h1>Agendamento <span class="highlight">Inteligente</span><br>para Clínicas</h1>
       <p>Simplifique o agendamento de consultas, reduza ligações telefônicas e melhore a comunicação entre pacientes e profissionais de saúde.</p>
+
       <div class="hero-features">
         <div class="hero-feature"><i data-lucide="calendar"></i> Agendamento Online</div>
         <div class="hero-feature"><i data-lucide="clock"></i> Disponibilidade Real</div>
         <div class="hero-feature"><i data-lucide="users"></i> Gestão de Pacientes</div>
         <div class="hero-feature"><i data-lucide="shield"></i> Dados Seguros</div>
       </div>
+
       <div class="hero-actions">
         <a href="{% url 'medify_web:auth' %}" class="btn-primary">
           <i data-lucide="arrow-right"></i> Começar Agora
         </a>
       </div>
     </div>
+
     <div class="hero-image">
       <div class="hero-image-box">
         <img src="{% static 'imagens/index_imagem.jpg' %}" alt="Ilustração clínica">
@@ -69,6 +79,7 @@
     <p class="features-desc">Tudo que você precisa para modernizar sua clínica e oferecer a melhor experiência aos seus pacientes.</p>
 
     <div class="features-grid">
+
       <div class="feature-card">
         <div class="feature-icon"><i data-lucide="calendar"></i></div>
         <h4>Agendamento Inteligente</h4>
@@ -90,7 +101,7 @@
       <div class="feature-card">
         <div class="feature-icon"><i data-lucide="bell"></i></div>
         <h4>Notificações Automáticas</h4>
-        <p>Lembretes por email e SMS para pacientes e profissionais sobre consultas agendadas e confirmações.</p>
+        <p>Lembretes por email e SMS para consultas agendadas e confirmações.</p>
       </div>
 
       <div class="feature-card">
@@ -102,8 +113,9 @@
       <div class="feature-card">
         <div class="feature-icon"><i data-lucide="shield"></i></div>
         <h4>Segurança LGPD</h4>
-        <p>Proteção completa dos dados médicos seguindo todas as normas de privacidade e segurança.</p>
+        <p>Proteção completa dos dados médicos seguindo todas as normas de segurança e privacidade.</p>
       </div>
+
     </div>
   </section>
 
@@ -113,6 +125,7 @@
     <p class="features-desc">Acesse de qualquer lugar, a qualquer momento, no dispositivo que preferir.</p>
 
     <div class="features-grid">
+
       <div class="feature-card-multiplatform">
         <div class="feature-icon-multiplatform"><i data-lucide="monitor"></i></div>
         <h4>Web Dashboard</h4>
@@ -139,16 +152,19 @@
           <a class="secondary">profissional</a>
         </div>
       </div>
+
     </div>
   </section>
+
 </main>
 
 <!-- Footer -->
-<footer class="footer-section">
+<footer class="footer-section" id="download">
   <h3 class="footer-title">Download</h3>
   <p class="footer-desc">Acesse de qualquer lugar, a qualquer momento, no dispositivo que preferir.</p>
 
   <div class="footer-grid">
+
     <div class="footer-card-multiplatform">
       <div class="footer-icon-multiplatform"><i data-lucide="monitor"></i></div>
       <h4>Aplicativo Web</h4>
@@ -172,6 +188,7 @@
       </ul>
       <button class="btn-footer">Download para Windows</button>
     </div>
+
   </div>
 </footer>
 
