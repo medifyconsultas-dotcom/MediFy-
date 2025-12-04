@@ -39,3 +39,21 @@ out/
 # sensitive keys
 *.pem
 
+# Python / virtualenv
+Medify_Web/venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+
+# SQLite / local DBs
+*.sqlite3
+*.db
+
+# compiled python
+*.egg-info/
+
+# other
+node_modules/
+*.log
+
