@@ -71,6 +71,24 @@ raw_allowed = os.environ.get('ALLOWED_HOSTS', default_allowed)
 # split and strip, ignore empty entries
 ALLOWED_HOSTS = [h.strip() for h in raw_allowed.split(',') if h.strip()]
 
+# CSRF trusted origins: can be set explicitly via env var `CSRF_TRUSTED_ORIGINS`
+# value should be comma-separated full origins (including scheme), e.g.
+# "https://medify-production-416a.up.railway.app,https://example.com"
+raw_csrf = os.environ.get('CSRF_TRUSTED_ORIGINS')
+if raw_csrf:
+    CSRF_TRUSTED_ORIGINS = [u.strip() for u in raw_csrf.split(',') if u.strip()]
+else:
+    # derive basic trusted origins from ALLOWED_HOSTS when possible
+    CSRF_TRUSTED_ORIGINS = []
+    for h in ALLOWED_HOSTS:
+        # skip wildcards, localhost and IPs
+        if h == '*' or h.startswith('127.') or h == 'localhost' or h.replace('.', '').isdigit():
+            continue
+        CSRF_TRUSTED_ORIGINS.append(f'https://{h}')
+
+# Tell Django to trust X-Forwarded-Proto header from the proxy (Railway)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 # Application definition
 
