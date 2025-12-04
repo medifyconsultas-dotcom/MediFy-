@@ -1,0 +1,91 @@
+/* Perfil paciente - estilo clean, profissional e "onita" (agradável)
+   Colors chosen to blend with existing style.css: soft teal/blue accents.
+*/
+:root{
+  --bg:#f6f9fb;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --primary:#0ea5a4; /* teal */
+  --primary-dark:#0b8281;
+  --accent:#06b6d4;
+  --border:rgba(15,23,42,0.06);
+  --shadow: 0 6px 18px rgba(11,15,30,0.06);
+}
+
+body{
+  background:var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:#0f172a;
+}
+
+main{padding:2rem}
+
+/* Profile grid */
+.profile-grid{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:1rem;
+  align-items:start;
+}
+
+.profile-avatar{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:1rem;
+  border-radius:8px;
+  text-align:center;
+  box-shadow:var(--shadow);
+}
+
+.avatar-preview{
+  width:120px;
+  height:120px;
+  margin:0 auto 0.5rem auto;
+  border-radius:999px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(180deg,#eef7f7,#fff);
+  border:1px solid rgba(14,165,164,0.08);
+}
+.avatar-preview img{width:100%;height:100%;object-fit:cover;display:block}
+.avatar-initial{
+  display:inline-block;
+  width:100%;height:100%;
+  font-size:44px;font-weight:600;color:var(--primary-dark);
+  display:flex;align-items:center;justify-content:center;
+}
+
+.upload-btn{display:inline-block;margin-top:6px;cursor:pointer}
+.upload-btn input[type=file]{display:none}
+.upload-btn span{
+  display:inline-block;padding:0.45rem 0.9rem;border-radius:6px;background:var(--primary);color:white;font-weight:600;font-size:0.95rem;
+}
+
+.btn-outline.small{padding:0.35rem 0.65rem;font-size:0.85rem}
+
+.profile-fields{background:var(--card);border:1px solid var(--border);padding:1rem;border-radius:8px;box-shadow:var(--shadow)}
+
+.grid-cols{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.grid-cols label{display:block}
+.grid-cols label.full{grid-column:1 / -1}
+
+input[type=text], input[type=email], input[type=password]{
+  width:100%;padding:0.6rem;border-radius:6px;border:1px solid rgba(15,23,42,0.08);background:#fff;font-size:0.95rem
+}
+
+.btn-primary{background:var(--accent);border:none;color:white;padding:0.65rem 0.9rem;border-radius:8px;font-weight:700}
+.btn-primary:hover{background:var(--primary-dark)}
+
+.messages{list-style:none;padding:0;margin:0 0 1rem 0}
+.message{padding:0.5rem 0.6rem;border-radius:6px;margin-bottom:0.5rem}
+.message.error{background:#fee2e2;color:#991b1b}
+.message.success{background:#dcfce7;color:#14532d}
+
+/* Responsive */
+@media (max-width:760px){
+  .profile-grid{grid-template-columns:1fr;}
+  .grid-cols{grid-template-columns:1fr}
+  .avatar-preview{width:96px;height:96px}
+}

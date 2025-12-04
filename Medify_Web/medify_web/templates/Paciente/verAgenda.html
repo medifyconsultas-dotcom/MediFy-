@@ -1,0 +1,1152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha Agenda</title>
+  <link rel="stylesheet" href="{% static 'css/dashboardPaciente.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ESTILOS DO MENU RESPONSIVO - IGUAL AO CONSULTAGERAL */
+    :root {
+      --color-surface: #ffffff;
+      --color-border: #e1e5e9;
+      --gradient-primary: linear-gradient(135deg, var(--primary), #1e6fc7);
+      --gradient-secondary: linear-gradient(135deg, var(--secondary), #008f7a);
+      --box-shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.15);
+      --box-shadow-xl: 0 12px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .welcome-section {
+      animation: fadeInDown 0.8s ease-out;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .welcome-section h1 {
+      font-size: 2.5rem;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .welcome-section p {
+      color: var(--gray);
+      font-size: 1.1rem;
+    }
+
+    /* ===== MENU LATERAL PARA DESKTOP - LADO DIREITO ===== */
+    .desktop-sidebar {
+      position: fixed;
+      top: 0;
+      right: -280px;
+      left: auto;
+      width: 280px;
+      height: 100vh;
+      background: white;
+      z-index: 100;
+      box-shadow: -2px 0 20px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition-slow);
+    }
+
+    .desktop-sidebar.active {
+      right: 0;
+      left: auto;
+    }
+
+    .desktop-sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .desktop-sidebar-header .logo-container {
+      gap: 0.5rem;
+    }
+
+    .desktop-sidebar-header h1 {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .desktop-sidebar-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.25rem;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .desktop-sidebar-close:hover {
+      background: rgba(255,255,255,0.2);
+      transform: rotate(90deg);
+    }
+
+    .desktop-sidebar-links {
+      flex: 1;
+      padding: 1rem 0;
+      overflow-y: auto;
+    }
+
+    .desktop-sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      color: var(--dark);
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      font-size: 1rem;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .desktop-sidebar-link:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      transform: translateX(-5px);
+    }
+
+    .desktop-sidebar-form {
+      margin-top: auto;
+      border-top: 1px solid var(--gray-light);
+    }
+
+    .desktop-sidebar-logout {
+      color: #e74c3c;
+      border-bottom: none !important;
+    }
+
+    .desktop-sidebar-logout:hover {
+      background: #ffeaea;
+      color: #c0392b;
+    }
+
+    /* Botão para abrir menu no desktop - LADO DIREITO */
+    .desktop-menu-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      left: auto;
+      z-index: 99;
+      background: var(--primary);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      box-shadow: var(--box-shadow);
+      cursor: pointer;
+      transition: var(--transition);
+      display: none;
+    }
+
+    .desktop-menu-toggle:hover {
+      background: #1e6fc7;
+      transform: scale(1.1);
+    }
+
+    /* Ajustes para quando o menu lateral está ativo - LADO DIREITO */
+    body.menu-active .main-content {
+      margin-right: 280px;
+      transition: var(--transition-slow);
+    }
+
+    /* ===== MENU MOBILE - LADO DIREITO ===== */
+    .mobile-menu-toggle {
+      display: none;
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      left: auto;
+      z-index: 1000;
+      background: var(--primary);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      box-shadow: var(--box-shadow);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .mobile-menu-toggle:hover {
+      background: #1e6fc7;
+      transform: scale(1.1);
+    }
+
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      left: auto;
+      width: 280px;
+      height: 100vh;
+      background: white;
+      z-index: 1001;
+      transition: var(--transition-slow);
+      box-shadow: -2px 0 20px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-nav.active {
+      right: 0;
+      left: auto;
+    }
+
+    .mobile-nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .mobile-nav-header .logo-container {
+      gap: 0.5rem;
+    }
+
+    .mobile-nav-header h1 {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .mobile-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.25rem;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .mobile-close:hover {
+      background: rgba(255,255,255,0.2);
+      transform: rotate(90deg);
+    }
+
+    .mobile-nav-links {
+      flex: 1;
+      padding: 1rem 0;
+      overflow-y: auto;
+    }
+
+    .mobile-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      color: var(--dark);
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      font-size: 1rem;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .mobile-nav-link:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      transform: translateX(-5px);
+    }
+
+    .mobile-nav-form {
+      margin-top: auto;
+      border-top: 1px solid var(--gray-light);
+    }
+
+    .mobile-nav-logout {
+      color: #e74c3c;
+      border-bottom: none !important;
+    }
+
+    .mobile-nav-logout:hover {
+      background: #ffeaea;
+      color: #c0392b;
+    }
+
+    .mobile-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .mobile-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ===== MEDIA QUERIES PARA MENU RESPONSIVO ===== */
+    @media (max-width: 768px) {
+      .desktop-sidebar,
+      .desktop-menu-toggle {
+        display: none;
+      }
+      
+      .mobile-menu-toggle {
+        display: flex;
+      }
+      
+      .main-content {
+        margin-right: 0 !important;
+        padding-top: 80px;
+      }
+
+      .header-right {
+        display: none !important;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .mobile-menu-toggle,
+      .mobile-nav,
+      .mobile-overlay {
+        display: none !important;
+      }
+      
+      .desktop-menu-toggle {
+        display: flex;
+      }
+      
+      .header-right {
+        display: block !important;
+      }
+    }
+
+    /* ESTILOS ESPECÍFICOS DA PÁGINA VER AGENDA */
+    .status-badge {
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: capitalize;
+      display: inline-block;
+    }
+    
+    .status-agendada {
+      background: rgba(251, 191, 36, 0.1);
+      color: #fbbf24;
+    }
+    
+    .status-confirmada {
+      background: rgba(59, 130, 246, 0.1);
+      color: #3b82f6;
+    }
+    
+    .status-realizada {
+      background: rgba(16, 185, 129, 0.1);
+      color: #10b981;
+    }
+    
+    .status-concluida {
+      background: rgba(16, 185, 129, 0.1);
+      color: #10b981;
+    }
+    
+    .status-cancelada {
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+    }
+    
+    .status-outro {
+      background: rgba(107, 114, 128, 0.1);
+      color: #6b7280;
+    }
+    
+    .appointment-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      margin-bottom: 1rem;
+      border: 1px solid var(--gray-light);
+    }
+    
+    .cancel-controls {
+      display: none;
+      gap: 0.5rem;
+      align-items: center;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .motivo-select, .motivo-text {
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid var(--gray-light);
+      font-size: 0.9rem;
+    }
+    
+    .motivo-text {
+      display: none;
+      width: 100%;
+      resize: vertical;
+    }
+
+    /* Card de Seleção de Motivo */
+    .motivo-card {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      padding: 1rem;
+    }
+
+    .motivo-card.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .motivo-card-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+    }
+
+    .motivo-card-content {
+      position: relative;
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      max-width: 500px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: scale(0.95) translateY(20px);
+      transition: transform 0.3s ease;
+      z-index: 1001;
+    }
+
+    .motivo-card.active .motivo-card-content {
+      transform: scale(1) translateY(0);
+    }
+
+    .motivo-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .motivo-card-header h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .motivo-card-header h3 i {
+      color: #f59e0b;
+    }
+
+    .motivo-card-close {
+      background: none;
+      border: none;
+      color: var(--gray);
+      font-size: 1.25rem;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .motivo-card-close:hover {
+      background: var(--gray-light);
+      color: var(--dark);
+    }
+
+    .motivo-card-body {
+      padding: 1.5rem;
+    }
+
+    .motivo-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .motivo-option {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: white;
+      border: 2px solid var(--gray-light);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--dark);
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: left;
+      width: 100%;
+      font-family: inherit;
+    }
+
+    .motivo-option:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      transform: translateX(4px);
+    }
+
+    .motivo-option.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .motivo-option i {
+      font-size: 1.25rem;
+      color: var(--primary);
+      width: 24px;
+      text-align: center;
+    }
+
+    .motivo-option.selected i {
+      color: var(--primary);
+    }
+
+    .motivo-text-container {
+      margin-bottom: 1.5rem;
+    }
+
+    .motivo-text-container label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--dark);
+      font-size: 0.95rem;
+    }
+
+    .motivo-text-card {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 2px solid var(--gray-light);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: white;
+      color: var(--dark);
+      transition: var(--transition);
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .motivo-text-card:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(43, 127, 217, 0.1);
+    }
+
+    .motivo-card-actions {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: flex-end;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--gray-light);
+    }
+
+    .motivo-card-actions .btn {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .motivo-card-actions .btn-outline {
+      background: white;
+      border: 2px solid var(--gray-light);
+      color: var(--dark);
+    }
+
+    .motivo-card-actions .btn-outline:hover {
+      background: var(--gray-light);
+      border-color: var(--gray);
+    }
+
+    .motivo-card-actions .btn-danger {
+      background: #dc3545;
+      border: 2px solid #dc3545;
+      color: white;
+    }
+
+    .motivo-card-actions .btn-danger:hover:not(:disabled) {
+      background: #c82333;
+      border-color: #bd2130;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+    }
+
+    .motivo-card-actions .btn-danger:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* RESPONSIVIDADE PARA CONTEÚDO */
+    @media (max-width: 768px) {
+      .main-content {
+        padding: 1rem;
+        padding-top: 80px;
+      }
+
+      .welcome-section {
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .welcome-section h1 {
+        font-size: 1.8rem;
+      }
+
+      .welcome-section p {
+        font-size: 1rem;
+      }
+
+      .appointment-card {
+        padding: 1.25rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-content {
+        padding: 0.75rem;
+        padding-top: 70px;
+      }
+
+      .appointment-card {
+        padding: 1rem;
+      }
+
+      .welcome-section h1 {
+        font-size: 1.5rem;
+      }
+
+      .cancel-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .motivo-select, .motivo-text {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body class="dashboard">
+  <!-- Header Profissional -->
+  <header class="dashboard-header">
+    <div class="logo-container">
+      <a href="{% url 'medify_web:dashboard_paciente' %}" style="text-decoration:none; color:inherit; display:flex; align-items:center;">
+        <img src="{% static 'imagens/estetoscopio.png' %}" alt="MediFy Logo" class="logo-icon" style="width:24px;height:24px;object-fit:contain;">
+        <h1 style="margin:0 0 0 0.5rem;">MediFy</h1>
+      </a>
+    </div>
+    <div class="header-right">
+  
+    </div>
+  </header>
+
+  <!-- Menu Mobile (para telas menores) -->
+  <div class="mobile-menu-toggle" id="mobileMenuToggle">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+      <div class="logo-container">
+        <img src="{% static 'imagens/estetoscopio.png' %}" alt="MediFy Logo" class="logo-icon" style="width:24px;height:24px;object-fit:contain;">
+        <h1>MediFy</h1>
+      </div>
+      <button class="mobile-close" id="mobileClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="{% url 'medify_web:dashboard_paciente' %}" class="mobile-nav-link">
+        <i class="fas fa-home"></i>
+        Dashboard
+      </a>
+      <a href="{% url 'medify_web:consultaGeral' %}" class="mobile-nav-link">
+        <i class="fas fa-calendar-plus"></i>
+        Agendar Consulta
+      </a>
+      <a href="{% url 'medify_web:verAgenda' %}" class="mobile-nav-link">
+        <i class="fas fa-calendar-check"></i>
+        Minhas Consultas
+      </a>
+      <a href="{% url 'medify_web:perfilPaciente' %}" class="mobile-nav-link">
+        <i class="fas fa-user-edit"></i>
+        Meu Perfil
+      </a>
+      <form action="{% url 'medify_web:logout' %}" method="post" class="mobile-nav-form" id="logoutFormMobile" onsubmit="return confirmarLogout(event);">
+        {% csrf_token %}
+        <button type="submit" class="mobile-nav-link mobile-nav-logout">
+          <i class="fas fa-sign-out-alt"></i>
+          Sair
+        </button>
+      </form>
+    </nav>
+  </div>
+
+  <!-- Menu Desktop (para telas maiores) -->
+  <div class="desktop-menu-toggle" id="desktopMenuToggle">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <div class="desktop-sidebar" id="desktopSidebar">
+    <div class="desktop-sidebar-header">
+      <div class="logo-container">
+        <img src="{% static 'imagens/estetoscopio.png' %}" alt="MediFy Logo" class="logo-icon" style="width:24px;height:24px;object-fit:contain;">
+        <h1>MediFy</h1>
+      </div>
+      <button class="desktop-sidebar-close" id="desktopSidebarClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <nav class="desktop-sidebar-links">
+      <a href="{% url 'medify_web:dashboard_paciente' %}" class="desktop-sidebar-link">
+        <i class="fas fa-home"></i>
+        Dashboard
+      </a>
+      <a href="{% url 'medify_web:consultaGeral' %}" class="desktop-sidebar-link">
+        <i class="fas fa-calendar-plus"></i>
+        Agendar Consulta
+      </a>
+      <a href="{% url 'medify_web:verAgenda' %}" class="desktop-sidebar-link">
+        <i class="fas fa-calendar-check"></i>
+        Minhas Consultas
+      </a>
+      <a href="{% url 'medify_web:perfilPaciente' %}" class="desktop-sidebar-link">
+        <i class="fas fa-user-edit"></i>
+        Meu Perfil
+      </a>
+      <form action="{% url 'medify_web:logout' %}" method="post" class="desktop-sidebar-form" id="logoutFormDesktop" onsubmit="return confirmarLogout(event);">
+        {% csrf_token %}
+        <button type="submit" class="desktop-sidebar-link desktop-sidebar-logout">
+          <i class="fas fa-sign-out-alt"></i>
+          Sair
+        </button>
+      </form>
+    </nav>
+  </div>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <!-- Conteúdo Principal -->
+  <main class="main-content">
+    <div class="welcome-section">
+      <h1>Minhas Consultas</h1>
+      <p>Gerencie suas consultas agendadas e visualize seu histórico</p>
+    </div>
+
+    <section style="margin-top: 1rem;">
+
+      <div class="history-list">
+        {% if consultas_paciente_raw and consultas_paciente_raw|length > 0 %}
+          {% for c in consultas_paciente_raw %}
+            <div class="appointment-card">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                <div style="flex: 1;">
+                  <div style="font-weight: 600; font-size: 1.1rem; color: var(--dark); margin-bottom: 0.5rem;">
+                    {{ c.profissional_nome|default:"Profissional não especificado" }}
+                  </div>
+                  <div style="color: var(--gray); font-size: 0.95rem; margin-bottom: 0.5rem;">
+                    {% if c.data %}<i class="fas fa-calendar"></i> {{ c.data }}{% endif %}
+                    {% if c.hora %}&nbsp;<i class="fas fa-clock"></i> {{ c.hora }}{% endif %}
+                  </div>
+                  {% if c.endereco %}
+                    <div style="color: var(--gray); font-size: 0.875rem; margin-bottom: 0.25rem;">
+                      <i class="fas fa-map-marker-alt"></i> {{ c.endereco }}
+                    </div>
+                  {% endif %}
+                  {% if c.telefone %}
+                    <div style="color: var(--gray); font-size: 0.875rem;">
+                      <i class="fas fa-phone"></i> {{ c.telefone }}
+                    </div>
+                  {% endif %}
+                </div>
+                <div style="text-align: right; margin-left: 1rem;">
+                  <span class="status-badge {% if c.status|lower == 'concluída' or c.status|lower == 'realizada' %}status-realizada
+                        {% elif c.status|lower == 'cancelada' %}status-cancelada
+                        {% elif c.status|lower == 'agendada' or c.status|lower == 'confirmada' %}status-agendada
+                        {% else %}status-outro{% endif %}">
+                    {{ c.status|default:"Agendada"|capfirst }}
+                  </span>
+                </div>
+              </div>
+
+              {% if c.status and c.status|lower == 'agendada' %}
+                <div style="margin-top: 1rem; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+                  <a class="btn btn-outline" href="{% url 'medify_web:consultaGeral' %}?medico={{ c.profissional_uid }}&reschedule_from={{ c.id }}">
+                    <i class="fas fa-calendar-alt"></i> Remarcar
+                  </a>
+                  <button type="button" class="btn btn-outline show-cancel" data-consulta-id="{{ c.id }}" style="display: inline-block;">
+                    <i class="fas fa-times"></i> Cancelar
+                  </button>
+                </div>
+              {% endif %}
+            </div>
+            
+            <!-- Card de Seleção de Motivo (fora do appointment-card para funcionar como modal) -->
+            {% if c.status and c.status|lower == 'agendada' %}
+              <div class="motivo-card" id="motivo-card-{{ c.id }}">
+                <div class="motivo-card-overlay"></div>
+                <div class="motivo-card-content">
+                  <div class="motivo-card-header">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Selecione o Motivo</h3>
+                    <button type="button" class="motivo-card-close" data-consulta-id="{{ c.id }}">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                  <div class="motivo-card-body">
+                    <form method="post" action="{% url 'medify_web:cancelar_consulta' c.id %}" class="cancel-form-card">
+                      {% csrf_token %}
+                      <input type="hidden" name="motivo" class="motivo-hidden-card" value="">
+                      <div class="motivo-options">
+                        <button type="button" class="motivo-option" data-motivo="Doença">
+                          <i class="fas fa-thermometer-half"></i>
+                          <span>Doença</span>
+                        </button>
+                        <button type="button" class="motivo-option" data-motivo="Conflito de horário">
+                          <i class="fas fa-clock"></i>
+                          <span>Conflito de horário</span>
+                        </button>
+                        <button type="button" class="motivo-option" data-motivo="Problemas de transporte">
+                          <i class="fas fa-car"></i>
+                          <span>Problemas de transporte</span>
+                        </button>
+                        <button type="button" class="motivo-option" data-motivo="Outro">
+                          <i class="fas fa-ellipsis-h"></i>
+                          <span>Outro</span>
+                        </button>
+                      </div>
+                      <div class="motivo-text-container" style="display: none;">
+                        <label>Descreva o motivo:</label>
+                        <textarea name="motivo_custom" class="motivo-text-card" placeholder="Descreva o motivo do cancelamento" rows="4"></textarea>
+                      </div>
+                      <div class="motivo-card-actions">
+                        <button type="button" class="btn btn-outline motivo-card-cancel" data-consulta-id="{{ c.id }}">
+                          Voltar
+                        </button>
+                        <button type="submit" class="btn btn-danger motivo-card-submit" disabled>
+                          <i class="fas fa-check"></i> Confirmar Cancelamento
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <div class="appointment-card" style="text-align: center; color: var(--gray);">
+            <i class="fas fa-calendar-times" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+            <div style="font-size: 1.1rem;">Nenhuma consulta encontrada.</div>
+          </div>
+        {% endif %}
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Controle do menu móvel - IGUAL AO CONSULTAGERAL
+    document.addEventListener('DOMContentLoaded', function() {
+      // Elementos do menu mobile
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const mobileNav = document.getElementById('mobileNav');
+      const mobileClose = document.getElementById('mobileClose');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+
+      // Elementos do menu desktop
+      const desktopMenuToggle = document.getElementById('desktopMenuToggle');
+      const desktopSidebar = document.getElementById('desktopSidebar');
+      const desktopSidebarClose = document.getElementById('desktopSidebarClose');
+
+      function openMobileMenu() {
+        mobileNav.classList.add('active');
+        mobileOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMobileMenu() {
+        mobileNav.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      function openDesktopMenu() {
+        desktopSidebar.classList.add('active');
+        document.body.classList.add('menu-active');
+      }
+
+      function closeDesktopMenu() {
+        desktopSidebar.classList.remove('active');
+        document.body.classList.remove('menu-active');
+      }
+
+      // Event listeners para mobile
+      mobileMenuToggle.addEventListener('click', openMobileMenu);
+      mobileClose.addEventListener('click', closeMobileMenu);
+      mobileOverlay.addEventListener('click', closeMobileMenu);
+
+      // Event listeners para desktop
+      desktopMenuToggle.addEventListener('click', openDesktopMenu);
+      desktopSidebarClose.addEventListener('click', closeDesktopMenu);
+
+      // Fechar menus ao clicar em um link
+      document.querySelectorAll('.mobile-nav-link, .desktop-sidebar-link').forEach(link => {
+        link.addEventListener('click', function() {
+          closeMobileMenu();
+          closeDesktopMenu();
+        });
+      });
+
+      // Fechar menu desktop ao clicar fora
+      document.addEventListener('click', function(event) {
+        if (desktopSidebar.classList.contains('active') && 
+            !desktopSidebar.contains(event.target) && 
+            !desktopMenuToggle.contains(event.target)) {
+          closeDesktopMenu();
+        }
+      });
+
+      // Código específico da página verAgenda (cancelamento de consultas - card)
+      // Open motivo card when cancel button is clicked
+      document.querySelectorAll('.show-cancel').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var consultaId = this.getAttribute('data-consulta-id');
+          var card = document.getElementById('motivo-card-' + consultaId);
+          if (card) {
+            card.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+        });
+      });
+
+      // Close motivo card
+      document.querySelectorAll('.motivo-card-close, .motivo-card-cancel, .motivo-card-overlay').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var consultaId = this.getAttribute('data-consulta-id') || 
+                         (this.closest('.motivo-card') ? this.closest('.motivo-card').id.replace('motivo-card-', '') : null);
+          if (consultaId) {
+            var card = document.getElementById('motivo-card-' + consultaId);
+            if (card) {
+              card.classList.remove('active');
+              document.body.style.overflow = '';
+              // Reset form
+              var form = card.querySelector('.cancel-form-card');
+              if (form) {
+                form.reset();
+                var textareaContainer = card.querySelector('.motivo-text-container');
+                var submitBtn = card.querySelector('.motivo-card-submit');
+                if (textareaContainer) textareaContainer.style.display = 'none';
+                if (submitBtn) submitBtn.disabled = true;
+                // Remove selected state from options
+                card.querySelectorAll('.motivo-option').forEach(function(opt){
+                  opt.classList.remove('selected');
+                });
+              }
+            }
+          }
+        });
+      });
+
+      // Handle motivo option selection
+      document.querySelectorAll('.motivo-option').forEach(function(option){
+        option.addEventListener('click', function(){
+          var card = this.closest('.motivo-card');
+          var motivo = this.getAttribute('data-motivo');
+          var textareaContainer = card.querySelector('.motivo-text-container');
+          var textarea = card.querySelector('.motivo-text-card');
+          var submitBtn = card.querySelector('.motivo-card-submit');
+          var hidden = card.querySelector('.motivo-hidden-card');
+          
+          // Remove selected from all options
+          card.querySelectorAll('.motivo-option').forEach(function(opt){
+            opt.classList.remove('selected');
+          });
+          
+          // Add selected to clicked option
+          this.classList.add('selected');
+          
+          if (motivo === 'Outro'){
+            if (textareaContainer) textareaContainer.style.display = 'block';
+            if (textarea) {
+              textarea.required = true;
+              textarea.focus();
+            }
+            if (submitBtn) submitBtn.disabled = true;
+          } else {
+            if (textareaContainer) textareaContainer.style.display = 'none';
+            if (textarea) {
+              textarea.required = false;
+              textarea.value = '';
+            }
+            if (submitBtn) submitBtn.disabled = false;
+            if (hidden) hidden.value = motivo;
+          }
+        });
+      });
+
+      // Handle textarea input for "Outro"
+      document.querySelectorAll('.motivo-text-card').forEach(function(textarea){
+        textarea.addEventListener('input', function(){
+          var card = this.closest('.motivo-card');
+          var submitBtn = card.querySelector('.motivo-card-submit');
+          var hidden = card.querySelector('.motivo-hidden-card');
+          var value = this.value.trim();
+          
+          if (value.length > 0) {
+            if (submitBtn) submitBtn.disabled = false;
+            if (hidden) hidden.value = value;
+          } else {
+            if (submitBtn) submitBtn.disabled = true;
+          }
+        });
+      });
+
+      // Handle form submission
+      document.querySelectorAll('.cancel-form-card').forEach(function(form){
+        form.addEventListener('submit', function(e){
+          var hidden = this.querySelector('.motivo-hidden-card');
+          var motivoVal = hidden ? hidden.value : '';
+          
+          if (!motivoVal){
+            e.preventDefault();
+            alert('Por favor, selecione o motivo do cancelamento.');
+            return false;
+          }
+          // Allow submit to proceed
+        });
+      });
+    });
+
+    // Função para confirmar logout antes de sair
+    function confirmarLogout(event) {
+      event.preventDefault();
+      if (confirm('Tem certeza que deseja sair da sua conta?')) {
+        event.target.submit();
+      }
+      return false;
+    }
+
+    // Prevenir logout acidental ao usar o botão voltar do navegador
+    let logoutPrevenido = false;
+    window.addEventListener('beforeunload', function(e) {
+      if (!logoutPrevenido) {
+        // Não prevenir se não estiver tentando fazer logout
+        return;
+      }
+    });
+
+    // Interceptar todos os formulários de logout para adicionar confirmação
+    document.addEventListener('DOMContentLoaded', function() {
+      const logoutForms = document.querySelectorAll('form[action*="logout"]');
+      logoutForms.forEach(form => {
+        if (!form.hasAttribute('data-confirmado')) {
+          form.addEventListener('submit', function(e) {
+            if (!confirm('Tem certeza que deseja sair da sua conta?')) {
+              e.preventDefault();
+              return false;
+            }
+            logoutPrevenido = true;
+            form.setAttribute('data-confirmado', 'true');
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

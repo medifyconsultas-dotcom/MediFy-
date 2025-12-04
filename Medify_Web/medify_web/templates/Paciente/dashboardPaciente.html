@@ -1,0 +1,895 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <style>
+    .status-concluida { color: #2e7d32; font-weight: 600; }
+    .status-cancelada { color: #c62828; font-weight: 600; }
+    .status-outro { color: #666; font-weight: 600; }
+    /* Avatar in quick-action cards */
+    .action-icon img.action-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: none !important;
+      box-shadow: none !important;
+      outline: none !important;
+    }
+    .action-icon.has-avatar {
+      background: transparent !important;
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+    }
+    .action-icon .avatar-initial {
+      display: inline-flex;
+      width: 48px;
+      height: 48px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #eee;
+      color: #444;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Paciente</title>
+
+  <link rel="stylesheet" href="{% static 'css/dashboardPaciente.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="dashboard">
+
+  <!-- Header -->
+  <header class="dashboard-header">
+    <div class="logo-container">
+      <div class="logo-icon-wrapper">
+        <img src="{% static 'imagens/estetoscopio.png' %}" alt="MediFy Logo" style="width:32px;height:32px;object-fit:contain;filter:brightness(0) invert(1);">
+      </div>
+      <h1>MediFy</h1>
+    </div>
+    <div class="header-right">
+      <form action="{% url 'medify_web:logout' %}" method="post" id="logoutFormHeader" onsubmit="return confirmarLogout(event);">
+        {% csrf_token %}
+        <button type="submit" class="btn-sair">
+          <i class="fas fa-sign-out-alt"></i>
+          Sair
+        </button>
+      </form>
+    </div>
+  </header>
+
+  <!-- Menu Mobile (só aparece em telas menores) -->
+  <div class="mobile-menu-toggle" id="mobileMenuToggle">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+      <div class="logo-container">
+        <div class="logo-icon-wrapper">
+          <img src="{% static 'imagens/estetoscopio.png' %}" alt="MediFy Logo" style="width:32px;height:32px;object-fit:contain;filter:brightness(0) invert(1);">
+        </div>
+        <h1>MediFy</h1>
+      </div>
+      <button class="mobile-close" id="mobileClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="{% url 'medify_web:consultaGeral' %}" class="mobile-nav-link">
+        <i class="fas fa-calendar-plus"></i>
+        Agendar Consulta
+      </a>
+      <a href="{% url 'medify_web:verAgenda' %}" class="mobile-nav-link">
+        <i class="fas fa-calendar-check"></i>
+        Minhas Consultas
+      </a>
+      <a href="{% url 'medify_web:perfilPaciente' %}" class="mobile-nav-link">
+        <i class="fas fa-user-edit"></i>
+        Meu Perfil
+      </a>
+      <form action="{% url 'medify_web:logout' %}" method="post" class="mobile-nav-form" id="logoutFormMobile" onsubmit="return confirmarLogout(event);">
+        {% csrf_token %}
+        <button type="submit" class="mobile-nav-link mobile-nav-logout">
+          <i class="fas fa-sign-out-alt"></i>
+          Sair
+        </button>
+      </form>
+    </nav>
+  </div>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <!-- Conteúdo -->
+  <main class="dashboard-main">
+    <!-- Aviso de Consulta Agendada -->
+    <div id="consultaAgendadaModal" class="consulta-agendada-modal" style="display: none;">
+      <div class="consulta-agendada-content">
+        <div class="consulta-agendada-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h2>Consulta Agendada com Sucesso!</h2>
+        <p>Sua consulta foi agendada e você receberá todas as informações em breve.</p>
+        <button onclick="closeConsultaAgendadaModal()" class="btn-close-modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Saudação -->
+    <div class="welcome-section">
+      <h1>Olá, {{ paciente.nome }}</h1>
+      <p>Bem-vindo ao seu painel de controle</p>
+    </div>
+
+    <!-- Ações rápidas (ocultas no mobile) -->
+    <section class="quick-actions">
+      <div class="action-card">
+        <div class="action-icon">
+          <i class="fas fa-calendar-plus"></i>
+        </div>
+        <h3>Agendar Consulta</h3>
+        <p>Encontre e agende com profissionais qualificados</p>
+        <a href="{% url 'medify_web:consultaGeral' %}" class="btn btn-primary">Começar Agendamento</a>
+      </div>
+      <div class="action-card">
+        <div class="action-icon">
+          <i class="fas fa-calendar-check"></i>
+        </div>
+        <h3>Minhas Consultas</h3>
+        <p>Gerencie seus agendamentos</p>
+        <a class="btn btn-outline" href="{% url 'medify_web:verAgenda' %}">Ver Agenda</a>
+      </div>
+      <div class="action-card">
+        <div class="action-icon{% if paciente.foto %} has-avatar{% endif %}">
+          {% if paciente.foto %}
+            {% if paciente.foto|slice:":5" == "data:" %}
+              <img src="{{ paciente.foto }}" alt="Foto de perfil" class="action-avatar" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user-edit\'></i>'; this.parentElement.classList.remove('has-avatar');">
+            {% else %}
+              <img src="{{ paciente.foto }}" alt="Foto de perfil" class="action-avatar" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user-edit\'></i>'; this.parentElement.classList.remove('has-avatar');">
+            {% endif %}
+          {% else %}
+            <i class="fas fa-user-edit"></i>
+          {% endif %}
+        </div>
+        <h3>Meu Perfil</h3>
+        <p>Atualize suas informações</p>
+        <a class="btn btn-outline" href="{% url 'medify_web:perfilPaciente' %}">Editar Perfil</a>
+      </div>
+    </section>
+
+
+    {% if proximas_consultas and proximas_consultas|length > 0 %}
+    <!-- Próximas consultas (peek) -->
+    <section class="upcoming-appointments">
+      <h2>Próximas Consultas</h2>
+      <div class="upcoming-list">
+        {% for c in proximas_consultas %}
+          <div class="appointment-card">
+            <div class="appointment-info">
+              <h4>{{ c.medico }}</h4>
+              <p><i class="fas fa-calendar"></i> {{ c.data }} &nbsp; <i class="fas fa-clock"></i> {{ c.hora }}</p>
+            </div>
+            <div class="appointment-actions">
+              <a class="btn btn-outline" href="{% url 'medify_web:verAgenda' %}">
+                <i class="fas fa-info-circle"></i> Ver Detalhes
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    {% if show_debug_consultas %}
+      <section class="debug-section">
+        <h3>Debug: consultas_paciente_raw</h3>
+        <div class="debug-info">Session UID: {{ session_user_id }}</div>
+        <pre>{{ consultas_paciente_raw|safe }}</pre>
+      </section>
+    {% endif %}
+
+    <section class="specialties">
+      <h2>Especialidades</h2>
+      
+     <!-- Barra de pesquisa aprimorada -->
+      <div class="search-container">
+        <div class="search-bar">
+          <i class="fas fa-search search-icon"></i>
+          <input id="search-input" type="search" placeholder="Pesquisar médicos ou clínicas" class="search-input">
+          <button id="clear-filters" class="clear-btn">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <select id="scope-select" class="scope-select">
+          <option value="all">Todos</option>
+          <option value="medico">Médicos</option>
+          <option value="clinica">Clínicas</option>
+        </select>
+      </div>
+
+      <!-- Clínicas Section (shown when scope = 'clinica') -->
+      <div id="clinicas-section" style="display:none; margin-top:1.5rem;">
+        <h3 style="margin-bottom:1rem;">Clínicas Disponíveis</h3>
+        <div class="clinicas-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:1rem;">
+          {% for clinica in clinicas %}
+            <div class="clinica-card" style="border:1px solid #eee; border-radius:8px; padding:1.5rem; background:#fff; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+              <h4 style="margin:0 0 0.5rem 0; font-size:1.1rem;">{{ clinica.nome_fantasia|default:"Clínica" }}</h4>
+              <p style="margin:0.5rem 0; color:#666; font-size:0.95rem;">
+                <i class="fas fa-map-marker-alt"></i> {{ clinica.endereco|default:"—" }}
+              </p>
+              <p style="margin:0.5rem 0; color:#666; font-size:0.95rem;">
+                <i class="fas fa-phone"></i> {{ clinica.telefone|default:"—" }}
+              </p>
+              <p style="margin:0.5rem 0; color:#666; font-size:0.95rem;">
+                <i class="fas fa-envelope"></i> {{ clinica.email|default:"—" }}
+              </p>
+              <div style="margin-top:1rem; display:flex; gap:0.5rem;">
+                <a href="{% url 'medify_web:consultaGeral' %}?clinica={{ clinica.id }}" class="btn btn-primary" style="flex:1; text-align:center;">Agendar</a>
+              </div>
+            </div>
+          {% empty %}
+            <div style="grid-column:1/-1; text-align:center; padding:2rem; color:#999;">
+              <i class="fas fa-hospital"></i>
+              <p>Nenhuma clínica disponível no momento.</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+
+      <!-- Clinic pills (populated by JS from rendered doctor cards) -->
+      <div id="clinic-pills" class="clinic-pills-container">
+        <!-- JS will insert clinic buttons here -->
+      </div>
+
+      <!-- Horizontal scrollable specialty grid -->
+      {% regroup medicos_especialidade|dictsort:"especialidade" by especialidade as especialidades %}
+      {% if especialidades and especialidades|length > 0 %}
+        <div class="specialty-grid-container" style="position: relative;">
+  <div class="scroll-indicator left" style="display: none;">
+    <i class="fas fa-chevron-left"></i>
+  </div>
+  
+  <div class="specialty-grid">
+    <!-- Suas especialidades aqui -->
+    {% for esp in especialidades %}
+      {% if esp.grouper and esp.grouper|length > 0 %}
+        <div class="specialty-card" onclick="showDoctors('{{ forloop.counter0 }}')">
+          
+          <h3>{{ esp.grouper }}</h3>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  
+  <div class="scroll-indicator">
+    <i class="fas fa-chevron-right"></i>
+  </div>
+</div>
+        {% for esp in especialidades %}
+          <div id="doctors-{{ forloop.counter0 }}" class="doctors-list">
+            {% for medico in esp.list %}
+        <div class="doctor-card" data-clinic="{% if medico.clinica %}{{ medico.clinica }}{% elif medico.local %}{{ medico.local }}{% else %}{{ '' }}{% endif %}"
+          data-photo="{% if medico.avatar_url %}{{ medico.avatar_url }}{% elif medico.foto %}{{ medico.foto }}{% elif medico.fotoURL %}{{ medico.fotoURL }}{% else %}{% endif %}"
+          data-uid="{% if medico.id %}{{ medico.id }}{% elif medico.uid %}{{ medico.uid }}{% else %}{% endif %}">
+                <div class="doctor-info">
+                  <div class="doctor-avatar">
+                    {% if medico.avatar_url %}
+                      <img src="{{ medico.avatar_url }}" alt="{{ medico.nome }}" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user-md\'></i>';">
+                    {% elif medico.foto %}
+                      <img src="{{ medico.foto }}" alt="{{ medico.nome }}" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user-md\'></i>';">
+                    {% elif medico.fotoURL %}
+                      <img src="{{ medico.fotoURL }}" alt="{{ medico.nome }}" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user-md\'></i>';">
+                    {% else %}
+                      <i class="fas fa-user-md"></i>
+                    {% endif %}
+                  </div>
+                  <div class="doctor-details">
+                    <h4>{{ medico.nome }}</h4>
+                    <p>{{ medico.especialidade }}</p>
+                    {% if medico.endereco %}
+                      <p style="margin-top: 0.5rem; font-size: 0.875rem; color: #666;">
+                        <i class="fas fa-map-marker-alt"></i> {{ medico.endereco }}
+                      </p>
+                    {% elif medico.clinica_endereco %}
+                      <p style="margin-top: 0.5rem; font-size: 0.875rem; color: #666;">
+                        <i class="fas fa-map-marker-alt"></i> {{ medico.clinica_endereco }}
+                      </p>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="doctor-actions">
+                  {% if medico.id|default:'' != '' %}
+                    <a href="{% url 'medify_web:consultaMedico' medico.id %}" class="btn btn-primary">
+                      <i class="fas fa-calendar-plus"></i> Marcar Consulta
+                    </a>
+                  {% elif medico.uid|default:'' != '' %}
+                    <a href="{% url 'medify_web:consultaMedico' medico.uid %}" class="btn btn-primary">
+                      <i class="fas fa-calendar-plus"></i> Marcar Consulta
+                    </a>
+                  {% endif %}
+                  
+                  {% if medico.id|default:'' != '' %}
+                    <a class="btn btn-outline" href="{% url 'medify_web:perfil_medico' medico.id %}">
+                      <i class="fas fa-eye"></i> Ver Perfil
+                    </a>
+                  {% elif medico.uid|default:'' != '' %}
+                    <a class="btn btn-outline" href="{% url 'medify_web:perfil_medico' medico.uid %}">
+                      <i class="fas fa-eye"></i> Ver Perfil
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="no-specialties">
+          <i class="fas fa-stethoscope"></i>
+          <p>Nenhuma especialidade ou profissional disponível no momento.</p>
+          <p>Assim que houver profissionais cadastrados, eles aparecerão aqui!</p>
+        </div>
+      {% endif %}
+    </section>
+
+    </main>
+
+  <script>
+    // Controle do menu móvel
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const mobileNav = document.getElementById('mobileNav');
+      const mobileClose = document.getElementById('mobileClose');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+
+      function openMobileMenu() {
+        mobileNav.classList.add('active');
+        mobileOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMobileMenu() {
+        mobileNav.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      mobileMenuToggle.addEventListener('click', openMobileMenu);
+      mobileClose.addEventListener('click', closeMobileMenu);
+      mobileOverlay.addEventListener('click', closeMobileMenu);
+
+      // Fechar menu ao clicar em um link
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+      });
+    });
+  </script>
+    <script>
+      // Replace quick-action icon with patient's avatar if available (front-end only)
+      document.addEventListener('DOMContentLoaded', function() {
+        try {
+          const uid = "{{ session_user_id|default:'' }}";
+          if (!uid) return;
+          const PROJECT_ID = 'medify-401a8';
+          const API_KEY = 'AIzaSyC6w4Q2bzj9oV8YKuduoCeJjsmKiqNUH94';
+          const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/pacientes/${uid}?key=${API_KEY}`;
+
+          fetch(url, { method: 'GET', credentials: 'omit' })
+            .then(r => r.ok ? r.json() : Promise.reject(r))
+            .then(doc => {
+              const fields = doc && doc.fields ? doc.fields : null;
+              if (!fields) return;
+              // Try common field names that may contain the photo URL
+              const candidates = ['foto','photo','avatar_url','foto_url','photo_url','imagem','image'];
+              let foto = '';
+              for (const k of candidates) {
+                if (fields[k]) {
+                  foto = fields[k].stringValue || '';
+                  if (foto) break;
+                }
+              }
+              // If still empty, try nested patterns
+              if (!foto && fields.foto && fields.foto.mapValue) {
+                const inner = fields.foto.mapValue.fields || {};
+                foto = inner.url && inner.url.stringValue ? inner.url.stringValue : '';
+              }
+
+              if (!foto) {
+                // No foto URL: render initials like on perfilPaciente
+                let nome = '';
+                try {
+                  if (fields.nome && fields.nome.stringValue) nome = fields.nome.stringValue;
+                } catch(e){}
+                if (!nome) nome = "{{ paciente.nome|default:'' }}";
+                const initial = (nome && nome.trim().length) ? nome.trim().charAt(0).toUpperCase() : 'U';
+
+                const iconsFallback = document.querySelectorAll('.quick-actions .action-card .action-icon');
+                if (iconsFallback && iconsFallback.length > 0) {
+                  let targetFallback = null;
+                  iconsFallback.forEach(function(ic){
+                    try {
+                      const h3 = ic.parentElement.querySelector('h3');
+                      if (h3 && h3.textContent && h3.textContent.trim().toLowerCase().includes('meu perfil')) targetFallback = ic;
+                    } catch(e){}
+                  });
+                  if (!targetFallback) targetFallback = iconsFallback[0];
+                  if (targetFallback) {
+                    const span = document.createElement('span');
+                    span.className = 'avatar-initial';
+                    span.textContent = initial;
+                    targetFallback.innerHTML = '';
+                    targetFallback.appendChild(span);
+                  }
+                }
+                // don't attempt image replacement below
+                return;
+              }
+
+              // Normalize relative media paths
+              if (foto.startsWith('/')) {
+                // leave as-is (same origin)
+              } else if (!foto.startsWith('http')) {
+                // maybe starts with media path without leading slash
+                if (!foto.startsWith('/media')) foto = '/'+foto;
+              }
+
+              // Find the first quick action .action-icon that contains the user/profile icon
+              const icons = document.querySelectorAll('.quick-actions .action-card .action-icon');
+              if (!icons || icons.length === 0) return;
+              // Prefer the card whose sibling h3 is 'Meu Perfil'
+              let target = null;
+              icons.forEach(function(ic){
+                try {
+                  const h3 = ic.parentElement.querySelector('h3');
+                  if (h3 && h3.textContent && h3.textContent.trim().toLowerCase().includes('meu perfil')) target = ic;
+                } catch(e){}
+              });
+              if (!target) target = icons[0];
+
+              // Replace inner icon with img
+              if (target) {
+                const img = document.createElement('img');
+                img.className = 'action-avatar';
+                img.alt = 'Foto do paciente';
+                img.src = foto;
+                // Clear contents and insert
+                target.innerHTML = '';
+                target.appendChild(img);
+                // Add class to remove background
+                target.classList.add('has-avatar');
+              }
+            })
+            .catch(err => {
+              // silent
+              console.debug('avatar fetch failed', err);
+            });
+        } catch (e) { console.debug(e); }
+      });
+    </script>
+    <script>
+      function showDoctors(idx) {
+        var all = document.querySelectorAll('.doctors-list');
+        all.forEach(function(panel, i){
+          if(i == idx) {
+            panel.style.display = (panel.style.display === 'none' || panel.style.display === '') ? 'block' : 'none';
+          } else {
+            panel.style.display = 'none';
+          }
+        });
+      }
+    </script>
+
+    <script>
+
+function initSpecialtyScroll() {
+  const specialtyGrid = document.querySelector('.specialty-grid');
+  const scrollIndicators = document.querySelectorAll('.scroll-indicator');
+  
+  if (specialtyGrid && scrollIndicators.length > 0) {
+    scrollIndicators.forEach(indicator => {
+      indicator.addEventListener('click', function() {
+        const scrollAmount = 200;
+        const direction = this.classList.contains('left') ? -scrollAmount : scrollAmount;
+        
+        specialtyGrid.scrollBy({
+          left: direction,
+          behavior: 'smooth'
+        });
+      });
+    });
+    
+    // Atualizar visibilidade dos indicadores
+    function updateScrollIndicators() {
+      const leftIndicator = document.querySelector('.scroll-indicator.left');
+      const rightIndicator = document.querySelector('.scroll-indicator:not(.left)');
+      
+      if (leftIndicator) {
+        leftIndicator.style.display = specialtyGrid.scrollLeft > 0 ? 'flex' : 'none';
+      }
+      if (rightIndicator) {
+        const maxScroll = specialtyGrid.scrollWidth - specialtyGrid.clientWidth;
+        rightIndicator.style.display = specialtyGrid.scrollLeft < maxScroll - 10 ? 'flex' : 'none';
+      }
+    }
+    
+    specialtyGrid.addEventListener('scroll', updateScrollIndicators);
+    window.addEventListener('resize', updateScrollIndicators);
+    updateScrollIndicators();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initSpecialtyScroll);
+
+// Chamar a função quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', initSpecialtyScroll);
+      // Enhanced client-side search / filter for specialties, doctors and clinics
+      (function(){
+        var input = document.getElementById('search-input');
+        var scope = document.getElementById('scope-select');
+        var clearBtn = document.getElementById('clear-filters');
+        var clinicPillsContainer = document.getElementById('clinic-pills');
+        var clinicasSection = document.getElementById('clinicas-section');
+        var especialidadesSection = document.getElementById('especialidades-section');
+        var selectedClinic = null; // normalized clinic key when user clicks a pill
+
+        function normalize(s){ return (s||'').toString().toLowerCase(); }
+
+        // Populate clinic pills from rendered doctor cards (unique clinics)
+        function buildClinicPills(){
+            var clinics = new Map();
+            document.querySelectorAll('.doctor-card').forEach(function(d){
+              var raw = (d.getAttribute('data-clinic') || '');
+              var c = raw.trim();
+              if(c){
+                var key = normalize(c);
+                if(!clinics.has(key)) clinics.set(key, c);
+              }
+            });
+            clinics.forEach(function(displayName, key){
+              var btn = document.createElement('button');
+              btn.type = 'button';
+              btn.className = 'btn btn-outline clinic-pill';
+              btn.textContent = displayName;
+              // store normalized value to ensure filtering matches normalized clinic attr
+              btn.dataset.value = key;
+              btn.addEventListener('click', function(){
+                // set selected clinic (normalized) and visible query to display name
+                selectedClinic = key;
+                input.value = displayName;
+                scope.value = 'clinica';
+                // mark active pill
+                document.querySelectorAll('.clinic-pill').forEach(function(p){ p.classList.remove('active'); });
+                btn.classList.add('active');
+                filterAll();
+              });
+              clinicPillsContainer.appendChild(btn);
+            });
+        }
+
+        function filterAll(){
+          var q = normalize((input.value||'').toString().trim());
+          var sc = scope.value;
+
+          var specialtyCards = document.querySelectorAll('.specialty-card');
+          var doctorsLists = document.querySelectorAll('.doctors-list');
+
+          // Show/hide clinicas section based on scope
+          if(sc === 'clinica'){
+            clinicasSection.style.display = 'block';
+            if(especialidadesSection) especialidadesSection.style.display = 'none';
+          } else {
+            clinicasSection.style.display = 'none';
+            if(especialidadesSection) especialidadesSection.style.display = '';
+          }
+
+          doctorsLists.forEach(function(list, listIdx){
+            var anyVisible = false;
+            var doctorCards = list.querySelectorAll('.doctor-card');
+            // check if specialty matches query (badge text)
+            var badge = specialtyCards[listIdx] ? normalize((specialtyCards[listIdx].querySelector('.badge')||{}).textContent||'') : '';
+            var specialtyMatches = q !== '' && badge.indexOf(q) !== -1;
+            doctorCards.forEach(function(dcard){
+              var name = normalize(dcard.querySelector('.doctor-details h4') ? dcard.querySelector('.doctor-details h4').textContent : '');
+              var specialty = normalize(dcard.querySelector('.doctor-details p') ? dcard.querySelector('.doctor-details p').textContent : '');
+              var clinic = normalize((dcard.getAttribute('data-clinic') || '').toString().trim());
+
+              var match = false;
+
+              // Scope-first logic
+              if(sc === 'clinica'){
+                if(selectedClinic){
+                  // strict normalized match against selected pill
+                  match = clinic === selectedClinic;
+                } else if(q !== ''){
+                  // typed clinic query (loose match)
+                  match = clinic.indexOf(q) !== -1;
+                } else {
+                  // no clinic selected and no query: hide clinic-specific results
+                  match = false;
+                }
+              } else if(sc === 'medico'){
+                match = (q === '') ? true : (name.indexOf(q) !== -1);
+              } else { // all
+                if(q === ''){
+                  match = true; // show all by default
+                } else {
+                  // include specialty-level matches: if the specialty matches the query, show all doctors in that specialty
+                  match = specialtyMatches || (name.indexOf(q) !== -1) || (specialty.indexOf(q) !== -1) || (clinic.indexOf(q) !== -1);
+                }
+              }
+
+              dcard.style.display = match ? '' : 'none';
+              if(match) anyVisible = true;
+            });
+
+            // Show doctors-list if it has matches
+            list.style.display = anyVisible ? '' : 'none';
+            // Toggle corresponding specialty card based on inner matches
+            var specialtyCard = specialtyCards[listIdx];
+            if(specialtyCard){
+              // If query empty and scope all, keep specialty visible; otherwise hide empty ones
+              if(q === '' && sc === 'all') specialtyCard.style.display = '';
+              else specialtyCard.style.display = anyVisible ? '' : 'none';
+            }
+          });
+        }
+
+        // Init
+        buildClinicPills();
+        input && input.addEventListener('input', function(){ 
+          selectedClinic = null; 
+          document.querySelectorAll('.clinic-pill').forEach(function(p){ p.classList.remove('active'); }); 
+          filterAll(); 
+        });
+        scope && scope.addEventListener('change', filterAll);
+        clearBtn && clearBtn.addEventListener('click', function(){ 
+          input.value=''; 
+          scope.value='all'; 
+          selectedClinic = null; 
+          clinicPillsContainer.innerHTML=''; 
+          buildClinicPills(); 
+          filterAll(); 
+        });
+      
+      })();
+    </script>
+
+    <script>
+      // Replace doctor card icons with doctor profile photos when available.
+      // Front-end only: uses rendered data-photo when present, otherwise tries
+      // to fetch the profissional document via Firestore REST using data-uid.
+      document.addEventListener('DOMContentLoaded', function() {
+        try {
+          const PROJECT_ID = 'medify-401a8';
+          const API_KEY = 'AIzaSyC6w4Q2bzj9oV8YKuduoCeJjsmKiqNUH94';
+
+          document.querySelectorAll('.doctor-card').forEach(function(card){
+            try {
+              const avatarWrap = card.querySelector('.doctor-avatar');
+              if (!avatarWrap) return;
+
+              const photoAttr = (card.dataset.photo || '').trim();
+              if (photoAttr) {
+                // If template provided a photo URL, ensure an <img> is shown
+                avatarWrap.innerHTML = '';
+                const img = document.createElement('img');
+                img.src = photoAttr;
+                img.alt = (card.querySelector('.doctor-details h4')||{}).textContent || 'Médico';
+                img.style.width = '100%';
+                img.style.height = '100%';
+                img.style.objectFit = 'cover';
+                img.onerror = function() {
+                  avatarWrap.innerHTML = '<i class="fas fa-user-md"></i>';
+                };
+                avatarWrap.appendChild(img);
+                return;
+              }
+
+              const uid = (card.dataset.uid || '').trim();
+              if (!uid) return;
+
+              // Try profissionais collection first, then funcionarios (clinic doctors)
+              const tryFetchFoto = (collectionName) => {
+                const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/${collectionName}/${uid}?key=${API_KEY}`;
+                return fetch(url, { method: 'GET', credentials: 'omit' })
+                  .then(r => r.ok ? r.json() : Promise.reject(r))
+                  .then(doc => {
+                    const fields = doc && doc.fields ? doc.fields : null;
+                    if (!fields) return null;
+                    const candidates = ['foto','photo','avatar_url','foto_url','photo_url','fotoURL','imagem','image'];
+                    let foto = '';
+                    for (const k of candidates) {
+                      if (fields[k] && fields[k].stringValue) {
+                        foto = fields[k].stringValue;
+                        break;
+                      }
+                    }
+                    // nested mapValue fallback
+                    if (!foto && fields.foto && fields.foto.mapValue) {
+                      const inner = fields.foto.mapValue.fields || {};
+                      if (inner.url && inner.url.stringValue) foto = inner.url.stringValue;
+                    }
+                    return foto;
+                  });
+              };
+
+              // Try profissionais first
+              tryFetchFoto('profissionais')
+                .then(foto => {
+                  if (foto) {
+                    // Normalize
+                    if (foto && !foto.startsWith('http') && !foto.startsWith('/')) {
+                      if (!foto.startsWith('/media')) foto = '/'+foto;
+                    }
+                    // Insert image
+                    avatarWrap.innerHTML = '';
+                    const img = document.createElement('img');
+                    img.src = foto;
+                    img.alt = (card.querySelector('.doctor-details h4')||{}).textContent || 'Médico';
+                    img.style.width = '100%';
+                    img.style.height = '100%';
+                    img.style.objectFit = 'cover';
+                    img.onerror = function() {
+                      avatarWrap.innerHTML = '<i class="fas fa-user-md"></i>';
+                    };
+                    avatarWrap.appendChild(img);
+                  } else {
+                    // Try funcionarios as fallback
+                    return tryFetchFoto('funcionarios');
+                  }
+                })
+                .then(foto => {
+                  if (foto) {
+                    // Normalize
+                    if (foto && !foto.startsWith('http') && !foto.startsWith('/')) {
+                      if (!foto.startsWith('/media')) foto = '/'+foto;
+                    }
+                    // Insert image
+                    avatarWrap.innerHTML = '';
+                    const img = document.createElement('img');
+                    img.src = foto;
+                    img.alt = (card.querySelector('.doctor-details h4')||{}).textContent || 'Médico';
+                    img.style.width = '100%';
+                    img.style.height = '100%';
+                    img.style.objectFit = 'cover';
+                    img.onerror = function() {
+                      avatarWrap.innerHTML = '<i class="fas fa-user-md"></i>';
+                    };
+                    avatarWrap.appendChild(img);
+                  }
+                })
+                .catch(err => {
+                  // silent: leave default icon
+                  console.debug('doctor avatar fetch failed', err);
+                });
+            } catch (e) { console.debug(e); }
+          });
+        } catch (e) { console.debug(e); }
+      });
+    </script>
+
+    <!-- Script para mostrar modal de consulta agendada -->
+    <script>
+      function showConsultaAgendadaModal() {
+        const modal = document.getElementById('consultaAgendadaModal');
+        if (modal) {
+          modal.style.display = 'flex';
+          // Remover parâmetro da URL sem recarregar a página
+          const url = new URL(window.location);
+          url.searchParams.delete('consulta_agendada');
+          window.history.replaceState({}, '', url);
+          // Auto-fechar após 5 segundos
+          setTimeout(() => {
+            closeConsultaAgendadaModal();
+          }, 5000);
+        }
+      }
+
+      function closeConsultaAgendadaModal() {
+        const modal = document.getElementById('consultaAgendadaModal');
+        if (modal) {
+          modal.style.display = 'none';
+        }
+      }
+
+      // Verificar se há parâmetro consulta_agendada na URL
+      window.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('consulta_agendada') === '1') {
+          setTimeout(showConsultaAgendadaModal, 300);
+        }
+        // Remover parâmetro de erro da URL (se houver) sem mostrar mensagem
+        if (urlParams.get('erro_agendamento') === '1') {
+          const url = new URL(window.location);
+          url.searchParams.delete('erro_agendamento');
+          window.history.replaceState({}, '', url);
+        }
+      });
+
+      // Fechar ao clicar fora do modal
+      document.addEventListener('click', function(e) {
+        const modal = document.getElementById('consultaAgendadaModal');
+        if (modal && e.target === modal) {
+          closeConsultaAgendadaModal();
+        }
+      });
+
+      // Função para confirmar logout antes de sair
+      function confirmarLogout(event) {
+        event.preventDefault();
+        if (confirm('Tem certeza que deseja sair da sua conta?')) {
+          event.target.submit();
+        }
+        return false;
+      }
+
+      // Prevenir logout acidental ao usar o botão voltar do navegador
+      let logoutPrevenido = false;
+      let logoutConfirmado = false;
+
+      // Interceptar navegação no histórico do navegador
+      window.addEventListener('popstate', function(event) {
+        // Se a URL contém logout, redirecionar para o dashboard
+        if (window.location.pathname.includes('/logout') || window.location.pathname.includes('/auth/')) {
+          if (!logoutConfirmado) {
+            event.preventDefault();
+            window.history.pushState(null, null, window.location.href);
+            window.location.href = '{% url "medify_web:dashboard_paciente" %}';
+          }
+        }
+      });
+
+      // Prevenir acesso direto à URL de logout via GET
+      if (window.location.pathname.includes('/logout')) {
+        if (!logoutConfirmado) {
+          window.location.href = '{% url "medify_web:dashboard_paciente" %}';
+        }
+      }
+
+      // Adicionar estado ao histórico para prevenir logout ao voltar
+      window.history.pushState(null, null, window.location.href);
+
+      // Interceptar todos os formulários de logout para adicionar confirmação
+      document.addEventListener('DOMContentLoaded', function() {
+        const logoutForms = document.querySelectorAll('form[action*="logout"]');
+        logoutForms.forEach(form => {
+          if (!form.hasAttribute('data-confirmado')) {
+            form.addEventListener('submit', function(e) {
+              if (!confirm('Tem certeza que deseja sair da sua conta?')) {
+                e.preventDefault();
+                return false;
+              }
+              logoutConfirmado = true;
+              logoutPrevenido = true;
+              form.setAttribute('data-confirmado', 'true');
+            });
+          }
+        });
+
+        // Prevenir que o botão voltar cause logout
+        window.addEventListener('beforeunload', function(e) {
+          if (!logoutConfirmado && window.location.pathname.includes('/logout')) {
+            e.preventDefault();
+            return false;
+          }
+        });
+      });
+    </script>
+
+    <script>
+      // Inicializar Lucide Icons
+      lucide.createIcons();
+    </script>
+
+</body>
+</html>

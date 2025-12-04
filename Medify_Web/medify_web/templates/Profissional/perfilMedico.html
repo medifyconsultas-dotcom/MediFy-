@@ -1,0 +1,891 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil do Médico - MediFy</title>
+  <link rel="stylesheet" href="{% static 'css/dashboardPaciente.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ESTILOS DO MENU RESPONSIVO - IGUAL ÀS OUTRAS PÁGINAS */
+    :root {
+      --color-surface: #ffffff;
+      --color-border: #e1e5e9;
+      --gradient-primary: linear-gradient(135deg, var(--primary), #1e6fc7);
+      --gradient-secondary: linear-gradient(135deg, var(--secondary), #008f7a);
+      --box-shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.15);
+      --box-shadow-xl: 0 12px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    .main-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .welcome-section {
+      animation: fadeInDown 0.8s ease-out;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .welcome-section h1 {
+      font-size: 2.5rem;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .welcome-section p {
+      color: var(--gray);
+      font-size: 1.1rem;
+    }
+
+    /* ESTILOS ESPECÍFICOS DO PERFIL MÉDICO */
+    .profile-container {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .profile-card {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow-lg);
+      overflow: hidden;
+      animation: slideInLeft 0.6s ease-out;
+    }
+
+    @keyframes slideInLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .profile-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      background: var(--gray-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+      font-size: 4rem;
+    }
+
+    .profile-info {
+      padding: 1.5rem;
+    }
+
+    .profile-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-specialty {
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .profile-detail {
+      margin-bottom: 0.75rem;
+      color: var(--dark);
+    }
+
+    .profile-detail strong {
+      color: var(--dark);
+    }
+
+    .content-card {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow-lg);
+      padding: 2rem;
+      animation: slideInRight 0.6s ease-out;
+    }
+
+    @keyframes slideInRight {
+      0% {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .content-card h2 {
+      color: var(--dark);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .description-text {
+      line-height: 1.6;
+      color: var(--dark);
+      margin-bottom: 2rem;
+    }
+
+    .btn-agendar {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .btn-agendar:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--box-shadow-lg);
+    }
+
+    /* ===== MENU LATERAL PARA DESKTOP - LADO DIREITO ===== */
+    .desktop-sidebar {
+      position: fixed;
+      top: 0;
+      right: -280px;
+      left: auto;
+      width: 280px;
+      height: 100vh;
+      background: white;
+      z-index: 100;
+      box-shadow: -2px 0 20px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition-slow);
+    }
+
+    .desktop-sidebar.active {
+      right: 0;
+      left: auto;
+    }
+
+    .desktop-sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .desktop-sidebar-header .logo-container {
+      gap: 0.5rem;
+    }
+
+    .desktop-sidebar-header h1 {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .desktop-sidebar-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.25rem;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .desktop-sidebar-close:hover {
+      background: rgba(255,255,255,0.2);
+      transform: rotate(90deg);
+    }
+
+    .desktop-sidebar-links {
+      flex: 1;
+      padding: 1rem 0;
+      overflow-y: auto;
+    }
+
+    .desktop-sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      color: var(--dark);
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      font-size: 1rem;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .desktop-sidebar-link:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      transform: translateX(-5px);
+    }
+
+    .desktop-sidebar-form {
+      margin-top: auto;
+      border-top: 1px solid var(--gray-light);
+    }
+
+    .desktop-sidebar-logout {
+      color: #e74c3c;
+      border-bottom: none !important;
+    }
+
+    .desktop-sidebar-logout:hover {
+      background: #ffeaea;
+      color: #c0392b;
+    }
+
+    /* Botão para abrir menu no desktop - LADO DIREITO */
+    .desktop-menu-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      left: auto;
+      z-index: 99;
+      background: var(--primary);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      box-shadow: var(--box-shadow);
+      cursor: pointer;
+      transition: var(--transition);
+      display: none;
+    }
+
+    .desktop-menu-toggle:hover {
+      background: #1e6fc7;
+      transform: scale(1.1);
+    }
+
+    /* Ajustes para quando o menu lateral está ativo - LADO DIREITO */
+    body.menu-active .main-content {
+      margin-right: 280px;
+      transition: var(--transition-slow);
+    }
+
+    /* ===== MENU MOBILE - LADO DIREITO ===== */
+    .mobile-menu-toggle {
+      display: none;
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      left: auto;
+      z-index: 1000;
+      background: var(--primary);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      box-shadow: var(--box-shadow);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .mobile-menu-toggle:hover {
+      background: #1e6fc7;
+      transform: scale(1.1);
+    }
+
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      left: auto;
+      width: 280px;
+      height: 100vh;
+      background: white;
+      z-index: 1001;
+      transition: var(--transition-slow);
+      box-shadow: -2px 0 20px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-nav.active {
+      right: 0;
+      left: auto;
+    }
+
+    .mobile-nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .mobile-nav-header .logo-container {
+      gap: 0.5rem;
+    }
+
+    .mobile-nav-header h1 {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .mobile-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.25rem;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .mobile-close:hover {
+      background: rgba(255,255,255,0.2);
+      transform: rotate(90deg);
+    }
+
+    .mobile-nav-links {
+      flex: 1;
+      padding: 1rem 0;
+      overflow-y: auto;
+    }
+
+    .mobile-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      color: var(--dark);
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      font-size: 1rem;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .mobile-nav-link:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      transform: translateX(-5px);
+    }
+
+    .mobile-nav-form {
+      margin-top: auto;
+      border-top: 1px solid var(--gray-light);
+    }
+
+    .mobile-nav-logout {
+      color: #e74c3c;
+      border-bottom: none !important;
+    }
+
+    .mobile-nav-logout:hover {
+      background: #ffeaea;
+      color: #c0392b;
+    }
+
+    .mobile-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .mobile-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ===== MEDIA QUERIES PARA MENU RESPONSIVO ===== */
+    @media (max-width: 768px) {
+      .desktop-sidebar,
+      .desktop-menu-toggle {
+        display: none;
+      }
+      
+      .mobile-menu-toggle {
+        display: flex;
+      }
+      
+      .main-content {
+        margin-right: 0 !important;
+        padding-top: 80px;
+      }
+
+      .header-right {
+        display: none !important;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .mobile-menu-toggle,
+      .mobile-nav,
+      .mobile-overlay {
+        display: none !important;
+      }
+      
+      .desktop-menu-toggle {
+        display: flex;
+      }
+      
+      .header-right {
+        display: block !important;
+      }
+    }
+
+    /* RESPONSIVIDADE PARA CONTEÚDO - MELHORADO */
+    @media (max-width: 768px) {
+      .main-content {
+        padding: 1rem;
+        padding-top: 80px;
+        max-width: 100%;
+      }
+
+      .welcome-section {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
+      }
+
+      .welcome-section h1 {
+        font-size: 1.8rem;
+        line-height: 1.2;
+      }
+
+      .welcome-section p {
+        font-size: 1rem;
+      }
+
+      .profile-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .profile-card {
+        max-width: 100%;
+        margin: 0;
+        box-shadow: var(--box-shadow);
+      }
+
+      .profile-image {
+        height: 200px;
+        font-size: 3rem;
+      }
+
+      .profile-info {
+        padding: 1.25rem;
+      }
+
+      .profile-name {
+        font-size: 1.3rem;
+      }
+
+      .profile-specialty {
+        font-size: 1rem;
+      }
+
+      .content-card {
+        padding: 1.5rem;
+        margin: 0;
+        box-shadow: var(--box-shadow);
+      }
+
+      .content-card h2 {
+        font-size: 1.3rem;
+      }
+
+      .btn-agendar {
+        width: 100%;
+        justify-content: center;
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-content {
+        padding: 0.75rem;
+        padding-top: 70px;
+      }
+
+      .welcome-section h1 {
+        font-size: 1.5rem;
+      }
+
+      .welcome-section p {
+        font-size: 0.9rem;
+      }
+
+      .profile-container {
+        gap: 1rem;
+      }
+
+      .profile-image {
+        height: 180px;
+        font-size: 2.5rem;
+      }
+
+      .profile-info {
+        padding: 1rem;
+      }
+
+      .profile-name {
+        font-size: 1.2rem;
+      }
+
+      .profile-detail {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .content-card {
+        padding: 1.25rem;
+      }
+
+      .content-card h2 {
+        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .description-text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+      }
+
+      .btn-agendar {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.95rem;
+      }
+    }
+
+    /* Ajustes para telas muito pequenas */
+    @media (max-width: 360px) {
+      .main-content {
+        padding: 0.5rem;
+        padding-top: 60px;
+      }
+
+      .welcome-section h1 {
+        font-size: 1.3rem;
+      }
+
+      .profile-image {
+        height: 160px;
+      }
+
+      .profile-info {
+        padding: 0.875rem;
+      }
+
+      .content-card {
+        padding: 1rem;
+      }
+
+      .mobile-nav {
+        width: 100%;
+        right: -100%;
+      }
+
+      .mobile-nav.active {
+        right: 0;
+      }
+    }
+  </style>
+</head>
+<body class="dashboard">
+  <!-- Header Profissional -->
+  <header class="dashboard-header">
+    <div class="logo-container">
+      <a href="{% url 'medify_web:dashboard_paciente' %}" style="text-decoration:none; color:inherit; display:flex; align-items:center;">
+        <i class="fas fa-heartbeat logo-icon"></i>
+        <h1 style="margin:0 0 0 0.5rem;">MediFy</h1>
+      </a>
+    </div>
+    <div class="header-right">
+  
+    </div>
+  </header>
+
+  <!-- Menu Mobile (para telas menores) -->
+  <div class="mobile-menu-toggle" id="mobileMenuToggle">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+      <div class="logo-container">
+        <i class="fas fa-heartbeat logo-icon"></i>
+        <h1>MediFy</h1>
+      </div>
+      <button class="mobile-close" id="mobileClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="{% url 'medify_web:dashboard_paciente' %}" class="mobile-nav-link">
+        <i class="fas fa-home"></i>
+        Dashboard
+      </a>
+      <a href="{% url 'medify_web:consultaGeral' %}" class="mobile-nav-link">
+        <i class="fas fa-calendar-plus"></i>
+        Agendar Consulta
+      </a>
+      <a href="{% url 'medify_web:verAgenda' %}" class="mobile-nav-link">
+        <i class="fas fa-calendar-check"></i>
+        Minhas Consultas
+      </a>
+      <a href="{% url 'medify_web:perfilPaciente' %}" class="mobile-nav-link">
+        <i class="fas fa-user-edit"></i>
+        Meu Perfil
+      </a>
+      <form action="{% url 'medify_web:logout' %}" method="post" class="mobile-nav-form">
+        {% csrf_token %}
+        <button type="submit" class="mobile-nav-link mobile-nav-logout">
+          <i class="fas fa-sign-out-alt"></i>
+          Sair
+        </button>
+      </form>
+    </nav>
+  </div>
+
+  <!-- Menu Desktop (para telas maiores) -->
+  <div class="desktop-menu-toggle" id="desktopMenuToggle">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <div class="desktop-sidebar" id="desktopSidebar">
+    <div class="desktop-sidebar-header">
+      <div class="logo-container">
+        <i class="fas fa-heartbeat logo-icon"></i>
+        <h1>MediFy</h1>
+      </div>
+      <button class="desktop-sidebar-close" id="desktopSidebarClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <nav class="desktop-sidebar-links">
+      <a href="{% url 'medify_web:dashboard_paciente' %}" class="desktop-sidebar-link">
+        <i class="fas fa-home"></i>
+        Dashboard
+      </a>
+      <a href="{% url 'medify_web:consultaGeral' %}" class="desktop-sidebar-link">
+        <i class="fas fa-calendar-plus"></i>
+        Agendar Consulta
+      </a>
+      <a href="{% url 'medify_web:verAgenda' %}" class="desktop-sidebar-link">
+        <i class="fas fa-calendar-check"></i>
+        Minhas Consultas
+      </a>
+      <a href="{% url 'medify_web:perfilPaciente' %}" class="desktop-sidebar-link">
+        <i class="fas fa-user-edit"></i>
+        Meu Perfil
+      </a>
+      <form action="{% url 'medify_web:logout' %}" method="post" class="desktop-sidebar-form">
+        {% csrf_token %}
+        <button type="submit" class="desktop-sidebar-link desktop-sidebar-logout">
+          <i class="fas fa-sign-out-alt"></i>
+          Sair
+        </button>
+      </form>
+    </nav>
+  </div>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <!-- Conteúdo Principal -->
+  <main class="main-content">
+    <div class="welcome-section">
+      <h1>Perfil do Profissional</h1>
+      <p>Conheça mais sobre o profissional</p>
+    </div>
+
+    <div class="profile-container">
+      <div class="profile-card">
+        <div class="profile-image">
+          {% if profissional.foto %}
+            <img src="{{ profissional.foto }}" alt="Foto do profissional" style="width: 100%; height: 100%; object-fit: cover;">
+          {% elif profissional.imagem %}
+            <img src="{{ profissional.imagem }}" alt="Foto do profissional" style="width: 100%; height: 100%; object-fit: cover;">
+          {% elif profissional.image %}
+            <img src="{{ profissional.image }}" alt="Foto do profissional" style="width: 100%; height: 100%; object-fit: cover;">
+          {% elif profissional.foto_url %}
+            <img src="{{ profissional.foto_url }}" alt="Foto do profissional" style="width: 100%; height: 100%; object-fit: cover;">
+          {% else %}
+            <i class="fas fa-user-md"></i>
+          {% endif %}
+        </div>
+        <div class="profile-info">
+          <div class="profile-name">{{ profissional.nome|default:'---' }}</div>
+          <div class="profile-specialty">{{ profissional.especialidade|default:'Geral' }}</div>
+          
+          <div class="profile-detail">
+            <strong>CRM:</strong> {{ profissional.crm|default:'---' }}
+          </div>
+          
+          {% if profissional.endereco %}
+            <div class="profile-detail">
+              <strong><i class="fas fa-map-marker-alt"></i> Endereço:</strong> {{ profissional.endereco }}
+            </div>
+          {% endif %}
+          
+          {% if clinica and clinica.nome %}
+            <div class="profile-detail">
+              <strong>Clínica:</strong> {{ clinica.nome }}
+            </div>
+          {% elif profissional.clinica_nome %}
+            <div class="profile-detail">
+              <strong>Clínica:</strong> {{ profissional.clinica_nome }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h2>Descrição</h2>
+        {% if profissional.descricao %}
+          <div class="description-text">{{ profissional.descricao }}</div>
+        {% elif profissional.bio %}
+          <div class="description-text">{{ profissional.bio }}</div>
+        {% else %}
+          <div class="description-text">Sem descrição disponível.</div>
+        {% endif %}
+
+        {% with medico_id=profissional.uid|default:profissional.id %}
+          <a href="{% url 'medify_web:consultaMedico' medico_id %}" class="btn-agendar">
+            <i class="fas fa-calendar-plus"></i> Marcar Consulta
+          </a>
+        {% endwith %}
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Controle do menu móvel - IGUAL ÀS OUTRAS PÁGINAS
+    document.addEventListener('DOMContentLoaded', function() {
+      // Elementos do menu mobile
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const mobileNav = document.getElementById('mobileNav');
+      const mobileClose = document.getElementById('mobileClose');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+
+      // Elementos do menu desktop
+      const desktopMenuToggle = document.getElementById('desktopMenuToggle');
+      const desktopSidebar = document.getElementById('desktopSidebar');
+      const desktopSidebarClose = document.getElementById('desktopSidebarClose');
+
+      function openMobileMenu() {
+        mobileNav.classList.add('active');
+        mobileOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMobileMenu() {
+        mobileNav.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      function openDesktopMenu() {
+        desktopSidebar.classList.add('active');
+        document.body.classList.add('menu-active');
+      }
+
+      function closeDesktopMenu() {
+        desktopSidebar.classList.remove('active');
+        document.body.classList.remove('menu-active');
+      }
+
+      // Event listeners para mobile
+      mobileMenuToggle.addEventListener('click', openMobileMenu);
+      mobileClose.addEventListener('click', closeMobileMenu);
+      mobileOverlay.addEventListener('click', closeMobileMenu);
+
+      // Event listeners para desktop
+      desktopMenuToggle.addEventListener('click', openDesktopMenu);
+      desktopSidebarClose.addEventListener('click', closeDesktopMenu);
+
+      // Fechar menus ao clicar em um link
+      document.querySelectorAll('.mobile-nav-link, .desktop-sidebar-link').forEach(link => {
+        link.addEventListener('click', function() {
+          closeMobileMenu();
+          closeDesktopMenu();
+        });
+      });
+
+      // Fechar menu desktop ao clicar fora
+      document.addEventListener('click', function(event) {
+        if (desktopSidebar.classList.contains('active') && 
+            !desktopSidebar.contains(event.target) && 
+            !desktopMenuToggle.contains(event.target)) {
+          closeDesktopMenu();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

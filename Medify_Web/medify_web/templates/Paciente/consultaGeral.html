@@ -1,0 +1,1476 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendar Consulta - MediFy</title>
+  <link rel="stylesheet" href="{% static 'css/dashboardPaciente.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* dashboardPaciente.css - Versão Aprimorada para Telas de Agendamento */
+
+/* ===== VARIÁVEIS ADICIONAIS ===== */
+:root {
+  --color-surface: #ffffff;
+  --color-border: #e1e5e9;
+  --gradient-primary: linear-gradient(135deg, var(--primary), #1e6fc7);
+  --gradient-secondary: linear-gradient(135deg, var(--secondary), #008f7a);
+  --box-shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.15);
+  --box-shadow-xl: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== LAYOUT PRINCIPAL ===== */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* ===== ESTILOS PARA AGENDAMENTO ===== */
+.form-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  animation: slideUpFadeIn 0.8s ease-out;
+}
+
+@keyframes slideUpFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.welcome-section {
+  animation: fadeInDown 0.8s ease-out;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.welcome-section h1 {
+  font-size: 2.5rem;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+}
+
+.welcome-section p {
+  color: var(--gray);
+  font-size: 1.1rem;
+}
+
+.appointment-form {
+  background: var(--color-surface);
+  border-radius: var(--border-radius);
+  padding: 2.5rem;
+  box-shadow: var(--box-shadow-lg);
+  border: 1px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.appointment-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+}
+
+.appointment-field {
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.appointment-field:nth-child(1) { animation-delay: 0.1s; }
+.appointment-field:nth-child(2) { animation-delay: 0.2s; }
+.appointment-field:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+    .appointment-field label {
+      display: block;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+      color: var(--dark);
+      font-size: 1rem;
+    }
+
+.input-field {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--gray-light);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: var(--transition);
+  background: white;
+  font-family: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(43, 127, 217, 0.1);
+  transform: translateY(-2px);
+}
+
+.input-field:hover {
+  border-color: var(--primary-light);
+}
+
+/* ===== HORÁRIOS DISPONÍVEIS ===== */
+.horarios-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+    .horarios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+      min-height: 100px;
+      width: 100%;
+    }
+    
+    #horarios-container {
+      width: 100%;
+    }
+
+    .horario-btn, .slot-btn {
+      padding: 0.875rem 1rem;
+      border: 2px solid var(--primary-light);
+      border-radius: var(--border-radius);
+      background: white;
+      color: var(--primary);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-width: 100px;
+    }
+
+    .slot-btn i {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+.horario-btn::before, .slot-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-primary);
+  transition: left 0.4s ease;
+  z-index: 0;
+}
+
+.horario-btn:hover, .slot-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow);
+  border-color: var(--primary);
+  color: white;
+}
+
+.horario-btn:hover::before, .slot-btn:hover::before {
+  left: 0;
+}
+
+.horario-btn:hover span, .slot-btn:hover span {
+  position: relative;
+  z-index: 1;
+}
+
+    .horario-btn.active, .slot-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(43, 127, 217, 0.3);
+    }
+
+    .horario-btn.active i, .slot-btn.active i {
+      opacity: 1;
+      color: white;
+    }
+
+.horario-btn:disabled, .slot-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.horario-btn span, .slot-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== INFORMAÇÕES DO MÉDICO ===== */
+.medico-info-card {
+  background: linear-gradient(135deg, var(--primary-light), #f8fbff);
+  border: 1px solid var(--primary-light);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  animation: slideInRight 0.6s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.medico-info-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232b7fd9' opacity='0.1'%3E%3Cpath d='M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 5.5V7H9V5.5L3 7V9L9 10.5V12L3 13.5V15.5L9 14V16L3 17.5V19.5L9 18V22H15V18L21 19.5V17.5L15 16V14L21 15.5V13.5L15 12V10.5L21 9Z'/%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+}
+
+.medico-nome {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 0.25rem;
+}
+
+.medico-especialidade {
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* ===== BOTÕES DE AÇÃO ===== */
+.btn-agendar {
+  background: var(--gradient-primary);
+  color: white;
+  padding: 1.25rem 2rem;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-agendar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn-agendar:hover::before {
+  left: 100%;
+}
+
+.btn-agendar:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow-lg);
+}
+
+.btn-agendar:active {
+  transform: translateY(-1px);
+}
+
+/* ===== ESTADOS DE CARREGAMENTO ===== */
+.loading-state {
+  display: none;
+  text-align: center;
+  padding: 2rem;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--primary-light);
+  border-top: 4px solid var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== ANIMAÇÕES DE FEEDBACK ===== */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.bounce-in {
+  animation: bounceIn 0.6s ease-out;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1rem;
+    padding-top: 80px;
+  }
+
+  .welcome-section {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .welcome-section h1 {
+    font-size: 1.8rem;
+  }
+
+  .welcome-section p {
+    font-size: 1rem;
+  }
+
+  .form-container {
+    margin: 1rem 0;
+  }
+
+  .appointment-form {
+    padding: 1.5rem;
+  }
+  
+      .horarios-grid {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 0.5rem;
+      }
+      
+      .slot-btn {
+        padding: 0.75rem 0.5rem;
+        font-size: 0.85rem;
+        min-width: 90px;
+      }
+  
+  .input-field {
+    padding: 0.875rem 1rem;
+  }
+  
+  .btn-agendar {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .medico-info-card {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 0.75rem;
+    padding-top: 70px;
+  }
+
+  .appointment-form {
+    padding: 1.25rem;
+  }
+  
+      .horarios-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+      }
+  
+  .appointment-field {
+    margin-bottom: 1.5rem;
+  }
+
+  .welcome-section h1 {
+    font-size: 1.5rem;
+  }
+}
+
+    /* ===== CALENDÁRIO ===== */
+    #data_consulta {
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    #data_consulta::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      opacity: 0;
+      position: absolute;
+      right: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #data-formatada {
+      animation: fadeInUp 0.4s ease-out;
+    }
+
+    /* ===== ESTILOS PARA SELECTS PERSONALIZADOS ===== */
+    .select-wrapper {
+      position: relative;
+    }
+
+.select-wrapper::after {
+  content: '▼';
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  pointer-events: none;
+  transition: var(--transition);
+}
+
+.select-wrapper:hover::after {
+  color: var(--dark);
+}
+
+/* ===== ESTILOS PARA TEXTAREA ===== */
+.textarea-field {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--gray-light);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: var(--transition);
+  resize: vertical;
+  min-height: 100px;
+  background: white;
+}
+
+.textarea-field:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(43, 127, 217, 0.1);
+  transform: translateY(-2px);
+}
+
+.textarea-field:hover {
+  border-color: var(--primary-light);
+}
+
+/* ===== INDICADOR DE STATUS ===== */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.status-available {
+  background: var(--secondary-light);
+  color: var(--secondary);
+}
+
+.status-unavailable {
+  background: #fee;
+  color: #e74c3c;
+}
+
+/* ===== MENU LATERAL PARA DESKTOP - LADO DIREITO ===== */
+.desktop-sidebar {
+  position: fixed;
+  top: 0;
+  right: -280px;
+  left: auto;
+  width: 280px;
+  height: 100vh;
+  background: white;
+  z-index: 100;
+  box-shadow: -2px 0 20px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-slow);
+}
+
+.desktop-sidebar.active {
+  right: 0;
+  left: auto;
+}
+
+.desktop-sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.desktop-sidebar-header .logo-container {
+  gap: 0.5rem;
+}
+
+.desktop-sidebar-header h1 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.desktop-sidebar-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.25rem;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.desktop-sidebar-close:hover {
+  background: rgba(255,255,255,0.2);
+  transform: rotate(90deg);
+}
+
+.desktop-sidebar-links {
+  flex: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+}
+
+.desktop-sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  color: var(--dark);
+  text-decoration: none;
+  transition: var(--transition);
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  font-size: 1rem;
+  border-bottom: 1px solid var(--gray-light);
+}
+
+.desktop-sidebar-link:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+  transform: translateX(-5px);
+}
+
+.desktop-sidebar-form {
+  margin-top: auto;
+  border-top: 1px solid var(--gray-light);
+}
+
+.desktop-sidebar-logout {
+  color: #e74c3c;
+  border-bottom: none !important;
+}
+
+.desktop-sidebar-logout:hover {
+  background: #ffeaea;
+  color: #c0392b;
+}
+
+/* Botão para abrir menu no desktop - LADO DIREITO */
+.desktop-menu-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  left: auto;
+  z-index: 99;
+  background: var(--primary);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  transition: var(--transition);
+  display: none;
+}
+
+.desktop-menu-toggle:hover {
+  background: #1e6fc7;
+  transform: scale(1.1);
+}
+
+/* Ajustes para quando o menu lateral está ativo - LADO DIREITO */
+body.menu-active .main-content {
+  margin-right: 280px;
+  transition: var(--transition-slow);
+}
+
+/* ===== MENU MOBILE - LADO DIREITO ===== */
+.mobile-menu-toggle {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  left: auto;
+  z-index: 1000;
+  background: var(--primary);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.mobile-menu-toggle:hover {
+  background: #1e6fc7;
+  transform: scale(1.1);
+}
+
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  left: auto;
+  width: 280px;
+  height: 100vh;
+  background: white;
+  z-index: 1001;
+  transition: var(--transition-slow);
+  box-shadow: -2px 0 20px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-nav.active {
+  right: 0;
+  left: auto;
+}
+
+.mobile-nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.mobile-nav-header .logo-container {
+  gap: 0.5rem;
+}
+
+.mobile-nav-header h1 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.mobile-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.25rem;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.mobile-close:hover {
+  background: rgba(255,255,255,0.2);
+  transform: rotate(90deg);
+}
+
+.mobile-nav-links {
+  flex: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  color: var(--dark);
+  text-decoration: none;
+  transition: var(--transition);
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  font-size: 1rem;
+  border-bottom: 1px solid var(--gray-light);
+}
+
+.mobile-nav-link:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+  transform: translateX(-5px);
+}
+
+.mobile-nav-form {
+  margin-top: auto;
+  border-top: 1px solid var(--gray-light);
+}
+
+.mobile-nav-logout {
+  color: #e74c3c;
+  border-bottom: none !important;
+}
+
+.mobile-nav-logout:hover {
+  background: #ffeaea;
+  color: #c0392b;
+}
+
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+
+.mobile-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===== MEDIA QUERIES PARA MENU RESPONSIVO ===== */
+@media (max-width: 768px) {
+  .desktop-sidebar,
+  .desktop-menu-toggle {
+    display: none;
+  }
+  
+  .mobile-menu-toggle {
+    display: flex;
+  }
+  
+  .main-content {
+    margin-right: 0 !important;
+    padding-top: 80px;
+  }
+
+  .header-right {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-menu-toggle,
+  .mobile-nav,
+  .mobile-overlay {
+    display: none !important;
+  }
+  
+  .desktop-menu-toggle {
+    display: flex;
+  }
+  
+  .header-right {
+    display: block !important;
+  }
+}
+  </style>
+</head>
+<body class="dashboard">
+  <!-- Header Profissional -->
+  <header class="dashboard-header">
+    <div class="logo-container">
+      <a href="{% url 'medify_web:dashboard_paciente' %}" style="text-decoration:none; color:inherit; display:flex; align-items:center;">
+        <img src="{% static 'imagens/estetoscopio.png' %}" alt="MediFy Logo" class="logo-icon" style="width:24px;height:24px;object-fit:contain;">
+        <h1 style="margin:0 0 0 0.5rem;">MediFy</h1>
+      </a>
+    </div>
+    <div class="header-right">
+  
+    </div>
+  </header>
+
+  <!-- Menu Mobile (para telas menores) -->
+  <div class="mobile-menu-toggle" id="mobileMenuToggle">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+      <div class="logo-container">
+        <img src="{% static 'imagens/estetoscopio.png' %}" alt="MediFy Logo" class="logo-icon" style="width:24px;height:24px;object-fit:contain;">
+        <h1>MediFy</h1>
+      </div>
+      <button class="mobile-close" id="mobileClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="{% url 'medify_web:dashboard_paciente' %}" class="mobile-nav-link">
+        <i class="fas fa-home"></i>
+        Dashboard
+      </a>
+      <a href="{% url 'medify_web:consultaGeral' %}" class="mobile-nav-link">
+        <i class="fas fa-calendar-plus"></i>
+        Agendar Consulta
+      </a>
+      <a href="{% url 'medify_web:verAgenda' %}" class="mobile-nav-link">
+        <i class="fas fa-calendar-check"></i>
+        Minhas Consultas
+      </a>
+      <a href="{% url 'medify_web:perfilPaciente' %}" class="mobile-nav-link">
+        <i class="fas fa-user-edit"></i>
+        Meu Perfil
+      </a>
+      <form action="{% url 'medify_web:logout' %}" method="post" class="mobile-nav-form" id="logoutFormMobile" onsubmit="return confirmarLogout(event);">
+        {% csrf_token %}
+        <button type="submit" class="mobile-nav-link mobile-nav-logout">
+          <i class="fas fa-sign-out-alt"></i>
+          Sair
+        </button>
+      </form>
+    </nav>
+  </div>
+
+  <!-- Menu Desktop (para telas maiores) -->
+  <div class="desktop-menu-toggle" id="desktopMenuToggle">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <div class="desktop-sidebar" id="desktopSidebar">
+    <div class="desktop-sidebar-header">
+      <div class="logo-container">
+        <img src="{% static 'imagens/estetoscopio.png' %}" alt="MediFy Logo" class="logo-icon" style="width:24px;height:24px;object-fit:contain;">
+        <h1>MediFy</h1>
+      </div>
+      <button class="desktop-sidebar-close" id="desktopSidebarClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <nav class="desktop-sidebar-links">
+      <a href="{% url 'medify_web:dashboard_paciente' %}" class="desktop-sidebar-link">
+        <i class="fas fa-home"></i>
+        Dashboard
+      </a>
+      <a href="{% url 'medify_web:consultaGeral' %}" class="desktop-sidebar-link">
+        <i class="fas fa-calendar-plus"></i>
+        Agendar Consulta
+      </a>
+      <a href="{% url 'medify_web:verAgenda' %}" class="desktop-sidebar-link">
+        <i class="fas fa-calendar-check"></i>
+        Minhas Consultas
+      </a>
+      <a href="{% url 'medify_web:perfilPaciente' %}" class="desktop-sidebar-link">
+        <i class="fas fa-user-edit"></i>
+        Meu Perfil
+      </a>
+      <form action="{% url 'medify_web:logout' %}" method="post" class="desktop-sidebar-form" id="logoutFormDesktop" onsubmit="return confirmarLogout(event);">
+        {% csrf_token %}
+        <button type="submit" class="desktop-sidebar-link desktop-sidebar-logout">
+          <i class="fas fa-sign-out-alt"></i>
+          Sair
+        </button>
+      </form>
+    </nav>
+  </div>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <!-- Conteúdo Principal -->
+  <main class="main-content">
+    <div class="welcome-section">
+      <h1>Agendar Consulta</h1>
+      <p>Encontre e agende com profissionais qualificados</p>
+    </div>
+
+    <div class="form-container">
+      <form method="post" action="" class="appointment-form">
+        {% csrf_token %}
+        <input type="hidden" name="reschedule_from" id="reschedule_from_input" value="{{ reschedule_from|default:'' }}">
+        
+        <div class="appointment-field">
+          <label for="especialidade_select">Especialidade</label>
+          <div class="select-wrapper">
+            <select id="especialidade_select" class="input-field">
+              <option value="">Todas as especialidades</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="appointment-field">
+          <label for="medico">
+            Médico
+          </label>
+          <div class="select-wrapper">
+            <select name="medico" id="medico" required class="input-field">
+              <option value="">Selecione o médico</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="appointment-field" id="data-field" style="display: none;">
+          <label for="data_consulta">
+            Selecione o dia da consulta
+          </label>
+          <div style="position: relative;">
+            <input type="date" id="data_consulta" name="data_consulta" class="input-field" style="padding-left: 3rem;">
+            <i class="fas fa-calendar" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--primary); pointer-events: none;"></i>
+          </div>
+          <div id="data-formatada" style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--primary); font-weight: 600; display: none;">
+            <i class="fas fa-check-circle" style="margin-right: 0.5rem;"></i>
+            <span id="data-formatada-texto"></span>
+          </div>
+        </div>
+        
+        <div class="appointment-field" id="horarios-field" style="display: none;">
+          <label>
+            Horários disponíveis
+          </label>
+          <div id="horarios-container">
+            <!-- Horários aparecerão aqui -->
+          </div>
+        </div>
+        
+        <input type="hidden" name="data" id="data">
+        <input type="hidden" name="hora" id="hora">
+        
+        <div id="selected-medico-info" class="medico-info-card" style="display:none">
+          <div id="selected-medico-nome" class="medico-nome"></div>
+          <div id="selected-medico-esp" class="medico-especialidade"></div>
+          <a id="ver-perfil-link" class="btn btn-outline" href="#">
+            <i class="fas fa-user-md"></i> Ver Perfil Completo
+          </a>
+        </div>
+        
+        <div class="appointment-field">
+          <label for="obs">Observação (opcional)</label>
+          <textarea name="obs" id="obs" rows="3" class="textarea-field" placeholder="Alguma observação importante..."></textarea>
+        </div>
+        
+        <button class="btn-agendar" type="submit">
+          <i class="fas fa-calendar-check"></i>
+          <span>Confirmar Agendamento</span>
+        </button>
+        
+        <div class="loading-state">
+          <div class="loading-spinner"></div>
+          <p>Processando agendamento...</p>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    // Controle do menu móvel
+    document.addEventListener('DOMContentLoaded', function() {
+      // Elementos do menu mobile
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const mobileNav = document.getElementById('mobileNav');
+      const mobileClose = document.getElementById('mobileClose');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+
+      // Elementos do menu desktop
+      const desktopMenuToggle = document.getElementById('desktopMenuToggle');
+      const desktopSidebar = document.getElementById('desktopSidebar');
+      const desktopSidebarClose = document.getElementById('desktopSidebarClose');
+
+      function openMobileMenu() {
+        mobileNav.classList.add('active');
+        mobileOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMobileMenu() {
+        mobileNav.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      function openDesktopMenu() {
+        desktopSidebar.classList.add('active');
+        document.body.classList.add('menu-active');
+      }
+
+      function closeDesktopMenu() {
+        desktopSidebar.classList.remove('active');
+        document.body.classList.remove('menu-active');
+      }
+
+      // Event listeners para mobile
+      mobileMenuToggle.addEventListener('click', openMobileMenu);
+      mobileClose.addEventListener('click', closeMobileMenu);
+      mobileOverlay.addEventListener('click', closeMobileMenu);
+
+      // Event listeners para desktop
+      desktopMenuToggle.addEventListener('click', openDesktopMenu);
+      desktopSidebarClose.addEventListener('click', closeDesktopMenu);
+
+      // Fechar menus ao clicar em um link
+      document.querySelectorAll('.mobile-nav-link, .desktop-sidebar-link').forEach(link => {
+        link.addEventListener('click', function() {
+          closeMobileMenu();
+          closeDesktopMenu();
+        });
+      });
+
+      // Fechar menu desktop ao clicar fora
+      document.addEventListener('click', function(event) {
+        if (desktopSidebar.classList.contains('active') && 
+            !desktopSidebar.contains(event.target) && 
+            !desktopMenuToggle.contains(event.target)) {
+          closeDesktopMenu();
+        }
+      });
+    });
+
+    // Build medicos JS data with horarios passed from server-rendered medicos
+    var MEDICOS = [];
+    (function(){
+      // Parse server-provided JSON (safe) instead of manual template loops
+      var MEDICOS = [];
+      try {
+        MEDICOS = JSON.parse('{{ medicos_json|escapejs }}');
+      } catch (e) {
+        console.error('Failed to parse medicos_json:', e);
+        MEDICOS = [];
+      }
+
+      // populate specialties select and medico select on the client
+      (function buildSpecialtiesAndMedicos(){
+        var espSet = new Set();
+        MEDICOS.forEach(function(m){ if(m.especialidade) espSet.add(m.especialidade); });
+        var especialidadeSelect = document.getElementById('especialidade_select');
+        espSet.forEach(function(esp){
+          var opt = document.createElement('option');
+          opt.value = esp;
+          opt.textContent = esp;
+          especialidadeSelect.appendChild(opt);
+        });
+      })();
+
+      // Função para formatar data no padrão brasileiro (dd/mm/yyyy)
+      function formatarDataBrasileira(dataStr) {
+        if (!dataStr) return '';
+        // Se está no formato YYYY-MM-DD, converte para DD/MM/YYYY
+        if (dataStr.match(/^\d{4}-\d{2}-\d{2}$/)) {
+          var parts = dataStr.split('-');
+          return parts[2] + '/' + parts[1] + '/' + parts[0];
+        }
+        return dataStr;
+      }
+
+      // Função para obter o nome do dia da semana
+      function obterNomeDiaSemana(dataStr) {
+        if (!dataStr) return '';
+        var data = new Date(dataStr + 'T00:00:00');
+        var dias = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+        return dias[data.getDay()];
+      }
+
+      // Função para formatar data no formato YYYY-MM-DD
+      function formatarDataParaComparacao(dataStr) {
+        if (!dataStr) return '';
+        // Se já está no formato YYYY-MM-DD, retorna
+        if (dataStr.match(/^\d{4}-\d{2}-\d{2}$/)) {
+          return dataStr;
+        }
+        // Se está no formato DD/MM/YYYY, converte
+        if (dataStr.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
+          var parts = dataStr.split('/');
+          return parts[2] + '-' + parts[1] + '-' + parts[0];
+        }
+        return dataStr;
+      }
+
+      // Armazenar todos os horários do médico selecionado
+      var TODOS_HORARIOS_MEDICO = [];
+
+      // Utility to render slots
+      function renderHorariosFor(uid){
+        var container = document.getElementById('horarios-container');
+        container.innerHTML = '';
+        var medico = MEDICOS.find(function(m){ return m.uid == uid; });
+        if(!medico) {
+          document.getElementById('data-field').style.display = 'none';
+          document.getElementById('horarios-field').style.display = 'none';
+          return;
+        }
+        
+        // Mostrar campo de data
+        document.getElementById('data-field').style.display = 'block';
+        
+        // Armazenar todos os horários do médico
+        TODOS_HORARIOS_MEDICO = (medico.horarios || []).filter(function(h) { return h.disponivel; });
+        
+        // Se não há horários, mostrar mensagem
+        if(TODOS_HORARIOS_MEDICO.length === 0){
+          container.innerHTML = '<div style="text-align: center; padding: 2.5rem; color: #666; background: linear-gradient(135deg, #f8f9fa, #ffffff); border-radius: 12px; border: 2px dashed #dee2e6; box-shadow: 0 2px 8px rgba(0,0,0,0.05);"><i class="fas fa-calendar-times" style="font-size: 3rem; margin-bottom: 1rem; color: #adb5bd; display: block;"></i><p style="margin: 0; font-size: 1rem; font-weight: 500; color: #495057;">Nenhum horário disponível para este profissional.</p></div>';
+          document.getElementById('horarios-field').style.display = 'block';
+          return;
+        }
+        
+        // Criar grid para slots de horário
+        var grid = document.createElement('div');
+        grid.className = 'horarios-grid';
+        container.appendChild(grid);
+        
+        // Mostrar mensagem inicial com card melhorado
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2.5rem; color: #666; background: linear-gradient(135deg, #f8f9fa, #ffffff); border-radius: 12px; border: 2px dashed #dee2e6; box-shadow: 0 2px 8px rgba(0,0,0,0.05);"><i class="fas fa-calendar-alt" style="font-size: 3rem; margin-bottom: 1rem; color: var(--primary); opacity: 0.6; display: block;"></i><p style="margin: 0; font-size: 1rem; font-weight: 500; color: #495057;">Selecione um dia para ver os horários disponíveis</p></div>';
+        
+        document.getElementById('horarios-field').style.display = 'block';
+      }
+
+      // Função para exibir horários do dia selecionado
+      function exibirHorariosDoDia(dataSelecionada) {
+        var container = document.getElementById('horarios-container');
+        var grid = container.querySelector('.horarios-grid');
+        
+        if (!grid) {
+          // Se não existe grid, criar um
+          grid = document.createElement('div');
+          grid.className = 'horarios-grid';
+          container.innerHTML = '';
+          container.appendChild(grid);
+        }
+        
+        if (!dataSelecionada) {
+          grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2.5rem; color: #666; background: linear-gradient(135deg, #f8f9fa, #ffffff); border-radius: 12px; border: 2px dashed #dee2e6; box-shadow: 0 2px 8px rgba(0,0,0,0.05);"><i class="fas fa-calendar-alt" style="font-size: 3rem; margin-bottom: 1rem; color: var(--primary); opacity: 0.6; display: block;"></i><p style="margin: 0; font-size: 1rem; font-weight: 500; color: #495057;">Selecione um dia para ver os horários disponíveis</p></div>';
+          return;
+        }
+
+        var dataFormatada = formatarDataParaComparacao(dataSelecionada);
+        var horariosDoDia = TODOS_HORARIOS_MEDICO.filter(function(h) {
+          var hData = formatarDataParaComparacao(h.data);
+          return hData === dataFormatada && h.disponivel;
+        });
+
+        if (horariosDoDia.length === 0) {
+          grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2.5rem; background: linear-gradient(135deg, #fff5f5, #ffffff); border-radius: 12px; border: 2px dashed #fecaca; box-shadow: 0 2px 8px rgba(0,0,0,0.05);"><i class="fas fa-clock" style="font-size: 3rem; margin-bottom: 1rem; color: #ef4444; opacity: 0.7; display: block;"></i><p style="margin: 0; font-size: 1rem; font-weight: 600; color: #991b1b;">Nenhum horário disponível para este dia</p></div>';
+          return;
+        }
+
+        // Ordenar horários por hora
+        horariosDoDia.sort(function(a, b) {
+          return a.hora.localeCompare(b.hora);
+        });
+
+        // Limpar grid antes de adicionar novos botões
+        grid.innerHTML = '';
+        
+        // Criar botões para cada horário
+        horariosDoDia.forEach(function(h) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'slot-btn';
+          btn.setAttribute('data-data', h.data);
+          btn.setAttribute('data-hora', h.hora);
+          
+          // Criar ícone de relógio
+          var icon = document.createElement('i');
+          icon.className = 'fas fa-clock';
+          
+          // Criar span com o horário
+          var span = document.createElement('span');
+          span.textContent = h.hora;
+          
+          btn.appendChild(icon);
+          btn.appendChild(span);
+          
+          btn.addEventListener('click', function() {
+            document.getElementById('data').value = h.data;
+            document.getElementById('hora').value = h.hora;
+            // Remover active de todos os botões
+            var allButtons = grid.querySelectorAll('.slot-btn');
+            allButtons.forEach(function(x) { 
+              x.classList.remove('active'); 
+            });
+            // Adicionar active ao botão clicado
+            this.classList.add('active');
+          });
+          
+          grid.appendChild(btn);
+        });
+      }
+
+      var medicoSelect = document.getElementById('medico');
+      var especialidadeSelect = document.getElementById('especialidade_select');
+
+      function populateMedicosByEspecialidade(){
+        var esp = especialidadeSelect.value;
+        medicoSelect.innerHTML = '<option value="">Selecione o médico</option>';
+        MEDICOS.forEach(function(m){
+          if(!esp || esp === '' || m.especialidade === esp){
+            var opt = document.createElement('option');
+            opt.value = m.uid;
+            opt.textContent = m.nome + ' - ' + m.especialidade;
+            medicoSelect.appendChild(opt);
+          }
+        });
+        document.getElementById('horarios-container').innerHTML = '';
+        document.getElementById('selected-medico-info').style.display = 'none';
+      }
+
+      especialidadeSelect && especialidadeSelect.addEventListener('change', populateMedicosByEspecialidade);
+      medicoSelect && medicoSelect.addEventListener('change', function(){ 
+        renderHorariosFor(this.value);
+        // Limpar seleção de data e horário quando mudar médico
+        var dataConsultaInput = document.getElementById('data_consulta');
+        if (dataConsultaInput) {
+          dataConsultaInput.value = '';
+          document.getElementById('data-formatada').style.display = 'none';
+        }
+        document.getElementById('data').value = '';
+        document.getElementById('hora').value = '';
+      });
+      medicoSelect && medicoSelect.addEventListener('change', function(){
+        var uid = this.value;
+        var medico = MEDICOS.find(function(m){ return m.uid == uid; });
+        var info = document.getElementById('selected-medico-info');
+        if(!medico){ info.style.display='none'; return; }
+        document.getElementById('selected-medico-nome').textContent = medico.nome;
+        document.getElementById('selected-medico-esp').textContent = medico.especialidade || '';
+        var perfilLink = document.getElementById('ver-perfil-link');
+        perfilLink.href = '/medico/perfil/' + encodeURIComponent(medico.uid) + '/';
+        info.style.display = 'block';
+      });
+
+      // Event listener para o campo de data
+      var dataConsultaInput = document.getElementById('data_consulta');
+      var dataFormatadaDiv = document.getElementById('data-formatada');
+      var dataFormatadaTexto = document.getElementById('data-formatada-texto');
+      
+      if (dataConsultaInput) {
+        // Definir data mínima como hoje
+        var hoje = new Date();
+        hoje.setHours(0, 0, 0, 0);
+        var hojeStr = hoje.toISOString().split('T')[0];
+        dataConsultaInput.setAttribute('min', hojeStr);
+        
+        dataConsultaInput.addEventListener('change', function() {
+          var dataSelecionada = this.value;
+          
+          // Exibir data formatada
+          if (dataSelecionada) {
+            var dataFormatada = formatarDataBrasileira(dataSelecionada);
+            var nomeDia = obterNomeDiaSemana(dataSelecionada);
+            dataFormatadaTexto.textContent = nomeDia + ', ' + dataFormatada;
+            dataFormatadaDiv.style.display = 'block';
+          } else {
+            dataFormatadaDiv.style.display = 'none';
+          }
+          
+          exibirHorariosDoDia(dataSelecionada);
+          // Limpar seleção de horário quando mudar o dia
+          document.getElementById('data').value = '';
+          document.getElementById('hora').value = '';
+        });
+      }
+
+      // initial population
+      populateMedicosByEspecialidade();
+
+      // If server provided an old_consulta (remarcar flow), prefill fields and preselect medico
+      try {
+        var OLD = null;
+        try {
+          // safely inject JSON as an escaped string and parse it to avoid syntax errors
+          var _old_raw = '{{ old_consulta_json|default:"null"|escapejs }}';
+          if(_old_raw && _old_raw !== 'null'){
+            OLD = JSON.parse(_old_raw);
+          } else {
+            OLD = null;
+          }
+        } catch(e){ OLD = null; }
+        if(OLD){
+          // preselect medico if available
+          if(OLD.profissional_uid){
+            medicoSelect.value = OLD.profissional_uid;
+            medicoSelect.dispatchEvent(new Event('change'));
+          }
+          // set data/hora/obs
+          if(OLD.data) {
+            document.getElementById('data').value = OLD.data;
+            // Preencher campo de data e exibir formatada
+            var dataConsultaInput = document.getElementById('data_consulta');
+            if (dataConsultaInput) {
+              var dataFormatada = formatarDataParaComparacao(OLD.data);
+              dataConsultaInput.value = dataFormatada;
+              
+              // Exibir data formatada
+              var dataFormatadaDiv = document.getElementById('data-formatada');
+              var dataFormatadaTexto = document.getElementById('data-formatada-texto');
+              if (dataFormatadaDiv && dataFormatadaTexto) {
+                var dataFormatadaBR = formatarDataBrasileira(dataFormatada);
+                var nomeDia = obterNomeDiaSemana(dataFormatada);
+                dataFormatadaTexto.textContent = nomeDia + ', ' + dataFormatadaBR;
+                dataFormatadaDiv.style.display = 'block';
+              }
+              
+              // Disparar evento change para carregar horários
+              var changeEvent = new Event('change');
+              dataConsultaInput.dispatchEvent(changeEvent);
+            }
+          }
+          if(OLD.hora) document.getElementById('hora').value = OLD.hora;
+          if(OLD.obs) document.getElementById('obs').value = OLD.obs;
+          // set hidden reschedule input so POST will carry it
+          var rin = document.getElementById('reschedule_from_input');
+          if(rin) rin.value = '{{ reschedule_from|default:"" }}';
+          // visually mark matching horario button if present
+          setTimeout(function(){
+            var container = document.getElementById('horarios-container');
+            Array.from(container.querySelectorAll('.slot-btn')).forEach(function(b){
+              var bd = b.dataset || {};
+              var bdata = (bd.data || '').toString().trim();
+              var bhora = (bd.hora || '').toString().trim();
+              var oldData = (OLD.data || '').toString().trim();
+              var oldHora = (OLD.hora || '').toString().trim();
+              if(oldData && oldHora && bdata === oldData && bhora === oldHora){
+                document.querySelectorAll('.slot-btn').forEach(function(x){ 
+                  x.classList.remove('active'); 
+                });
+                b.classList.add('active');
+              }
+            });
+          }, 300);
+        }
+      } catch(e){ /* ignore prefill errors */ }
+    })();
+
+    // Função para confirmar logout antes de sair
+    function confirmarLogout(event) {
+      event.preventDefault();
+      if (confirm('Tem certeza que deseja sair da sua conta?')) {
+        event.target.submit();
+      }
+      return false;
+    }
+
+    // Prevenir logout acidental ao usar o botão voltar do navegador
+    let logoutPrevenido = false;
+    window.addEventListener('beforeunload', function(e) {
+      if (!logoutPrevenido) {
+        // Não prevenir se não estiver tentando fazer logout
+        return;
+      }
+    });
+
+    // Interceptar todos os formulários de logout para adicionar confirmação
+    document.addEventListener('DOMContentLoaded', function() {
+      const logoutForms = document.querySelectorAll('form[action*="logout"]');
+      logoutForms.forEach(form => {
+        if (!form.hasAttribute('data-confirmado')) {
+          form.addEventListener('submit', function(e) {
+            if (!confirm('Tem certeza que deseja sair da sua conta?')) {
+              e.preventDefault();
+              return false;
+            }
+            logoutPrevenido = true;
+            form.setAttribute('data-confirmado', 'true');
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
