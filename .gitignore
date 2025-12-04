@@ -32,3 +32,8 @@ serviceAccountKey.json
 build/
 out/
 
+
+# ignore nested git dirs
+Medify_Web/
+mobile-app/
+
