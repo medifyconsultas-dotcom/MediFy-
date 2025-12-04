@@ -86,6 +86,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     # custom session security middleware (idle/absolute timeouts)
     'medify_web.middleware.session_security.SessionSecurityMiddleware',
@@ -163,10 +164,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+# URL prefix for static files. Must start and end with '/'.
+STATIC_URL = '/static/'
 
 # Allow configuring STATIC_ROOT via environment (set in Dockerfile as /vol/static)
 STATIC_ROOT = os.environ.get('STATIC_ROOT', str(BASE_DIR / 'staticfiles'))
+
+# Use WhiteNoise to serve static files in production (installed in requirements)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Media files (user uploads)
 # Files uploaded by users (profile photos etc.) will be saved to BASE_DIR / 'media'
