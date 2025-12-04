@@ -20,6 +20,9 @@ COPY . /app
 # use /app as working directory (project files are already the context root)
 WORKDIR /app
 
+# ensure entrypoint is executable (some Git clients on Windows don't preserve exec bit)
+RUN chmod +x /app/entrypoint.sh
+
 # static files location
 ENV STATIC_ROOT=/vol/static
 RUN mkdir -p /vol/static
