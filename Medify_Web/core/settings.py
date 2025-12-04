@@ -12,19 +12,44 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 
-
 import firebase_admin
 from firebase_admin import credentials, firestore
 import os
+import json
 
 # Corrige o caminho do firebase_key.json para ser relativo ao BASE_DIR
 BASE_DIR = Path(__file__).resolve().parent.parent
 cred_path = os.path.join(BASE_DIR, 'core', 'firebase_key.json')
-cred = credentials.Certificate(cred_path)
-firebase_admin.initialize_app(cred)
 
-# instancia do Firestore
-db = firestore.client()
+# Inicializa o Firebase a partir da variável de ambiente FIREBASE_SERVICE_ACCOUNT (JSON string)
+# Se a variável não existir, tenta carregar o arquivo `core/firebase_key.json` quando presente e não vazio.
+cred = None
+sa_json = os.environ.get('FIREBASE_SERVICE_ACCOUNT')
+if sa_json:
+    try:
+        # pode ser uma string JSON; carregar para dict e passar para Certificate
+        sa_dict = json.loads(sa_json)
+        cred = credentials.Certificate(sa_dict)
+    except Exception:
+        # se falhar ao parsear, ignore e tentaremos o arquivo
+        cred = None
+
+if cred is None:
+    try:
+        if os.path.exists(cred_path) and os.path.getsize(cred_path) > 0:
+            cred = credentials.Certificate(cred_path)
+    except Exception:
+        cred = None
+
+if cred:
+    firebase_admin.initialize_app(cred)
+    # instancia do Firestore
+    db = firestore.client()
+else:
+    # Não inicializamos o Firebase automaticamente se não houver credenciais válidas.
+    # Isso evita que o processo falhe no startup; confirme que a variável
+    # FIREBASE_SERVICE_ACCOUNT está definida no ambiente do Railway.
+    db = None
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
