@@ -3,7 +3,32 @@ from firebase_admin import firestore
 import time
 from functools import wraps
 
-db = firestore.client()
+def _get_db():
+    try:
+        return firestore.client()
+    except Exception:
+        # Firebase not initialized (e.g. FIREBASE_SERVICE_ACCOUNT not provided)
+        return None
+
+
+class _DBProxy:
+    """Lazy proxy for Firestore client.
+
+    Accessing attributes will attempt to resolve the real client. If the
+    Firebase SDK was not initialized, a RuntimeError is raised with a
+    helpful message. This avoids importing/crashing at module-import time
+    when credentials are not yet available in the environment.
+    """
+    def __getattr__(self, item):
+        db = _get_db()
+        if db is None:
+            raise RuntimeError(
+                "Firebase is not initialized. Ensure FIREBASE_SERVICE_ACCOUNT is set in the environment."
+            )
+        return getattr(db, item)
+
+
+db = _DBProxy()
 
 
 import requests
