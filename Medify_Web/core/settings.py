@@ -136,6 +136,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Allow configuring STATIC_ROOT via environment (set in Dockerfile as /vol/static)
+STATIC_ROOT = os.environ.get('STATIC_ROOT', str(BASE_DIR / 'staticfiles'))
+
 # Media files (user uploads)
 # Files uploaded by users (profile photos etc.) will be saved to BASE_DIR / 'media'
 MEDIA_URL = '/media/'
