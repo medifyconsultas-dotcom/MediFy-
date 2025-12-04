@@ -39,8 +39,12 @@ SECRET_KEY = 'django-insecure-rr!298*rd1gtpnnbdq0tr2i0=n@0pa4%(8z2ll@xo-r*gh8iyo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# Permitir acesso pelo IP da rede 4G e localhost
-ALLOWED_HOSTS = ['10.194.23.207', 'localhost', '127.0.0.1', '192.168.56.1']
+# Permitir acesso por hosts configuráveis via variável de ambiente.
+# Em produção configure a variável `ALLOWED_HOSTS` no Railway (ex: "medify-production-416a.up.railway.app,example.com").
+default_allowed = '10.194.23.207,localhost,127.0.0.1,192.168.56.1'
+raw_allowed = os.environ.get('ALLOWED_HOSTS', default_allowed)
+# split and strip, ignore empty entries
+ALLOWED_HOSTS = [h.strip() for h in raw_allowed.split(',') if h.strip()]
 
 
 # Application definition
