@@ -29,9 +29,18 @@ if sa_json:
     try:
         # pode ser uma string JSON; carregar para dict e passar para Certificate
         sa_dict = json.loads(sa_json)
+        # debug: report size but never print secrets
+        try:
+            print(f"[startup] FIREBASE_SERVICE_ACCOUNT env present (json length={len(sa_json)}).", flush=True)
+        except Exception:
+            pass
         cred = credentials.Certificate(sa_dict)
     except Exception:
         # se falhar ao parsear, ignore e tentaremos o arquivo
+        try:
+            print("[startup] FIREBASE_SERVICE_ACCOUNT env present but failed to parse JSON.", flush=True)
+        except Exception:
+            pass
         cred = None
 
 if cred is None:
@@ -42,9 +51,21 @@ if cred is None:
         cred = None
 
 if cred:
-    firebase_admin.initialize_app(cred)
-    # instancia do Firestore
-    db = firestore.client()
+    try:
+        firebase_admin.initialize_app(cred)
+        # instancia do Firestore
+        db = firestore.client()
+        try:
+            print("[startup] Firebase initialized successfully.", flush=True)
+        except Exception:
+            pass
+    except Exception as e:
+        # initialization failed; log and continue without Firebase
+        try:
+            print(f"[startup] Firebase initialize_app failed: {e}", flush=True)
+        except Exception:
+            pass
+        db = None
 else:
     # Não inicializamos o Firebase automaticamente se não houver credenciais válidas.
     # Isso evita que o processo falhe no startup; confirme que a variável
