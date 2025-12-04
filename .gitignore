@@ -37,3 +37,8 @@ out/
 Medify_Web/
 mobile-app/
 
+
+# sensitive keys
+Medify_Web/core/firebase_key.json
+*.pem
+
