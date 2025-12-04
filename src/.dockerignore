@@ -1,0 +1,14 @@
+node_modules
+dist
+release
+dist-electron
+.env
+*.env
+.git
+venv
+serviceAccountKey.json
+serviceAccountKey.json.example
+Medify_Web/core/firebase_key.json
+*.log
+*.pyc
+.DS_Store
